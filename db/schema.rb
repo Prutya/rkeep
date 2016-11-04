@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104190557) do
+ActiveRecord::Schema.define(version: 20161104193929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,13 +39,14 @@ ActiveRecord::Schema.define(version: 20161104190557) do
 
   create_table "bills", force: :cascade do |t|
     t.integer  "table_id"
-    t.decimal  "total",       precision: 10, scale: 2, default: "0.0", null: false
-    t.decimal  "subtotal",    precision: 10, scale: 2, default: "0.0", null: false
-    t.decimal  "discount",    precision: 5,  scale: 2, default: "0.0", null: false
+    t.decimal  "total",         precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal  "subtotal",      precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal  "discount",      precision: 5,  scale: 2, default: "0.0", null: false
     t.datetime "time_cancel"
     t.datetime "time_close"
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+    t.integer  "people_number",                          default: 1,     null: false
     t.index ["table_id"], name: "index_bills_on_table_id", using: :btree
   end
 
