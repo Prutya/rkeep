@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe BillItem, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'relationships' do
+    it { should belong_to :good }
+    it { should belong_to :bill }
+    it { should belong_to :user }
+  end
 end
