@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rkeep</title>
+    <title><%= full_title yield(:page_title) %></title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'  %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <% if params[:controller] == 'home' && params[:action] == 'index' %>
+      <%= yield %>
+    <% else %>
+      <%= render 'layouts/header' %>
+      <main class="container">
+        <%= yield %>
+      </main>
+    <% end %>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
