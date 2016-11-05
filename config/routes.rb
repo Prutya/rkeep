@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'home#index'
+  as :user do
+  end
 
-  devise_for :users
+  devise_for :users, path: '', path_names: { sign_in:  'sign-in' }
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 end

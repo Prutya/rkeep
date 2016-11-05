@@ -5,7 +5,7 @@ module DeviseHelper
     messages = resource.errors.full_messages.map { |msg| "toastr.error(\"#{msg}\", \"Error\");" }
 
     script = <<-HTML
-    <script>$(document).ready(function(){ #{messages.join} });</script>
+    <script>$(document).ready( function(){ #{messages.join} });</script>
     HTML
 
     script.html_safe
@@ -14,5 +14,5 @@ module DeviseHelper
   def devise_error_messages?
     !resource.errors.empty?
   end
-  
+
 end
