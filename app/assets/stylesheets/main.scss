@@ -2,5 +2,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/* Base */
+@import "base/variables";
+
+/* Shared */
+@import "shared/footer";
+
 /* home */
 @import "home/welcome";

@@ -9,6 +9,7 @@ html {
     .welcome {
       height: inherit;
       min-height: inherit;
+      background-color: $background-color;
 
       .welcome-block {
         min-height: inherit;
