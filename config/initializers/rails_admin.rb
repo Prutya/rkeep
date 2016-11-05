@@ -7,7 +7,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   ## == Cancancan ==
-  # config.authorize_with :cancan, AdminAbility
+  config.authorize_with :cancan, AdminAbility
 
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
