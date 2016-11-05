@@ -1,5 +1,7 @@
-<main class="jumbotron text-center welcome">
-  <h1>Hey!</h1>
-  <p>Welcome to <strong>rkeep</strong>! Sign in to start doing your hard job.</p>
-  <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-success btn-lg' %>
+<main class="jumbotron welcome">
+  <div class="text-center welcome-block">
+    <h1>Hey!</h1>
+    <p>Welcome to <strong>rkeep</strong>!</p>
+    <p><%= link_to 'Sign in', new_user_session_url, class: 'btn btn-success btn-lg' %> to start doing your hard job.</p>
+  </div>
 </main>
