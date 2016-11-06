@@ -4,6 +4,7 @@ class Bill < ApplicationRecord
 
   validates :people_number, presence: true
 
+  # manually tested :)
   scope :for_shift, -> (current_time = Time.zone.now) do
     config = Configuration.last_set
     time_opens_today = Time.new(current_time.year, current_time.month, current_time.day,
