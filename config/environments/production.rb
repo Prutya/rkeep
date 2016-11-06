@@ -85,5 +85,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Configure Rails time zone
-  config.time_zone = ENV["RKEEP_TIME_ZONE"]
+  config.time_zone = ENV.fetch('RKEEP_TIME_ZONE') { 'UTC' }
 end
