@@ -54,13 +54,20 @@ RSpec.describe User, type: :model do
   end
 
   describe 'abilities' do
+    describe 'guest' do
+      it 'should have access to home page' do
+        @ability = Ability.new(subject)
+        expect(@ability.can?(:index, :home)).to be_truthy
+      end
+    end
+
     describe 'rails admin' do
-      it 'should not be able to access rails admin' do
+      it 'should not have access to rails admin' do
         @ability = AdminAbility.new(subject)
         expect(@ability.can?(:access, :rails_admin)).to be_falsy
       end
 
-      it 'should be able to access rails admin if is admin' do
+      it 'should have access to rails admin if is admin' do
         subject.roles << Role.new({ name: :admin })
         @ability = AdminAbility.new(subject)
         expect(@ability.can?(:access, :rails_admin)).to be_truthy

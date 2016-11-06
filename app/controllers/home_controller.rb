@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
+  authorize_resource class: false
+
   def index
-    render 'home/index'
   end
 end
