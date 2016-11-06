@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  root 'home#index'
-  as :user do
+  authenticated :user do
     root 'bills#index'
   end
+  root 'home#index'
 
   resources :bills, only: [:index]
 
