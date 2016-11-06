@@ -22,23 +22,33 @@ RSpec.describe User, type: :model do
       @roles = [ Role.new({ name: :admin }), Role.new({ name: :employee }) ]
     end
 
-    describe 'admin?' do
-      it 'should return true when has admin role' do
-        subject.roles << @roles[0]
-        expect(subject.admin?).to be_truthy
+    describe 'roles' do
+      context 'admin?' do
+        it 'should return true when has admin role' do
+          subject.roles << @roles[0]
+          expect(subject.admin?).to be_truthy
+        end
+        it 'should return false when has no admin role' do
+          expect(subject.admin?).to be_falsy
+        end
       end
-      it 'should return false when has no admin role' do
-        expect(subject.admin?).to be_falsy
+
+      context 'employee?' do
+        it 'should return true when has employee role' do
+          subject.roles << @roles[1]
+          expect(subject.employee?).to be_truthy
+        end
+        it 'should return false when has no employee role' do
+          expect(subject.employee?).to be_falsy
+        end
       end
     end
 
-    describe 'employee?' do
-      it 'should return true when has employee role' do
-        subject.roles << @roles[1]
-        expect(subject.employee?).to be_truthy
-      end
-      it 'should return false when has no employee role' do
-        expect(subject.employee?).to be_falsy
+    describe 'helper' do
+      context 'name' do
+        it 'should return full name' do
+          expect(subject.name).to eq "#{subject.first_name} #{subject.last_name}"
+        end
       end
     end
   end
