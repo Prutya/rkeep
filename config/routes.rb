@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     root 'bills#index'
   end
 
-  get 'bills/index'
+  resources :bills, only: [:index]
 
   devise_for :users, path: '', path_names: { sign_in: 'sign-in' }
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

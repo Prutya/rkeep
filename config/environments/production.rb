@@ -94,7 +94,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  # Configure Rails time zone
-  config.time_zone = ENV.fetch('RKEEP_TIME_ZONE') { 'UTC' }
 end

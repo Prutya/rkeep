@@ -11,5 +11,8 @@ module Rkeep
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    
+    # Configure Rails time zone
+    config.time_zone = ENV.fetch('RKEEP_TIME_ZONE') { 'UTC' }
   end
 end
