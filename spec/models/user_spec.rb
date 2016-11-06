@@ -56,7 +56,7 @@ RSpec.describe User, type: :model do
   describe 'abilities' do
     describe 'rails admin' do
       it 'should not be able to access rails admin' do
-        @ability = Ability.new(subject)
+        @ability = AdminAbility.new(subject)
         expect(@ability.can?(:access, :rails_admin)).to be_falsy
       end
 
