@@ -2,6 +2,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "lib/toastr.min";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 /* Base */
 @import "base/variables";
@@ -9,6 +11,8 @@
 /* Shared */
 @import "shared/brand";
 @import "shared/footer";
+@import "shared/actions_bar";
+@import "shared/circle_button";
 
-/* home */
+/* Home */
 @import "home/welcome";

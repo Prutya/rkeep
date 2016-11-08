@@ -1,0 +1,17 @@
+<% provide :page_title, 'New bill' %>
+
+<%= form_for @bill do |f| %>
+  <div class="form-group">
+    <%= f.label :table %>
+    <%= f.select :table_id, @tables.map{ |t| [t.name, t.id] }, {}, { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :people %>
+    <%= f.select :people_number, (1..100).map{ |n| [n, n] }, {}, { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Create', class: 'btn btn-primary' %>
+  </div>
+<% end %>

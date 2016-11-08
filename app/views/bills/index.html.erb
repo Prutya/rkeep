@@ -1,2 +1,32 @@
 <% provide :page_title, 'Bills' %>
-<%= @bills %>
+
+<%= render('actions') %>
+
+<section class="col-xs-12 table-responsive">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <td><%= 'Table'      %></td>
+        <td><%= 'People'     %></td>
+        <td><%= 'Subtotal'   %></td>
+        <td><%= 'Discount'   %></td>
+        <td><%= 'Total'      %></td>
+        <td><%= 'Status'     %></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bills.each do |bill| %>
+        <tr>
+          <td><%= bill.table.name    %></td>
+          <td><%= bill.people_number %></td>
+          <td><%= bill.subtotal      %></td>
+          <td><%= bill.discount      %></td>
+          <td><%= bill.total         %></td>
+          <td>
+            <span class="label label-<%= bootstrap_status(bill.status) %>"><%= bill.status %></span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
