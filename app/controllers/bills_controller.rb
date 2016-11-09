@@ -17,7 +17,10 @@ class BillsController < ApplicationController
 
   def create
     authorize! :create, Bill
-    Bill.create params_create
+    
+    bill = Bill.new(params_create)
+    bill.user = current_user
+    bill.save!
 
     redirect_to bills_url
   end
