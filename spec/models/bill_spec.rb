@@ -9,7 +9,6 @@ RSpec.describe Bill, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of :people_number }
-
     it { should validate_numericality_of(:people_number) }
     it { should_not allow_value(-1).for(:people_number) }
     it { should_not allow_value(0).for(:people_number) }

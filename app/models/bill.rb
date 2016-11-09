@@ -4,9 +4,9 @@ class Bill < ApplicationRecord
   has_many   :bill_items, dependent: :delete_all
 
   validates :people_number, presence: true, numericality: { greater_than: 0 }
-  validates :total, presence: true, numericality: { greater_than_or_equal_to: 0.00 }
-  validates :subtotal, presence: true, numericality: { greater_than_or_equal_to: 0.00 }
-  validates :discount, presence: true, numericality: { greater_than_or_equal_to: 0.00, less_than_or_equal_to: 100.00 }
+  validates :total,         numericality: { greater_than_or_equal_to: 0.00 }
+  validates :subtotal,      numericality: { greater_than_or_equal_to: 0.00 }
+  validates :discount,      numericality: { greater_than_or_equal_to: 0.00, less_than_or_equal_to: 100.00 }
 
   # manually tested :)
   scope :for_shift, -> (current_time = Time.zone.now) do

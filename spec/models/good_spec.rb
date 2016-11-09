@@ -8,6 +8,7 @@ RSpec.describe Good, type: :model do
   describe 'validations' do
     it { should validate_presence_of :name}
     it { should_not allow_value("").for :name }
+
     it { should validate_presence_of :price }
     it { should validate_numericality_of(:price) }
     it { should_not allow_value(-1).for(:price) }
