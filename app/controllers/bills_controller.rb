@@ -31,7 +31,7 @@ class BillsController < ApplicationController
       @bill.save!
     end
 
-    redirect_to bill_url(@bill)
+    redirect_to bills_url
   end
 
   def destroy

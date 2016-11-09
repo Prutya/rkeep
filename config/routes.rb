@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :bills, only: [:index, :show, :new, :create, :update, :destroy] do
-    resources :bill_items, only: [:new, :create, :destroy]
+    resources :items, only: [:new, :create, :destroy], controller: :bill_items
   end
 
   devise_for :users, path: '', path_names: { sign_in: 'sign-in' }
