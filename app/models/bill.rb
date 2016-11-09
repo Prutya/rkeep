@@ -14,18 +14,18 @@ class Bill < ApplicationRecord
 
     where({ created_at: time_from..time_to }).order(created_at: :desc)
   end
-  
+
   def status
-    return :cancelled if time_cancel
-    return :closed    if time_close
+    return :cancelled if self.time_cancel
+    return :closed    if self.time_close
     :open
   end
 
-  def close
-    self.time_close = Time.zone.now
+  def close(close_time = Time.zone.now)
+    self.time_close = close_time
   end
 
-  def cancel
-    self.time_cancel = Time.zone.now
+  def cancel(cancel_time = Time.zone.now)
+    self.time_cancel = cancel_time
   end
 end
