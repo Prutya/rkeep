@@ -3,15 +3,34 @@ require 'rails_helper'
 RSpec.describe Bill, type: :model do
   describe 'relationships' do
     it { should belong_to :table }
+    it { should belong_to :user }
     it { should have_many :bill_items }
   end
 
   describe 'validations' do
     it { should validate_presence_of :people_number }
+
     it { should validate_numericality_of(:people_number) }
     it { should_not allow_value(-1).for(:people_number) }
     it { should_not allow_value(0).for(:people_number) }
     it { should allow_value(1).for(:people_number) }
+
+    it { should validate_numericality_of(:total) }
+    it { should_not allow_value(-1).for(:total) }
+    it { should allow_value(0.00).for(:total) }
+    it { should allow_value(1.00).for(:total) }
+
+    it { should validate_numericality_of(:subtotal) }
+    it { should_not allow_value(-1).for(:subtotal) }
+    it { should allow_value(0.00).for(:subtotal) }
+    it { should allow_value(1.00).for(:subtotal) }
+
+    it { should validate_numericality_of(:discount) }
+    it { should_not allow_value(-1).for(:discount) }
+    it { should allow_value(0.00).for(:discount) }
+    it { should allow_value(1.00).for(:discount) }
+    it { should allow_value(100.00).for(:discount) }
+    it { should_not allow_value(100.01).for(:discount) }
   end
 
   describe 'methods' do

@@ -1,8 +1,12 @@
 class Bill < ApplicationRecord
   belongs_to :table
+  belongs_to :user
   has_many   :bill_items, dependent: :delete_all
 
   validates :people_number, presence: true, numericality: { greater_than: 0 }
+  validates :total, presence: true, numericality: { greater_than_or_equal_to: 0.00 }
+  validates :subtotal, presence: true, numericality: { greater_than_or_equal_to: 0.00 }
+  validates :discount, presence: true, numericality: { greater_than_or_equal_to: 0.00, less_than_or_equal_to: 100.00 }
 
   # manually tested :)
   scope :for_shift, -> (current_time = Time.zone.now) do
@@ -19,6 +23,14 @@ class Bill < ApplicationRecord
     return :cancelled if self.time_cancel
     return :closed    if self.time_close
     :open
+  end
+
+  def calculate_subtotal
+  end
+
+  def calculate_total
+    pre_subtotal = self.calculate_subtotal
+    pre_subtotal * (100 - self.discount) / 100
   end
 
   def close(close_time = Time.zone.now)

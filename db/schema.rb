@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161106082916) do
+ActiveRecord::Schema.define(version: 20161109102553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,15 +26,14 @@ ActiveRecord::Schema.define(version: 20161106082916) do
   end
 
   create_table "bill_items", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "bill_id"
     t.integer  "good_id"
     t.datetime "time_cancel"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "quantity",    default: 1, null: false
     t.index ["bill_id"], name: "index_bill_items_on_bill_id", using: :btree
     t.index ["good_id"], name: "index_bill_items_on_good_id", using: :btree
-    t.index ["user_id"], name: "index_bill_items_on_user_id", using: :btree
   end
 
   create_table "bills", force: :cascade do |t|
@@ -47,7 +46,9 @@ ActiveRecord::Schema.define(version: 20161106082916) do
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
     t.integer  "people_number",                          default: 1,     null: false
+    t.integer  "user_id"
     t.index ["table_id"], name: "index_bills_on_table_id", using: :btree
+    t.index ["user_id"], name: "index_bills_on_user_id", using: :btree
   end
 
   create_table "configurations", force: :cascade do |t|
@@ -112,7 +113,6 @@ ActiveRecord::Schema.define(version: 20161106082916) do
   add_foreign_key "assignments", "users"
   add_foreign_key "bill_items", "bills"
   add_foreign_key "bill_items", "goods"
-  add_foreign_key "bill_items", "users"
   add_foreign_key "bills", "tables"
   add_foreign_key "spendings", "users"
 end
