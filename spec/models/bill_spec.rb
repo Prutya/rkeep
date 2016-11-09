@@ -51,6 +51,35 @@ RSpec.describe Bill, type: :model do
       end
     end
 
+    describe 'calculations' do
+      before(:each) do
+        [ Good.new({ name: 'Good1', price: 100.00 }), Good.new({ name: 'Good2', price: 200.00 }) ].each do |good|
+          subject.bill_items.push(BillItem.new({ good: good, quantity: 2 }))
+        end
+      end
+
+      describe 'subtotal' do
+        it 'should return correct subtotal' do
+          expect(subject.calculate_subtotal).to eq 600.00
+        end
+      end
+
+      describe 'total without discount' do
+        it 'should return correct total' do
+          expect(subject.calculate_subtotal).to eq 600.00
+        end
+      end
+
+      describe 'total with discount' do
+        it 'should return correct total' do
+          subject.discount = 50.00
+          expect(subject.calculate_total).to eq 300.00
+        end
+      end
+    end
+  end
+
+  describe 'helpers' do
     describe 'status' do
       context 'when bill has time_close and time_cancel' do
         it 'returns status cancel' do
@@ -81,30 +110,14 @@ RSpec.describe Bill, type: :model do
       end
     end
 
-    describe 'calculations' do
-      before(:each) do
-        [ Good.new({ name: 'Good1', price: 100.00 }), Good.new({ name: 'Good2', price: 200.00 }) ].each do |good|
-          subject.bill_items.push(BillItem.new({ good: good, quantity: 2 }))
-        end
+    describe 'closed?' do
+      it 'returns true if bill is closed' do
+        subject.close
+        expect(subject.closed?).to be_truthy
       end
 
-      describe 'subtotal' do
-        it 'should return correct subtotal' do
-          expect(subject.calculate_subtotal).to eq 600.00
-        end
-      end
-
-      describe 'total without discount' do
-        it 'should return correct total' do
-          expect(subject.calculate_subtotal).to eq 600.00
-        end
-      end
-
-      describe 'total with discount' do
-        it 'should return correct total' do
-          subject.discount = 50.00
-          expect(subject.calculate_total).to eq 300.00
-        end
+      it 'returns false if bill is not closed' do
+        expect(subject.closed?).to be_falsy
       end
     end
   end

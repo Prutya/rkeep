@@ -12,7 +12,8 @@ class BillsController < ApplicationController
 
   def create
     authorize! :create, Bill
-    Bill.create create_params
+    Bill.create params_create
+
     redirect_to bills_url
   end
 
@@ -21,13 +22,21 @@ class BillsController < ApplicationController
     @bill = Bill.find(params[:id])
   end
 
-  protected
+  def destroy
+    authorize! :destroy, Bill
+    @bill = Bill.find(params[:id])
 
-  def create_params
-    params.require(:bill).permit(:table_id, :people_number, :discount)
+    unless @bill.closed?
+      @bill.close
+      @bill.save!
+    end
+
+    redirect_to bills_url
   end
 
-  def update_params
-    params.require(:bill).permit(:table_id, :people_number, :discount, :time_cancel)
+  protected
+
+  def params_create
+    params.require(:bill).permit(:table_id, :people_number, :discount)
   end
 end

@@ -13,7 +13,7 @@
     <%= icon('pencil') %> <%= 'Edit' %>
   <% end %>
 
-  <%= link_to '#', class: 'btn btn-success' do %>
+  <%= link_to bill_path(@bill), class: 'btn btn-success', method: :delete, data: { confirm: 'Are you sure?' } do %>
     <%= icon('check') %> <%= 'Checkout' %>
   <% end %>
 
