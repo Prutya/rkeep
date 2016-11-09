@@ -7,24 +7,24 @@
     <thead>
       <tr>
         <td><%= 'Created'  %></td>
-        <td><%= 'Table'    %></td>
-        <td><%= 'People'   %></td>
-        <td><%= 'Subtotal' %></td>
-        <td><%= 'Discount' %></td>
-        <td><%= 'Total'    %></td>
-        <td><%= 'Status'   %></td>
+        <td class="text-right"><%= 'Table'    %></td>
+        <td class="text-right"><%= 'People'   %></td>
+        <td class="text-right"><%= 'Subtotal' %></td>
+        <td class="text-right"><%= 'Discount' %></td>
+        <td class="text-right"><%= 'Total'    %></td>
+        <td class="text-right"><%= 'Status'   %></td>
       </tr>
     </thead>
     <tbody>
       <% @bills.each do |bill| %>
         <tr class="row-link" data-href="<%= bill_url(bill) %>" >
           <td><%= bill.created_at    %></td>
-          <td><%= bill.table.name    %></td>
-          <td><%= bill.people_number %></td>
-          <td><%= bill.subtotal      %></td>
-          <td><%= bill.discount      %></td>
-          <td><%= bill.total         %></td>
-          <td>
+          <td class="text-right"><%= bill.table.name    %></td>
+          <td class="text-right"><%= bill.people_number %></td>
+          <td class="text-right"><%= bill.subtotal      %></td>
+          <td class="text-right"><%= bill.discount      %></td>
+          <td class="text-right"><%= bill.total         %></td>
+          <td class="text-right">
             <span class="label label-<%= bootstrap_status(bill.status) %>">
               <%= bill.status %>
             </span>
