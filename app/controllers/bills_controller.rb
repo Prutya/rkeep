@@ -4,6 +4,11 @@ class BillsController < ApplicationController
     @bills = Bill.for_shift
   end
 
+  def show
+    authorize! :show, Bill
+    @bill = Bill.find(params[:id])
+  end
+
   def new
     authorize! :create, Bill
     @bill = Bill.new
@@ -15,11 +20,6 @@ class BillsController < ApplicationController
     Bill.create params_create
 
     redirect_to bills_url
-  end
-
-  def show
-    authorize! :show, Bill
-    @bill = Bill.find(params[:id])
   end
 
   def update
