@@ -26,11 +26,11 @@ class Bill < ApplicationRecord
   end
 
   def calculate_subtotal
+    bill_items.inject(0) { |total, item| total += item.good.price * item.quantity }
   end
 
   def calculate_total
-    pre_subtotal = self.calculate_subtotal
-    pre_subtotal * (100 - self.discount) / 100
+    calculate_subtotal * (100 - self.discount) / 100
   end
 
   def close(close_time = Time.zone.now)
