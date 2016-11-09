@@ -3,8 +3,7 @@
 <menu class="col-xs-12 action-bar">
   <div class="text-left col-xs-12 col-md-4 action-bar-section">
     <%= link_to bills_url, class: 'btn btn-default' do %>
-      <%= icon('list') %>
-      <%= 'Back to list' %>
+      <%= icon('list') %> <%= 'Back to list' %>
     <% end %>
   </div>
 
@@ -51,7 +50,7 @@
 
   <div class="form-group">
     <%= label :bill, :subtotal %>
-    <%= text_field :bill, :subtotal, class: 'form-control', readonly: true %>
+    <%= text_field :bill, :subtotal, value: @bill.calculate_subtotal, class: 'form-control', readonly: true %>
   </div>
 
   <div class="form-group">
@@ -61,7 +60,7 @@
 
   <div class="form-group">
     <%= label :bill, :total %>
-    <%= text_field :bill, :total, class: 'form-control', readonly: true %>
+    <%= text_field :bill, :total, value: @bill.calculate_total, class: 'form-control', readonly: true %>
   </div>
 </section>
 
@@ -72,14 +71,18 @@
     <thead>
       <tr>
         <td class="text-right"><%= 'Title' %></td>
+        <td class="text-right"><%= 'Price' %></td>
         <td class="text-right"><%= 'Quantity' %></td>
+        <td class="text-right"><%= 'Subtotal' %></td>
       </tr>
     </thead>
     <tbody>
       <% @bill.bill_items.each do |item| %>
       <tr>
         <td class="text-right"><%= item.good.name %></td>
+        <td class="text-right"><%= item.good.price %></td>
         <td class="text-right"><%= item.quantity  %></td>
+        <td class="text-right"><%= item.calculate_subtotal %></td>
       </tr>
       <% end %>
     </tbody>
