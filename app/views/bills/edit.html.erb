@@ -1,8 +1,12 @@
-<% provide :page_title, 'New bill' %>
+<% provide :page_title, "Edit bill №#{@bill.id}" %>
 
 <menu class="col-xs-12 actions-bar text-right">
   <%= link_to bills_url, class: 'btn btn-default pull-left' do %>
     <%= icon('list') %> <%= 'Back to list' %>
+  <% end %>
+
+  <%= link_to bill_url(@bill), class: 'btn btn-default pull-left' do %>
+    <%= icon('arrow-left') %> <%= 'Back to bill' %>
   <% end %>
 </menu>
 

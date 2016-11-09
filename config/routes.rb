@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
   root 'home#index'
 
-  resources :bills, only: [:index, :new, :create, :show, :destroy]
+  resources :bills
 
   devise_for :users, path: '', path_names: { sign_in: 'sign-in' }
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

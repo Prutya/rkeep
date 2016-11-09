@@ -7,7 +7,7 @@ class Ability
     can [:index], :home
 
     if user.employee?
-      can [:index, :create, :show, :destroy], Bill
+      can [:index, :create, :show, :update, :destroy], Bill
     end
   end
 end

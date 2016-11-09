@@ -1,24 +1,24 @@
-<% provide :page_title, "Bill ##{@bill.id}" %>
+<% provide :page_title, "Bill №#{@bill.id}" %>
 
-<menu class="col-xs-12 actions-bar text-center">
-  <%= link_to bills_url, class: 'btn btn-default' do %>
-    <%= icon('arrow-left') %> <%= 'Back to list' %>
+<menu class="col-xs-12 actions-bar text-right">
+  <%= link_to bills_url, class: 'btn btn-default pull-left' do %>
+    <%= icon('list') %> <%= 'Back to list' %>
   <% end %>
 
-  <%= link_to '#', class: 'btn btn-primary' do %>
-    <%= icon('plus') %> <%= 'Add item' %>
+  <%= link_to '#', class: 'btn btn-warning pull-right' do %>
+    <%= icon('trash') %> <%= 'Cancel' %>
   <% end %>
 
-  <%= link_to '#', class: 'btn btn-default' do %>
-    <%= icon('pencil') %> <%= 'Edit' %>
-  <% end %>
-
-  <%= link_to bill_path(@bill), class: 'btn btn-success', method: :delete, data: { confirm: 'Are you sure?' } do %>
+  <%= link_to bill_path(@bill), class: 'btn btn-success pull-right', method: :delete, data: { confirm: 'Are you sure?' } do %>
     <%= icon('check') %> <%= 'Checkout' %>
   <% end %>
 
-  <%= link_to '#', class: 'btn btn-warning' do %>
-    <%= icon('trash') %> <%= 'Cancel' %>
+  <%= link_to edit_bill_url(@bill), class: 'btn btn-default  pull-right' do %>
+    <%= icon('pencil') %> <%= 'Edit' %>
+  <% end %>
+
+  <%= link_to '#', class: 'btn btn-primary pull-right' do %>
+    <%= icon('plus') %> <%= 'Add item' %>
   <% end %>
 </menu>
 

@@ -22,6 +22,21 @@ class BillsController < ApplicationController
     @bill = Bill.find(params[:id])
   end
 
+  def edit
+    authorize! :update, Bill
+    @bill = Bill.find(params[:id])
+    @tables = Table.select('name, id')
+  end
+
+  def update
+    authorize! :update, Bill
+    @bill = Bill.find(params[:id])
+
+    @bill.update_attributes(params_update)
+
+    redirect_to bill_url(@bill)
+  end
+
   def destroy
     authorize! :destroy, Bill
     @bill = Bill.find(params[:id])
@@ -37,6 +52,10 @@ class BillsController < ApplicationController
   protected
 
   def params_create
+    params.require(:bill).permit(:table_id, :people_number, :discount)
+  end
+
+  def params_update
     params.require(:bill).permit(:table_id, :people_number, :discount)
   end
 end
