@@ -1,24 +1,28 @@
-<% provide :page_title, 'Bills' %>
+<% provide :page_title, 'Bills list' %>
 
-<%= render('actions') %>
+<menu class="col-xs-12 actions-bar text-center">
+  <%= link_to new_bill_url, class: 'btn btn-primary' do %>
+    <%= icon('plus') %> <%= 'New bill' %>
+  <% end %>
+</menu>
 
 <section class="col-xs-12 table-responsive">
   <table class="table">
     <thead>
       <tr>
-        <td><%= 'Created at' %></td>
-        <td class="text-right"><%= 'Table'    %></td>
-        <td class="text-right"><%= 'People'   %></td>
-        <td class="text-right"><%= 'Subtotal' %></td>
-        <td class="text-right"><%= 'Discount' %></td>
-        <td class="text-right"><%= 'Total'    %></td>
-        <td class="text-right"><%= 'Status'   %></td>
+        <td class="text-left" ><%= 'Created at' %></td>
+        <td class="text-right"><%= 'Table'      %></td>
+        <td class="text-right"><%= 'People'     %></td>
+        <td class="text-right"><%= 'Subtotal'   %></td>
+        <td class="text-right"><%= 'Discount'   %></td>
+        <td class="text-right"><%= 'Total'      %></td>
+        <td class="text-right"><%= 'Status'     %></td>
       </tr>
     </thead>
     <tbody>
       <% @bills.each do |bill| %>
         <tr class="row-link" data-href="<%= bill_url(bill) %>" >
-          <td><%= bill.created_at    %></td>
+          <td class="text-left" ><%= bill.created_at    %></td>
           <td class="text-right"><%= bill.table.name    %></td>
           <td class="text-right"><%= bill.people_number %></td>
           <td class="text-right"><%= bill.subtotal      %></td>

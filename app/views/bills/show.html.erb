@@ -1,28 +1,75 @@
 <% provide :page_title, "Bill ##{@bill.id}" %>
 
-<section class="col-xs-12">
-  <div class="col-xs-12 col-sm-3">
-    <div class="form-group">
-      <%= label :bill, :table %>
-      <input class="form-control" readonly="readonly" type="text" value="<%= @bill.table.name %>" id="bill_table_name" name="bill[table][name]" />
-    </div>
+<menu class="col-xs-12 actions-bar text-center">
+  <%= link_to bills_url, class: 'btn btn-default' do %>
+    <%= icon('arrow-left') %> <%= 'Back to list' %>
+  <% end %>
 
-    <div class="form-group">
-      <%= label :bill, :people_number %>
-      <%= text_field :bill, :people_number, class: 'form-control', readonly: true %>
-    </div>
+  <%= link_to '#', class: 'btn btn-primary' do %>
+    <%= icon('plus') %> <%= 'Add item' %>
+  <% end %>
 
-    <div class="form-group">
-      <%= label :bill, :status %>
-      <%= text_field :bill, :status, class: 'form-control', readonly: true %>
-    </div>
+  <%= link_to '#', class: 'btn btn-default' do %>
+    <%= icon('pencil') %> <%= 'Edit' %>
+  <% end %>
 
-    <div class="form-group">
-      <%= label :bill, :status %>
-      <%= text_field :bill, :status, class: 'form-control', readonly: true %>
-    </div>
-  </div>
+  <%= link_to '#', class: 'btn btn-success' do %>
+    <%= icon('check') %> <%= 'Checkout' %>
+  <% end %>
 
-  <div class="col-xs-12 col-sm-6 form-group">
-  </div>
+  <%= link_to '#', class: 'btn btn-warning' do %>
+    <%= icon('trash') %> <%= 'Cancel' %>
+  <% end %>
+</menu>
+
+<section class="col-xs-12 col-sm-3">
+  <legend class="text-center">Information</legend>
+
+  <dl>
+    <dt><%= 'Created at' %></dt>
+    <dd><%= @bill.created_at %></dt>
+
+    <dt><%= 'Table' %></dt>
+    <dd><%= @bill.table.name %></dt>
+
+    <dt><%= 'People' %></dt>
+    <dd><%= @bill.people_number %></dt>
+
+    <dt><%= 'Status' %></dt>
+    <dd>
+      <span class="label label-<%= bootstrap_status(@bill.status) %>">
+        <%= @bill.status %>
+      </span>
+    </dt>
+
+    <dt><%= 'Subtotal' %></dt>
+    <dd><%= @bill.subtotal %></dd>
+
+    <dt><%= 'Discount' %></dt>
+    <dd><%= @bill.discount %></dd>
+
+    <dt><%= 'Total' %></dt>
+    <dd><%= @bill.total %></dd>
+  </dl>
+</section>
+
+<section class="col-xs-12 col-sm-9 table-responsive">
+  <legend class="text-center">Items</legend>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <td class="text-right"><%= 'Title' %></td>
+        <td class="text-right"><%= 'Quantity' %></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bill.bill_items.each do |item| %>
+        <tr>
+          <td class="text-right"><%= item.good.name %></td>
+          <td class="text-right"><%= item.quantity  %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </section>

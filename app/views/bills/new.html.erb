@@ -1,17 +1,25 @@
 <% provide :page_title, 'New bill' %>
 
-<%= form_for @bill, html: { class: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3' } do |f| %>
-  <div class="form-group">
-    <%= f.label :table %>
-    <%= f.select :table_id, @tables.map{ |t| [t.name, t.id] }, {}, { class: 'form-control' } %>
-  </div>
+<menu class="col-xs-12 actions-bar text-center">
+  <%= link_to bills_url, class: 'btn btn-default' do %>
+    <%= icon('arrow-left') %> <%= 'Back to list' %>
+  <% end %>
+</menu>
 
-  <div class="form-group">
-    <%= f.label :people %>
-    <%= f.select :people_number, (1..100).map{ |n| [n, n] }, {}, { class: 'form-control' } %>
-  </div>
+<section class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+  <%= form_for @bill do |f| %>
+    <div class="form-group">
+      <%= f.label :table %>
+      <%= f.select :table_id, @tables.map{ |t| [t.name, t.id] }, {}, { class: 'form-control' } %>
+    </div>
 
-  <div class="form-group">
-    <%= f.submit 'Create', class: 'btn btn-primary' %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <%= f.label :people %>
+      <%= f.select :people_number, (1..100).map{ |n| [n, n] }, {}, { class: 'form-control' } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit 'Create', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</section>
