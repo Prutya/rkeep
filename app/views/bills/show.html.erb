@@ -1,4 +1,5 @@
 <% provide :page_title, "Bill #{@bill.id}" %>
+<h3 class="text-center"><span class="label label-<%= bootstrap_status(@bill.status) %>"><%= @bill.status %></span></h2>
 
 <menu class="col-xs-12 action-bar">
   <div class="text-left col-xs-12 col-md-4 action-bar-section">
@@ -8,19 +9,21 @@
   </div>
 
   <div class="text-right col-xs-12 col-md-8 action-bar-section">
-    <%= link_to new_bill_item_url(@bill), class: 'btn btn-primary' do %>
-      <%= icon('plus') %>
-      <%= 'Add item' %>
-    <% end %>
+    <% unless @bill.closed? || @bill.cancelled? %>
+      <%= link_to new_bill_item_url(@bill), class: 'btn btn-primary' do %>
+        <%= icon('plus') %>
+        <%= 'Add item' %>
+      <% end %>
 
-    <%= link_to bill_path(@bill), class: 'btn btn-success', method: :delete, data: { confirm: 'Are you sure?' } do %>
-      <%= icon('check') %>
-      <%= 'Checkout' %>
-    <% end %>
+      <%= link_to bill_path(@bill), class: 'btn btn-success', method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <%= icon('check') %>
+        <%= 'Checkout' %>
+      <% end %>
 
-    <%= link_to bill_path(@bill), class: 'btn btn-warning', method: :put, data: { confirm: 'Are you sure?' } do %>
-      <%= icon('trash') %>
-      <%= 'Cancel' %>
+      <%= link_to bill_path(@bill), class: 'btn btn-warning', method: :put, data: { confirm: 'Are you sure?' } do %>
+        <%= icon('trash') %>
+        <%= 'Cancel' %>
+      <% end %>
     <% end %>
   </div>
 </menu>
@@ -28,19 +31,16 @@
 <section class="col-xs-12 col-sm-3">
   <legend class="text-center">Information</legend>
 
-  <div class="form-group">
-    <%= label :bill, :table %>
-    <input type="text" id="bill_table_name" name="bill[table][name]" value="<%= @bill.table.name %>" class="form-control" readonly="readonly" />
-  </div>
+  <div class="row">
+    <div class="form-group col-xs-6">
+      <%= label :bill, :table %>
+      <input type="text" id="bill_table_name" name="bill[table][name]" value="<%= @bill.table.name %>" class="form-control" readonly="readonly" />
+    </div>
 
-  <div class="form-group">
-    <%= label :bill, :people_number %>
-    <%= text_field :bill, :people_number, class: 'form-control', readonly: true %>
-  </div>
-
-  <div class="form-group">
-    <%= label :bill, :status %>
-    <%= text_field :bill, :status, class: 'form-control', readonly: true %>
+    <div class="form-group col-xs-6">
+      <%= label :bill, :people %>
+      <%= text_field :bill, :people_number, class: 'form-control', readonly: true %>
+    </div>
   </div>
 
   <div class="form-group">
