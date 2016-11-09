@@ -1,0 +1,6 @@
+.row-link {
+  cursor: pointer;
+  &:hover {
+    background-color: $gray-lighter;
+  }
+}

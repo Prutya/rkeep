@@ -16,6 +16,11 @@ class BillsController < ApplicationController
     redirect_to bills_url
   end
 
+  def show
+    authorize! :show, Bill
+    @bill = Bill.find(params[:id])
+  end
+
   protected
 
   def create_params
