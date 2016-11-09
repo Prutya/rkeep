@@ -6,7 +6,7 @@ class BillsController < ApplicationController
 
   def show
     authorize! :show, Bill
-    @bill = Bill.find(params[:id])
+    @bill = Bill.includes([:table, { bill_items: :good }]).find(params[:id])
   end
 
   def new
