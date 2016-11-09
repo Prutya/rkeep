@@ -8,7 +8,7 @@ class BillItemsController < ApplicationController
 
   def create
     authorize! :update, Bill
-    @bill = Bill.find(params[:bill_id])
+    @bill = Bill.includes(bill_items: :good).find(params[:bill_id])
 
     if @bill.closed? || @bill.cancelled?
       flash[:error] = 'This bill is closed or cancelled.'
