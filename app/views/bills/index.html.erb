@@ -1,9 +1,14 @@
 <% provide :page_title, 'Bills list' %>
 
-<menu class="col-xs-12 actions-bar">
-  <%= link_to new_bill_url, class: 'btn btn-primary pull-right' do %>
-    <%= icon('plus') %> <%= 'New bill' %>
-  <% end %>
+<menu class="col-xs-12 action-bar">
+  <div class="text-left col-xs-12 col-md-4 action-bar-section">
+  </div>
+
+  <div class="text-right col-xs-12 col-md-8 action-bar-section">
+    <%= link_to new_bill_url, class: 'btn btn-primary' do %>
+      <%= icon('plus') %> <%= 'New bill' %>
+    <% end %>
+  </div>
 </menu>
 
 <section class="col-xs-12 table-responsive">

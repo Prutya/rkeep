@@ -1,56 +1,73 @@
 <% provide :page_title, "Bill №#{@bill.id}" %>
 
-<menu class="col-xs-12 actions-bar text-right">
-  <%= link_to bills_url, class: 'btn btn-default pull-left' do %>
-    <%= icon('list') %> <%= 'Back to list' %>
-  <% end %>
+<menu class="col-xs-12 action-bar">
+  <div class="text-left col-xs-12 col-md-4 action-bar-section">
+    <%= link_to bills_url, class: 'btn btn-default' do %>
+    <%= icon('list') %>
+    <%= 'Back to list' %>
+    <% end %>
+  </div>
 
-  <%= link_to '#', class: 'btn btn-warning pull-right' do %>
-    <%= icon('trash') %> <%= 'Cancel' %>
-  <% end %>
+  <div class="text-right col-xs-12 col-md-8 action-bar-section">
+    <%= link_to '#', class: 'btn btn-primary' do %>
+    <%= icon('plus') %>
+    <%= 'Add item' %>
+    <% end %>
 
-  <%= link_to bill_path(@bill), class: 'btn btn-success pull-right', method: :delete, data: { confirm: 'Are you sure?' } do %>
-    <%= icon('check') %> <%= 'Checkout' %>
-  <% end %>
+    <%= link_to edit_bill_url(@bill), class: 'btn btn-default' do %>
+    <%= icon('pencil') %>
+    <%= 'Edit' %>
+    <% end %>
 
-  <%= link_to edit_bill_url(@bill), class: 'btn btn-default  pull-right' do %>
-    <%= icon('pencil') %> <%= 'Edit' %>
-  <% end %>
+    <%= link_to bill_path(@bill), class: 'btn btn-success', method: :delete, data: { confirm: 'Are you sure?' } do %>
+    <%= icon('check') %>
+    <%= 'Checkout' %>
+    <% end %>
 
-  <%= link_to '#', class: 'btn btn-primary pull-right' do %>
-    <%= icon('plus') %> <%= 'Add item' %>
-  <% end %>
+    <%= link_to '#', class: 'btn btn-warning' do %>
+    <%= icon('trash') %>
+    <%= 'Cancel' %>
+    <% end %>
+  </div>
 </menu>
 
 <section class="col-xs-12 col-sm-3">
   <legend class="text-center">Information</legend>
 
-  <dl>
-    <dt><%= 'Created at' %></dt>
-    <dd><%= @bill.created_at %></dt>
+  <div class="form-group">
+    <%= label :bill, :created_at %>
+    <%= text_field :bill, :created_at, class: 'form-control', readonly: true %>
+  </div>
 
-    <dt><%= 'Table' %></dt>
-    <dd><%= @bill.table.name %></dt>
+  <div class="form-group">
+    <%= label :bill, :table %>
+    <input type="text" id="bill_table_name" name="bill[table][name]" value="<%= @bill.table.name %>" class="form-control" readonly="readonly" />
+  </div>
 
-    <dt><%= 'People' %></dt>
-    <dd><%= @bill.people_number %></dt>
+  <div class="form-group">
+    <%= label :bill, :people_number %>
+    <%= text_field :bill, :people_number, class: 'form-control', readonly: true %>
+  </div>
 
-    <dt><%= 'Status' %></dt>
-    <dd>
-      <span class="label label-<%= bootstrap_status(@bill.status) %>">
-        <%= @bill.status %>
-      </span>
-    </dt>
+  <div class="form-group">
+    <%= label :bill, :status %>
+    <%= text_field :bill, :status, class: 'form-control', readonly: true %>
+  </div>
 
-    <dt><%= 'Subtotal' %></dt>
-    <dd><%= @bill.subtotal %></dd>
+  <div class="form-group">
+    <%= label :bill, :subtotal %>
+    <%= text_field :bill, :subtotal, class: 'form-control', readonly: true %>
+  </div>
 
-    <dt><%= 'Discount' %></dt>
-    <dd><%= @bill.discount %></dd>
+  <div class="form-group">
+    <%= label :bill, :discount %>
+    <%= text_field :bill, :discount, class: 'form-control', readonly: true %>
+  </div>
 
-    <dt><%= 'Total' %></dt>
-    <dd><%= @bill.total %></dd>
-  </dl>
+  <div class="form-group">
+    <%= label :bill, :total %>
+    <%= text_field :bill, :total, class: 'form-control', readonly: true %>
+  </div>
 </section>
 
 <section class="col-xs-12 col-sm-9 table-responsive">
@@ -65,10 +82,10 @@
     </thead>
     <tbody>
       <% @bill.bill_items.each do |item| %>
-        <tr>
-          <td class="text-right"><%= item.good.name %></td>
-          <td class="text-right"><%= item.quantity  %></td>
-        </tr>
+      <tr>
+        <td class="text-right"><%= item.good.name %></td>
+        <td class="text-right"><%= item.quantity  %></td>
+      </tr>
       <% end %>
     </tbody>
   </table>
