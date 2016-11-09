@@ -120,5 +120,16 @@ RSpec.describe Bill, type: :model do
         expect(subject.closed?).to be_falsy
       end
     end
+
+    describe 'cancelled?' do
+      it 'returns true if bill is cancelled' do
+        subject.cancel
+        expect(subject.cancelled?).to be_truthy
+      end
+
+      it 'returns false if bill is not cancelled' do
+        expect(subject.cancelled?).to be_falsy
+      end
+    end
   end
 end

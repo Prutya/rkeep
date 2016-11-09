@@ -3,30 +3,25 @@
 <menu class="col-xs-12 action-bar">
   <div class="text-left col-xs-12 col-md-4 action-bar-section">
     <%= link_to bills_url, class: 'btn btn-default' do %>
-    <%= icon('list') %>
-    <%= 'Back to list' %>
+      <%= icon('list') %>
+      <%= 'Back to list' %>
     <% end %>
   </div>
 
   <div class="text-right col-xs-12 col-md-8 action-bar-section">
     <%= link_to '#', class: 'btn btn-primary' do %>
-    <%= icon('plus') %>
-    <%= 'Add item' %>
-    <% end %>
-
-    <%= link_to edit_bill_url(@bill), class: 'btn btn-default' do %>
-    <%= icon('pencil') %>
-    <%= 'Edit' %>
+      <%= icon('plus') %>
+      <%= 'Add item' %>
     <% end %>
 
     <%= link_to bill_path(@bill), class: 'btn btn-success', method: :delete, data: { confirm: 'Are you sure?' } do %>
-    <%= icon('check') %>
-    <%= 'Checkout' %>
+      <%= icon('check') %>
+      <%= 'Checkout' %>
     <% end %>
 
-    <%= link_to '#', class: 'btn btn-warning' do %>
-    <%= icon('trash') %>
-    <%= 'Cancel' %>
+    <%= link_to bill_path(@bill), class: 'btn btn-warning', method: :put, data: { confirm: 'Are you sure?' } do %>
+      <%= icon('trash') %>
+      <%= 'Cancel' %>
     <% end %>
   </div>
 </menu>

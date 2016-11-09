@@ -29,6 +29,10 @@ class Bill < ApplicationRecord
     self.time_close.present?
   end
 
+  def cancelled?
+    self.time_cancel.present?
+  end
+
   def calculate_subtotal
     bill_items.inject(0) { |total, item| total += item.good.price * item.quantity }
   end
