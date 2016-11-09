@@ -1,6 +1,6 @@
 class Bill < ApplicationRecord
   belongs_to :table
-  has_many   :bill_items
+  has_many   :bill_items, dependent: :delete_all
 
   validates :people_number, presence: true, numericality: { greater_than: 0 }
 
