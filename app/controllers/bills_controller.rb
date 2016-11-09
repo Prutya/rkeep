@@ -17,10 +17,11 @@ class BillsController < ApplicationController
 
   def create
     authorize! :create, Bill
-    
+
     bill = Bill.new(params_create)
     bill.user = current_user
     bill.save!
+    flash[:success] = 'Bill created successfully.'
 
     redirect_to bills_url
   end
@@ -32,6 +33,9 @@ class BillsController < ApplicationController
     unless @bill.cancelled? || @bill.closed?
       @bill.cancel
       @bill.save!
+      flash[:success] = 'Bill cancelled successfully.'
+    else
+      flash[:error] = 'This bill is already closed or cancelled.'
     end
 
     redirect_to bills_url
@@ -44,6 +48,9 @@ class BillsController < ApplicationController
     unless @bill.closed?
       @bill.close
       @bill.save!
+      flash[:success] = 'Bill closed successfully.'
+    else
+      flash[:error] = 'This bill is already closed.'
     end
 
     redirect_to bills_url

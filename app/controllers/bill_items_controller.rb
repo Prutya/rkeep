@@ -11,12 +11,13 @@ class BillItemsController < ApplicationController
     @bill = Bill.find(params[:bill_id])
 
     if @bill.closed? || @bill.cancelled?
-      flash[:error] = 'This bill is already closed or cancelled.'
+      flash[:error] = 'This bill is closed or cancelled.'
 
       return redirect_to bill_url(@bill)
     end
 
     create_or_add(params_create)
+    flash[:success] = 'Item added successfully.'
 
     redirect_to bill_url(@bill)
   end
