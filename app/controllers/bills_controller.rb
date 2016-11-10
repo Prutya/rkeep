@@ -57,7 +57,7 @@ class BillsController < ApplicationController
       @bill.save!
       flash[:success] = 'Bill cancelled successfully.'
     else
-      flash[:error] = 'This bill is already closed or cancelled.'
+      flash[:error] = 'This bill is closed or cancelled.'
     end
 
     redirect_to bills_url
@@ -72,7 +72,7 @@ class BillsController < ApplicationController
       @bill.save!
       flash[:success] = 'Bill closed successfully.'
     else
-      flash[:error] = 'This bill is already closed.'
+      flash[:error] = 'This bill is closed.'
     end
 
     redirect_to bills_url
