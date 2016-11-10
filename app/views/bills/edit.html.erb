@@ -28,6 +28,11 @@
     </div>
 
     <div class="form-group">
+      <%= f.label :discount %>
+      <%= f.select :discount_id, @discounts.map{ |t| [t.value, t.id] }, {}, { class: 'form-control' } %>
+    </div>
+
+    <div class="form-group">
       <%= f.submit 'Update', class: 'btn btn-primary' %>
     </div>
   <% end %>

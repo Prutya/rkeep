@@ -51,7 +51,7 @@
 
   <div class="form-group">
     <%= label :bill, :discount %>
-    <%= text_field :bill, :discount, class: 'form-control', readonly: true %>
+    <input type="text" id="bill_discount_value" name="bill[discount][value]" value="<%= @bill.discount.value %>" class="form-control" readonly="readonly" />
   </div>
 
   <div class="form-group">
@@ -80,6 +80,7 @@
         <td class="text-right"><%= 'Price' %></td>
         <td class="text-right"><%= 'Quantity' %></td>
         <td class="text-right"><%= 'Subtotal' %></td>
+        <td class="text-right"><%= 'Total' %></td>
       </tr>
     </thead>
     <tbody>
@@ -89,6 +90,7 @@
         <td class="text-right"><%= item.good.price %></td>
         <td class="text-right"><%= item.quantity  %></td>
         <td class="text-right"><%= item.calculate_subtotal %></td>
+        <td class="text-right"><%= item.calculate_total(@bill.discount.value) %></td>
       </tr>
       <% end %>
     </tbody>

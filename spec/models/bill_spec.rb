@@ -4,6 +4,7 @@ RSpec.describe Bill, type: :model do
   describe 'relationships' do
     it { should belong_to :table }
     it { should belong_to :user }
+    it { should belong_to :discount }
     it { should have_many :bill_items }
   end
 
@@ -23,13 +24,6 @@ RSpec.describe Bill, type: :model do
     it { should_not allow_value(-1).for(:subtotal) }
     it { should allow_value(0.00).for(:subtotal) }
     it { should allow_value(1.00).for(:subtotal) }
-
-    it { should validate_numericality_of(:discount) }
-    it { should_not allow_value(-1).for(:discount) }
-    it { should allow_value(0.00).for(:discount) }
-    it { should allow_value(1.00).for(:discount) }
-    it { should allow_value(100.00).for(:discount) }
-    it { should_not allow_value(100.01).for(:discount) }
   end
 
   describe 'methods' do
@@ -53,6 +47,7 @@ RSpec.describe Bill, type: :model do
 
     describe 'calculations' do
       before(:each) do
+        @discounts = [ Discount.new({ value: 50.00 }) ]
         [ Good.new({ name: 'Good1', price: 100.00 }), Good.new({ name: 'Good2', price: 200.00 }) ].each do |good|
           subject.bill_items.push(BillItem.new({ good: good, quantity: 2 }))
         end
@@ -72,7 +67,7 @@ RSpec.describe Bill, type: :model do
 
       describe 'total with discount' do
         it 'should return correct total' do
-          subject.discount = 50.00
+          subject.discount = @discounts[0]
           expect(subject.calculate_total).to eq 300.00
         end
       end

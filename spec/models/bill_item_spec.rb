@@ -14,16 +14,26 @@ RSpec.describe BillItem, type: :model do
   end
 
   describe 'methods' do
-    describe 'calculate_subtotal' do
+    describe 'calculations' do
       before(:each) do
         good = Good.new({ name: 'Test1', price: 20.00 })
         subject.good = good
       end
 
-      it 'should return correct value' do
-        subject.quantity = 10
+      describe 'calculate_subtotal' do
+        it 'should return correct value' do
+          subject.quantity = 10
 
-        expect(subject.calculate_subtotal).to eq 200.00
+          expect(subject.calculate_subtotal).to eq 200.00
+        end
+      end
+
+      describe 'calculate_total' do
+        it 'should return correct value' do
+          subject.quantity = 10
+
+          expect(subject.calculate_total(20.00)).to eq 160.00
+        end
       end
     end
   end

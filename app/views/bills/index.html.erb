@@ -28,13 +28,13 @@
     <tbody>
       <% @bills.each do |bill| %>
         <tr class="row-link" data-href="<%= bill_url(bill) %>" >
-          <td class="text-left" ><%= bill.created_at    %></td>
-          <td class="text-left" ><%= bill.user.name     %></td>
-          <td class="text-right"><%= bill.table.name    %></td>
-          <td class="text-right"><%= bill.people_number %></td>
-          <td class="text-right"><%= bill.subtotal      %></td>
-          <td class="text-right"><%= bill.discount      %></td>
-          <td class="text-right"><%= bill.total         %></td>
+          <td class="text-left" ><%= bill.created_at     %></td>
+          <td class="text-left" ><%= bill.user.name      %></td>
+          <td class="text-right"><%= bill.table.name     %></td>
+          <td class="text-right"><%= bill.people_number  %></td>
+          <td class="text-right"><%= bill.subtotal       %></td>
+          <td class="text-right"><%= bill.discount.value %></td>
+          <td class="text-right"><%= bill.total          %></td>
           <td class="text-right">
             <span class="label label-<%= bootstrap_status(bill.status) %>">
               <%= bill.status %>

@@ -6,7 +6,7 @@ class BillsController < ApplicationController
 
   def show
     authorize! :show, Bill
-    @bill = Bill.includes([:table, :user, { bill_items: :good }]).find(params[:id])
+    @bill = Bill.includes([:table, :discount, :user, { bill_items: :good }]).find(params[:id])
   end
 
   def new
@@ -14,10 +14,21 @@ class BillsController < ApplicationController
     @bill = Bill.new
 
     @tables = Table.select('name, id')
+    @discounts = Discount.select('value, id')
   end
 
   def create
     authorize! :create, Bill
+
+    unless Table.exists?(params_create[:table_id])
+      flash[:error] = 'Such table does not exist.'
+      return redirect_to bill_url(@bill)
+    end
+
+    unless Discount.exists?(params_create[:discount_id])
+      flash[:error] = 'Such discount does not exist.'
+      return redirect_to bill_url(@bill)
+    end
 
     bill = Bill.new(params_create)
     bill.user = current_user
@@ -32,11 +43,22 @@ class BillsController < ApplicationController
     @bill = Bill.find(params[:id])
 
     @tables = Table.select('name, id')
+    @discounts = Discount.select('value, id')
   end
 
   def update
     authorize! :update, Bill
     @bill = Bill.find(params[:id])
+
+    unless Table.exists?(params_create[:table_id])
+      flash[:error] = 'Such table does not exist.'
+      return redirect_to bill_url(@bill)
+    end
+
+    unless Discount.exists?(params_create[:discount_id])
+      flash[:error] = 'Such discount does not exist.'
+      return redirect_to bill_url(@bill)
+    end
 
     unless @bill.cancelled? || @bill.closed?
       @bill.update_attributes(params_update)
@@ -81,10 +103,10 @@ class BillsController < ApplicationController
   protected
 
   def params_create
-    params.require(:bill).permit(:table_id, :people_number, :discount)
+    params.require(:bill).permit(:table_id, :people_number, :discount_id)
   end
 
   def params_update
-    params.require(:bill).permit(:table_id, :people_number, :discount)
+    params.require(:bill).permit(:table_id, :people_number, :discount_id)
   end
 end

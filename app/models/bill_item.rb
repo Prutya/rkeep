@@ -7,4 +7,8 @@ class BillItem < ApplicationRecord
   def calculate_subtotal
     self.quantity * self.good.price
   end
+
+  def calculate_total(discount)
+    calculate_subtotal * (100 - discount) / 100
+  end
 end

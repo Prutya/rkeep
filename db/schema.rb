@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109102553) do
+ActiveRecord::Schema.define(version: 20161110163147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,13 +40,14 @@ ActiveRecord::Schema.define(version: 20161109102553) do
     t.integer  "table_id"
     t.decimal  "total",         precision: 10, scale: 2, default: "0.0", null: false
     t.decimal  "subtotal",      precision: 10, scale: 2, default: "0.0", null: false
-    t.decimal  "discount",      precision: 5,  scale: 2, default: "0.0", null: false
     t.datetime "time_cancel"
     t.datetime "time_close"
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
     t.integer  "people_number",                          default: 1,     null: false
     t.integer  "user_id"
+    t.integer  "discount_id"
+    t.index ["discount_id"], name: "index_bills_on_discount_id", using: :btree
     t.index ["table_id"], name: "index_bills_on_table_id", using: :btree
     t.index ["user_id"], name: "index_bills_on_user_id", using: :btree
   end
@@ -58,6 +59,13 @@ ActiveRecord::Schema.define(version: 20161109102553) do
     t.datetime "updated_at",                                   null: false
     t.datetime "time_setup",   default: '2016-01-01 10:00:00', null: false
     t.index ["time_setup"], name: "index_configurations_on_time_setup", unique: true, using: :btree
+  end
+
+  create_table "discounts", force: :cascade do |t|
+    t.decimal  "value",      precision: 5, scale: 2, default: "0.0", null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.index ["value"], name: "index_discounts_on_value", unique: true, using: :btree
   end
 
   create_table "goods", force: :cascade do |t|
@@ -113,6 +121,7 @@ ActiveRecord::Schema.define(version: 20161109102553) do
   add_foreign_key "assignments", "users"
   add_foreign_key "bill_items", "bills"
   add_foreign_key "bill_items", "goods"
+  add_foreign_key "bills", "discounts"
   add_foreign_key "bills", "tables"
   add_foreign_key "spendings", "users"
 end
