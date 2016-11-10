@@ -1,7 +1,7 @@
 class BillsController < ApplicationController
   def index
     authorize! :index, Bill
-    @bills = Bill.for_shift
+    @bills = Bill.for_shift.includes([:table, :discount, :user])
   end
 
   def show
