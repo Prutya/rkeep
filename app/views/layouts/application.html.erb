@@ -16,7 +16,7 @@
     <% else %>
       <%= render 'layouts/header' %>
       <main class="container">
-        <h2 class="text-center"><%= yield(:page_title) %></h2>
+        <h2 class="text-center"><%= yield(:page_heading) %></h2>
         <%= yield %>
       </main>
     <% end %>
