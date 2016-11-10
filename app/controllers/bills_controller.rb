@@ -12,6 +12,7 @@ class BillsController < ApplicationController
   def new
     authorize! :create, Bill
     @bill = Bill.new
+
     @tables = Table.select('name, id')
   end
 
@@ -26,7 +27,28 @@ class BillsController < ApplicationController
     redirect_to bills_url
   end
 
+  def edit
+    authorize! :update, Bill
+    @bill = Bill.find(params[:id])
+
+    @tables = Table.select('name, id')
+  end
+
   def update
+    authorize! :update, Bill
+    @bill = Bill.find(params[:id])
+
+    unless @bill.cancelled? || @bill.closed?
+      @bill.update_attributes(params_update)
+      flash[:success] = 'Bill updated successfully.'
+    else
+      flash[:error] = 'This bill is closed or cancelled.'
+    end
+
+    redirect_to bill_url(@bill)
+  end
+
+  def cancel
     authorize! :update, Bill
     @bill = Bill.find(params[:id])
 
@@ -59,6 +81,10 @@ class BillsController < ApplicationController
   protected
 
   def params_create
+    params.require(:bill).permit(:table_id, :people_number, :discount)
+  end
+
+  def params_update
     params.require(:bill).permit(:table_id, :people_number, :discount)
   end
 end

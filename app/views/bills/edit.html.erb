@@ -1,0 +1,34 @@
+<% provide :page_title, "Edit bill #{@bill.id}" %>
+
+<menu class="col-xs-12 action-bar">
+  <div class="text-left col-xs-12 col-md-4 action-bar-section">
+    <%= link_to bills_url, class: 'btn btn-default' do %>
+      <%= icon('list') %> <%= 'Back to list' %>
+    <% end %>
+
+    <%= link_to bill_url(@bill), class: 'btn btn-default' do %>
+      <%= icon('arrow-left') %> <%= 'Back to bill' %>
+    <% end %>
+  </div>
+
+  <div class="text-right col-xs-12 col-md-8 action-bar-section">
+  </div>
+</menu>
+
+<section class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+  <%= form_for @bill do |f| %>
+    <div class="form-group">
+      <%= f.label :table %>
+      <%= f.select :table_id, @tables.map{ |t| [t.name, t.id] }, {}, { class: 'form-control' } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :people %>
+      <%= f.select :people_number, (1..100).map{ |n| [n, n] }, {}, { class: 'form-control' } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit 'Update', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</section>

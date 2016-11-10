@@ -10,19 +10,20 @@
 
   <div class="text-right col-xs-12 col-md-8 action-bar-section">
     <% unless @bill.closed? || @bill.cancelled? %>
+      <%= link_to edit_bill_url(@bill), class: 'btn btn-default' do %>
+        <%= icon('pencil') %> <%= 'Edit bill' %>
+      <% end %>
+
       <%= link_to new_bill_item_url(@bill), class: 'btn btn-primary' do %>
-        <%= icon('plus') %>
-        <%= 'Add item' %>
+        <%= icon('plus') %> <%= 'Add item' %>
       <% end %>
 
-      <%= link_to bill_path(@bill), class: 'btn btn-success', method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <%= icon('check') %>
-        <%= 'Checkout' %>
+      <%= link_to bill_url(@bill), class: 'btn btn-success', method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <%= icon('check') %> <%= 'Checkout' %>
       <% end %>
 
-      <%= link_to bill_path(@bill), class: 'btn btn-warning', method: :put, data: { confirm: 'Are you sure?' } do %>
-        <%= icon('trash') %>
-        <%= 'Cancel' %>
+      <%= link_to cancel_bill_url(@bill), class: 'btn btn-warning', method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <%= icon('trash') %> <%= 'Cancel' %>
       <% end %>
     <% end %>
   </div>

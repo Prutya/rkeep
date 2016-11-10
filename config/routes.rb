@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :bills, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    member do
+      delete 'cancel'
+    end
+
     resources :items, only: [:new, :create, :destroy], controller: :bill_items
   end
 
