@@ -19,6 +19,11 @@ class Bill < ApplicationRecord
     where({ created_at: time_from..time_to }).order(created_at: :desc)
   end
 
+  def self.calculate_total_for_shift(datetime = Time.zone.now)
+    bills = Bill.for_shift.includes([ :discount, { bill_items: :good } ])
+    bills.select(&:closed?).inject(0) { |total, bill| total += bill.calculate_total }
+  end
+
   def status
     return :cancelled if self.time_cancel
     return :closed    if self.time_close

@@ -31,6 +31,20 @@ RSpec.describe Bill, type: :model do
       @current_time = Time.zone.now
     end
 
+    describe 'self' do
+      before(:each) do
+        Configuration.create({ time_opens: @current_time })
+      end
+
+      describe 'calculate_total' do
+        context 'any bills' do
+          it 'should return 0' do
+            expect(Bill.calculate_total_for_shift(@current_time)).to be_zero
+          end
+        end
+      end
+    end
+
     describe 'close' do
       it 'sets time_close' do
         subject.close(@current_time)
@@ -59,16 +73,18 @@ RSpec.describe Bill, type: :model do
         end
       end
 
-      describe 'total without discount' do
-        it 'should return correct total' do
-          expect(subject.calculate_subtotal).to eq 600.00
+      describe 'total' do
+        context 'without discount' do
+          it 'should return correct total' do
+            expect(subject.calculate_subtotal).to eq 600.00
+          end
         end
-      end
 
-      describe 'total with discount' do
-        it 'should return correct total' do
-          subject.discount = @discounts[0]
-          expect(subject.calculate_total).to eq 300.00
+        context 'with discount' do
+          it 'should return correct total' do
+            subject.discount = @discounts[0]
+            expect(subject.calculate_total).to eq 300.00
+          end
         end
       end
     end
