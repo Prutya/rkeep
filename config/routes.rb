@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
   root 'home#index'
 
-  resources :bills, only: [:index, :show, :new, :create, :update, :destroy] do
+  resources :bills, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :items, only: [:new, :create, :destroy], controller: :bill_items
   end
 
