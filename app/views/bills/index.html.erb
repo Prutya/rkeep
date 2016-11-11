@@ -33,9 +33,21 @@
           <td class="text-left" ><%= bill.user.name      %></td>
           <td class="text-right"><%= bill.table.name     %></td>
           <td class="text-right"><%= bill.people_number  %></td>
-          <td class="text-right"><%= bill.subtotal       %></td>
+          <td class="text-right">
+            <% if bill.closed? %>
+              <%= bill.subtotal %>
+            <% else %>
+              <%= bill.calculate_subtotal %>
+            <% end %>
+          </td>
           <td class="text-right"><%= bill.discount.value %></td>
-          <td class="text-right"><%= bill.total          %></td>
+          <td class="text-right">
+            <% if bill.closed? %>
+              <%= bill.total %>
+            <% else %>
+              <%= bill.calculate_total %>
+            <% end %>
+          </td>
           <td class="text-right">
             <span class="label label-<%= bootstrap_status(bill.status) %>">
               <%= bill.status %>

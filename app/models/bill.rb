@@ -48,6 +48,8 @@ class Bill < ApplicationRecord
 
   def close(close_time = Time.zone.now)
     self.time_close = close_time
+    self.subtotal = self.calculate_subtotal
+    self.total = self.calculate_total
   end
 
   def cancel(cancel_time = Time.zone.now)

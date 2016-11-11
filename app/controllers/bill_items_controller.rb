@@ -38,9 +38,6 @@ class BillItemsController < ApplicationController
       bill.bill_items << BillItem.new(params_create)
     end
 
-    bill.subtotal = bill.calculate_subtotal
-    bill.total = bill.calculate_total
-
     bill.save!
   end
 end

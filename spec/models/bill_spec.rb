@@ -89,15 +89,33 @@ RSpec.describe Bill, type: :model do
     end
 
     describe 'close' do
+      before(:each) do
+        subject.discount = Discount.create({ value: 10.00 })
+      end
+
       it 'sets time_close' do
         subject.close(@current_time)
+
         expect(subject.time_close).to eq @current_time
+      end
+
+      it 'updates total' do
+        subject.close(@current_time)
+
+        expect(subject.total).to eq subject.calculate_total
+      end
+
+      it 'update subtotal' do
+        subject.close(@current_time)
+
+        expect(subject.subtotal).to eq subject.calculate_subtotal
       end
     end
 
     describe 'cancel' do
       it 'sets time_cancel' do
         subject.cancel(@current_time)
+
         expect(subject.time_cancel).to eq @current_time
       end
     end
@@ -126,6 +144,7 @@ RSpec.describe Bill, type: :model do
         context 'with discount' do
           it 'should return correct total' do
             subject.discount = @discounts[0]
+
             expect(subject.calculate_total).to eq 300.00
           end
         end
@@ -134,11 +153,16 @@ RSpec.describe Bill, type: :model do
   end
 
   describe 'helpers' do
+    before(:each) do
+      subject.discount = Discount.create({ value: 10.00 })
+    end
+    
     describe 'status' do
       context 'when bill has time_close and time_cancel' do
         it 'returns status cancel' do
           subject.close
           subject.cancel
+
           expect(subject.status).to eq :cancelled
         end
       end
@@ -146,6 +170,7 @@ RSpec.describe Bill, type: :model do
       context 'when bill has only time_cancel' do
         it 'returns status cancelled' do
           subject.cancel
+
           expect(subject.status).to eq :cancelled
         end
       end
@@ -153,6 +178,7 @@ RSpec.describe Bill, type: :model do
       context 'when bill has only time_close' do
         it 'returns status closed' do
           subject.close
+
           expect(subject.status).to eq :closed
         end
       end
@@ -167,6 +193,7 @@ RSpec.describe Bill, type: :model do
     describe 'closed?' do
       it 'returns true if bill is closed' do
         subject.close
+
         expect(subject.closed?).to be_truthy
       end
 
@@ -178,6 +205,7 @@ RSpec.describe Bill, type: :model do
     describe 'cancelled?' do
       it 'returns true if bill is cancelled' do
         subject.cancel
+
         expect(subject.cancelled?).to be_truthy
       end
 
