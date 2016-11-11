@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('#bills-table tr').click(function(){
+  $('#bills-table tbody tr').click(function(){
     window.location = $(this).data('href');
     return false;
   });
