@@ -8,6 +8,7 @@ class Ability
 
     if user.employee?
       can [:index, :create, :show, :update, :destroy], Bill
+      can [:index, :create, :destroy], Spending
     end
   end
 end

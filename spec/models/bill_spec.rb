@@ -156,7 +156,7 @@ RSpec.describe Bill, type: :model do
     before(:each) do
       subject.discount = Discount.create({ value: 10.00 })
     end
-    
+
     describe 'status' do
       context 'when bill has time_close and time_cancel' do
         it 'returns status cancel' do

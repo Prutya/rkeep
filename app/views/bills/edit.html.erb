@@ -1,5 +1,8 @@
 <% provide :page_title, "Edit bill #{@bill.id}" %>
-<% provide :page_heading, "Edit bill #{@bill.id}" %>
+<% provide :page_heading do %>
+  <%= "Edit bill #{@bill.id}" %>
+  <strong class="label label-<%= bill_bootstrap_status(@bill.status) %>"><%= @bill.status %></strong>
+<% end %>
 
 <menu class="col-xs-12 action-bar">
   <div class="text-left col-xs-12 col-md-4 action-bar-section">

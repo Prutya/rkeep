@@ -15,4 +15,49 @@ RSpec.describe Spending, type: :model do
     it { should_not allow_value(0.00).for(:total) }
     it { should allow_value(1.00).for(:total) }
   end
+
+  describe 'methods' do
+    before(:each) do
+      @current_time = Time.zone.now
+    end
+
+    describe 'cancel' do
+      it 'sets time_cancel' do
+        subject.cancel(@current_time)
+
+        expect(subject.time_cancel).to eq @current_time
+      end
+    end
+  end
+
+  describe 'status' do
+    context 'when bill has only time_cancel' do
+      it 'returns status cancelled' do
+        subject.cancel
+
+        expect(subject.status).to eq :cancelled
+      end
+    end
+
+    context 'any other state' do
+      it 'returns status ok' do
+        expect(subject.status).to eq :open
+      end
+    end
+  end
+
+
+  describe 'calculations' do
+    before(:each) do
+      Configuration.create({ time_opens: Time.zone.now })
+      Spending.create({ name: 'Spending1', total: 100.00 })
+      Spending.create({ name: 'Spending2', total: 200.00 })
+    end
+
+    describe 'self.calculate_total_for_shift' do
+      it 'should return correct value' do
+        expect(Spending.calculate_total_for_shift).to eq 300.00
+      end
+    end
+  end
 end

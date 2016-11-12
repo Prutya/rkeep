@@ -24,7 +24,8 @@
                 <% if current_user.admin? %>
                   <li><%= link_to 'Admin dashboard', rails_admin_url %></li>
                 <% end %>
-                <li><%= link_to 'Bills', bills_url %></li>
+                <li><%= link_to 'Shift', bills_url %></li>
+                <li><%= link_to 'Spendings', spendings_url %></li>
                 <li><%= link_to 'Sign out', destroy_user_session_url, method: :delete %></li>
               </ul>
             </li>

@@ -1,7 +1,7 @@
 <% provide :page_title, "Bill #{@bill.id}" %>
 <% provide :page_heading do %>
   <%= "Bill #{@bill.id}" %>
-  <strong class="label label-<%= bootstrap_status(@bill.status) %>"><%= @bill.status %></strong>
+  <strong class="label label-<%= bill_bootstrap_status(@bill.status) %>"><%= @bill.status %></strong>
 <% end %>
 
 <menu class="col-xs-12 action-bar">
