@@ -1,5 +1,5 @@
 <% provide :page_title, 'Spendings' %>
-<% provide :page_heading, 'Shift' %>
+<% provide :page_heading, 'Spendings' %>
 
 <menu class="col-xs-12 action-bar">
   <div class="text-left col-xs-12 col-md-4 action-bar-section">
@@ -28,9 +28,10 @@
       <tr>
         <td class="text-left"><%= 'Created at' %></td>
         <td class="text-left"><%= 'Created by' %></td>
-        <td class="text-left"><%= 'Title' %></td>
-        <td class="text-right"><%= 'Amount' %></td>
+        <td class="text-left"><%= 'Name' %></td>
+        <td class="text-right"><%= 'Total' %></td>
         <td class="text-right"><%= 'Status' %></td>
+        <td class="text-right"><%= 'Actions' %></td>
       </tr>
     </thead>
     <tbody>
@@ -44,6 +45,14 @@
           <span class="label label-<%= spending_bootstrap_status(spending.status) %>">
             <%= spending.status %>
           </span>
+        </td>
+        <td class="text-right">
+          <% unless spending.cancelled? %>
+            <%= link_to spending_url(spending), class: 'btn btn-xs btn-warning', method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <%= icon('trash') %>
+              <%= 'Remove' %>
+            <% end %>
+          <% end %>
         </td>
       </tr>
       <% end %>

@@ -17,6 +17,10 @@ class Spending < ApplicationRecord
     :ok
   end
 
+  def cancelled?
+    self.time_cancel.present?
+  end
+
   def cancel(cancel_time = Time.zone.now)
     self.time_cancel = cancel_time
   end

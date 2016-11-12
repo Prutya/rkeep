@@ -30,18 +30,32 @@ RSpec.describe Spending, type: :model do
     end
   end
 
-  describe 'status' do
-    context 'when bill has only time_cancel' do
-      it 'returns status cancelled' do
-        subject.cancel
+  describe 'helpers' do
+    describe 'status' do
+      context 'when bill has only time_cancel' do
+        it 'returns status cancelled' do
+          subject.cancel
 
-        expect(subject.status).to eq :cancelled
+          expect(subject.status).to eq :cancelled
+        end
+      end
+
+      context 'any other state' do
+        it 'returns status ok' do
+          expect(subject.status).to eq :ok
+        end
       end
     end
 
-    context 'any other state' do
-      it 'returns status ok' do
-        expect(subject.status).to eq :ok
+    describe 'cancelled?' do
+      it 'returns true if is cancelled' do
+        subject.cancel
+
+        expect(subject.cancelled?).to be_truthy
+      end
+
+      it 'returns false if is not cancelled' do
+        expect(subject.cancelled?).to be_falsy
       end
     end
   end
