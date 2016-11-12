@@ -50,7 +50,7 @@
           <% unless spending.cancelled? %>
             <%= link_to spending_url(spending), class: 'btn btn-xs btn-warning', method: :delete, data: { confirm: 'Are you sure?' } do %>
               <%= icon('trash') %>
-              <%= 'Remove' %>
+              <%= 'Cancel' %>
             <% end %>
           <% end %>
         </td>
