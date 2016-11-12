@@ -13,16 +13,6 @@ class Bill < ApplicationRecord
     where({ created_at: get_current_day_range(datetime) }).order(created_at: :desc)
   end
 
-  def self.get_current_day_range(datetime)
-    config = Configuration.last_set
-    time_opens_today = Time.new(datetime.year, datetime.month, datetime.day,
-                                config.time_opens.hour, config.time_opens.min, 0, 0)
-    time_from = datetime >= time_opens_today ? time_opens_today : time_opens_today - 1.day
-    time_to   = datetime >= time_opens_today ? time_opens_today + 1.day : time_opens_today
-
-    time_from..time_to
-  end
-
   def self.calculate_total_for_shift(datetime = Time.zone.now)
     where({ created_at: get_current_day_range(datetime) }).where.not({ time_close: nil }).sum(:total)
   end
@@ -57,5 +47,17 @@ class Bill < ApplicationRecord
 
   def cancel(cancel_time = Time.zone.now)
     self.time_cancel = cancel_time
+  end
+
+  protected
+
+  def self.get_current_day_range(datetime)
+    config = Configuration.last_set
+    time_opens_today = Time.new(datetime.year, datetime.month, datetime.day,
+                                config.time_opens.hour, config.time_opens.min, 0, 0)
+    time_from = datetime >= time_opens_today ? time_opens_today : time_opens_today - 1.day
+    time_to   = datetime >= time_opens_today ? time_opens_today + 1.day : time_opens_today
+
+    time_from..time_to
   end
 end

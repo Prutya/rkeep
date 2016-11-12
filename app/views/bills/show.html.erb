@@ -96,7 +96,7 @@
         <td class="text-right"><%= item.calculate_subtotal %></td>
         <td class="text-right"><%= item.calculate_total(@bill.discount.value) %></td>
         <td class="text-right">
-          <% unless @bill.closed? || @bill.cancelled %>
+          <% unless @bill.closed? || @bill.cancelled? %>
             <%= link_to bill_item_url(@bill, item), class: 'btn btn-xs btn-warning', method: :delete, data: { confirm: 'Are you sure?' } do %>
               <%= icon('trash') %> <%= 'Remove' %>
             <% end %>

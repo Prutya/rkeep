@@ -1,5 +1,5 @@
-<% provide :page_title, 'Bills' %>
-<% provide :page_heading, 'Bills' %>
+<% provide :page_title, 'Shift' %>
+<% provide :page_heading, 'Shift' %>
 
 <menu class="col-xs-12 action-bar">
   <div class="text-left col-xs-12 col-md-4 action-bar-section">
@@ -13,6 +13,10 @@
 </menu>
 
 <section class="col-xs-12 table-responsive">
+  <span>
+    <%= 'Shift total' %>: <strong><%= Bill.calculate_total_for_shift %></strong>
+  </span>
+
   <table class="table" id="bills-table">
     <thead>
       <tr>
