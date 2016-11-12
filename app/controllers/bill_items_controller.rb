@@ -22,6 +22,22 @@ class BillItemsController < ApplicationController
     redirect_to bill_url(@bill)
   end
 
+  def destroy
+    authorize! :update, Bill
+    @bill_item = BillItem.includes([:bill, :good]).find(params[:id])
+
+    if @bill_item.bill.closed? || @bill_item.bill.cancelled?
+      flash[:error] = 'This bill is closed or cancelled.'
+
+      return redirect_to bill_url(@bill_item.bill)
+    end
+
+    @bill_item.destroy!
+    flash[:success] = 'Item removed successfully.'
+
+    redirect_to bill_url(@bill_item.bill)
+  end
+
   protected
 
   def params_create
