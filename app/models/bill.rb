@@ -9,19 +9,22 @@ class Bill < ApplicationRecord
   validates :subtotal,      numericality: { greater_than_or_equal_to: 0.00 }
 
   # manually tested :)
-  scope :for_shift, -> (current_time = Time.zone.now) do
-    config = Configuration.last_set
-    time_opens_today = Time.new(current_time.year, current_time.month, current_time.day,
-                                config.time_opens.hour, config.time_opens.min, 0, 0)
-    time_from = current_time >= time_opens_today ? time_opens_today : time_opens_today - 1.day
-    time_to   = current_time >= time_opens_today ? time_opens_today + 1.day : time_opens_today
+  scope :for_shift, -> (datetime = Time.zone.now) do
+    where({ created_at: get_current_day_range(datetime) }).order(created_at: :desc)
+  end
 
-    where({ created_at: time_from..time_to }).order(created_at: :desc)
+  def self.get_current_day_range(datetime)
+    config = Configuration.last_set
+    time_opens_today = Time.new(datetime.year, datetime.month, datetime.day,
+                                config.time_opens.hour, config.time_opens.min, 0, 0)
+    time_from = datetime >= time_opens_today ? time_opens_today : time_opens_today - 1.day
+    time_to   = datetime >= time_opens_today ? time_opens_today + 1.day : time_opens_today
+
+    time_from..time_to
   end
 
   def self.calculate_total_for_shift(datetime = Time.zone.now)
-    bills = Bill.for_shift.includes([ :discount, { bill_items: :good } ])
-    bills.select(&:closed?).inject(0) { |total, bill| total += bill.calculate_total }
+    where({ created_at: get_current_day_range(datetime) }).where.not({ time_close: nil }).sum(:total)
   end
 
   def status
