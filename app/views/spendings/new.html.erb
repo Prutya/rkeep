@@ -1,0 +1,36 @@
+<% provide :page_title, 'Create spending' %>
+<% provide :page_heading, "Create spending" %>
+
+<menu class="col-xs-12 action-bar">
+  <div class="text-left col-xs-12 col-md-4 action-bar-section">
+    <%= link_to bills_url, class: 'btn btn-default' do %>
+    <%= icon('list') %>
+    <%= 'Back to shift' %>
+    <% end %>
+
+    <%= link_to spendings_url, class: 'btn btn-default' do %>
+    <%= icon('arrow-left') %>
+    <%= 'Back to list' %>
+    <% end %>
+  </div>
+
+  <div class="text-right col-xs-12 col-md-8 action-bar-section"></div>
+</menu>
+
+<section class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+  <%= form_for @spending do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :total %>
+    <%= f.text_field :total, class: 'form-control', value: '' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Create', class: 'btn btn-primary' %>
+  </div>
+  <% end %>
+</section>
