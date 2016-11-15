@@ -1,6 +1,6 @@
 class Bill < ApplicationRecord
   belongs_to :table
-  belongs_to :user
+  belongs_to :shift
   belongs_to :discount
   has_many   :bill_items, dependent: :delete_all
 

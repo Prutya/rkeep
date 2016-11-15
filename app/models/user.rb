@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :assignments
   has_many :spendings
   has_many :bills
+  has_many :user_shifts
+  has_many :shifts, through: :user_shifts
   has_many :roles, through: :assignments
 
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :user_shifts, only: []
+  resources :shifts, only: []
   resources :bills, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     member do
       delete 'cancel'

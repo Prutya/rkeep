@@ -1,5 +1,5 @@
 class Spending < ApplicationRecord
-  belongs_to :user
+  belongs_to :shift
 
   validates :name, presence: true, allow_blank: false
   validates :total, presence: true, numericality: { greater_than: 0.00 }

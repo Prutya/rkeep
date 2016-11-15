@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Bill, type: :model do
   describe 'relationships' do
     it { should belong_to :table }
-    it { should belong_to :user }
+    it { should belong_to :shift }
     it { should belong_to :discount }
     it { should have_many :bill_items }
   end

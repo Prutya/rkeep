@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161112144954) do
+ActiveRecord::Schema.define(version: 20161115181040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,9 @@ ActiveRecord::Schema.define(version: 20161112144954) do
     t.integer  "people_number",                          default: 1,     null: false
     t.integer  "user_id"
     t.integer  "discount_id"
+    t.integer  "shift_id"
     t.index ["discount_id"], name: "index_bills_on_discount_id", using: :btree
+    t.index ["shift_id"], name: "index_bills_on_shift_id", using: :btree
     t.index ["table_id"], name: "index_bills_on_table_id", using: :btree
     t.index ["user_id"], name: "index_bills_on_user_id", using: :btree
   end
@@ -82,20 +84,37 @@ ActiveRecord::Schema.define(version: 20161112144954) do
     t.index ["name"], name: "index_roles_on_name", unique: true, using: :btree
   end
 
+  create_table "shifts", force: :cascade do |t|
+    t.datetime "opened_at"
+    t.datetime "closed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "spendings", force: :cascade do |t|
     t.string   "name",                                                 null: false
     t.decimal  "total",       precision: 10, scale: 2, default: "0.0", null: false
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
-    t.integer  "user_id"
     t.datetime "time_cancel"
-    t.index ["user_id"], name: "index_spendings_on_user_id", using: :btree
+    t.integer  "shift_id"
+    t.index ["shift_id"], name: "index_spendings_on_shift_id", using: :btree
   end
 
   create_table "tables", force: :cascade do |t|
     t.string   "name",       default: "", null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "user_shifts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "shift_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shift_id"], name: "index_user_shifts_on_shift_id", using: :btree
+    t.index ["user_id", "shift_id"], name: "index_user_shifts_on_user_id_and_shift_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_user_shifts_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -123,6 +142,9 @@ ActiveRecord::Schema.define(version: 20161112144954) do
   add_foreign_key "bill_items", "bills"
   add_foreign_key "bill_items", "goods"
   add_foreign_key "bills", "discounts"
+  add_foreign_key "bills", "shifts"
   add_foreign_key "bills", "tables"
-  add_foreign_key "spendings", "users"
+  add_foreign_key "spendings", "shifts"
+  add_foreign_key "user_shifts", "shifts"
+  add_foreign_key "user_shifts", "users"
 end
