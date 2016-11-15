@@ -10,4 +10,12 @@ class Shift < ApplicationRecord
   def closed?
     self.closed_at.present?
   end
+
+  def calculate_total_cash
+    bills.sum(&:total)
+  end
+
+  def calculate_total_spendings
+    self.spendings.inject(0) { |total, spending| spending.cancelled? ? total : total + spending.total }
+  end
 end

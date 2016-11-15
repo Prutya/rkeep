@@ -59,19 +59,4 @@ RSpec.describe Spending, type: :model do
       end
     end
   end
-
-
-  describe 'calculations' do
-    before(:each) do
-      Configuration.create({ time_opens: Time.zone.now })
-      Spending.create({ name: 'Spending1', total: 100.00 })
-      Spending.create({ name: 'Spending2', total: 200.00 })
-    end
-
-    describe 'self.calculate_total_for_shift' do
-      it 'should return correct value' do
-        expect(Spending.calculate_total_for_shift).to eq 300.00
-      end
-    end
-  end
 end

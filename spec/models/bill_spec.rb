@@ -31,63 +31,6 @@ RSpec.describe Bill, type: :model do
       @current_time = Time.zone.now
     end
 
-    describe 'self' do
-      before(:each) do
-        Configuration.create({ time_opens: @current_time })
-      end
-
-      describe 'calculate_total_for_shift' do
-        context 'no bills' do
-          it 'should be zero' do
-            expect(Bill.calculate_total_for_shift(@current_time)).to be_zero
-          end
-        end
-
-        context 'with bills' do
-          before(:each) do
-            @table = Table.create({ name: 'Table1' })
-            @good = Good.create({ name: 'Good1', price: 100.00 })
-            @discount = Discount.create({ value: 10.00 })
-            @bills = [ Bill.create({ discount: @discount, table: @table }),
-                       Bill.create({ discount: @discount, table: @table }),
-                       Bill.create({ discount: @discount, table: @table }) ]
-            @bills.each do |bill| bill.bill_items << BillItem.new({ good: @good, quantity: 1 }) end
-          end
-
-          context 'all cancelled bills' do
-            it 'should return zero' do
-              @bills.each do |bill| bill.cancel; bill.save! end
-
-              expect(Bill.calculate_total_for_shift(@current_time)).to be_zero
-            end
-          end
-
-          context 'all closed bills' do
-            it 'should return correct value' do
-              @bills.each do |bill| bill.close; bill.save! end
-
-              expect(Bill.calculate_total_for_shift(@current_time)).to eq 270.00
-            end
-          end
-
-          context 'all new bills' do
-            it 'should return zero' do
-              expect(Bill.calculate_total_for_shift(@current_time)).to be_zero
-            end
-          end
-
-          context 'mixed bills' do
-            it 'should return correct value' do
-              @bills[0].cancel; @bills[0].save!
-              @bills[1].close; @bills[1].save!
-
-              expect(Bill.calculate_total_for_shift(@current_time)).to eq 90.00
-            end
-          end
-        end
-      end
-    end
-
     describe 'close' do
       before(:each) do
         subject.discount = Discount.create({ value: 10.00 })

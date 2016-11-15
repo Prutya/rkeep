@@ -21,11 +21,13 @@
 
   <span>
     <%= 'Shift total' %>:
-    <strong><%= 'TODO' %></strong>
+    <strong>
+      <%= @shift.bills.sum(&:total) %>
+    </strong>
   </span>
 
   <div class="table-responsive">
-    <table class="table table-striped" id="bills-table">
+    <table class="table" id="bills-table">
       <thead>
         <tr>
           <td class="text-left"><%= 'Created at' %></td>
@@ -45,12 +47,12 @@
           <td class="text-right"><%= bill.people_number  %></td>
           <td class="text-right">
             <% if bill.closed? %>
-            <%= bill.subtotal %>
-          <% else %>
-            <%= bill.calculate_subtotal %>
+              <%= bill.subtotal %>
+            <% else %>
+              <%= bill.calculate_subtotal %>
             <% end %>
           </td>
-          <td class="text-right"><%= bill.discount.value %></td>
+          <td class="text-right"><%= "#{bill.discount.value} %" %></td>
           <td class="text-right">
             <% if bill.closed? %>
             <%= bill.total %>
@@ -75,11 +77,11 @@
 
   <span>
     <%= 'Shift total' %>:
-    <strong><%= 'TODO' %></strong>
+    <strong><%= @shift.calculate_total_spendings %></strong>
   </span>
 
   <div class="table-responsive">
-    <table class="table table-striped" id="spendings-table">
+    <table class="table" id="spendings-table">
       <thead>
         <tr>
           <td class="text-left"><%= 'Created at' %></td>

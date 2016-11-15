@@ -19,4 +19,13 @@ RSpec.describe Shift, type: :model do
     it { should allow_value(0.00).for(:subtotal) }
     it { should allow_value(1.00).for(:subtotal) }
   end
+
+  describe 'calculations' do
+    before(:each) do
+      @discounts = [ Discount.new({ value: 50.00 }) ]
+      [ Good.new({ name: 'Good1', price: 100.00 }), Good.new({ name: 'Good2', price: 200.00 }) ].each do |good|
+        subject.bill_items.push(BillItem.new({ good: good, quantity: 2 }))
+      end
+    end
+  end
 end

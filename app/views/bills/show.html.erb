@@ -54,7 +54,7 @@
 
   <div class="form-group">
     <%= label :bill, :discount %>
-    <input type="text" id="bill_discount_value" name="bill[discount][value]" value="<%= @bill.discount.value %>" class="form-control" readonly="readonly" />
+    <input type="text" id="bill_discount_value" name="bill[discount][value]" value="<%= "#{@bill.discount.value} %" %>" class="form-control" readonly="readonly" />
   </div>
 
   <div class="form-group">
@@ -64,7 +64,7 @@
 
   <div class="form-group">
     <%= label :bill, :created_at %>
-    <%= text_field :bill, :created_at, class: 'form-control', readonly: true %>
+    <%= text_field :bill, :created_at, value: @bill.created_at.strftime("%Y-%m-%d %H:%M"), class: 'form-control', readonly: true %>
   </div>
 </section>
 
