@@ -1,54 +1,55 @@
 class BillsController < ApplicationController
   def index
-    authorize! :index, Bill
-    @bills = Bill.for_shift.includes([:table, :discount, :user])
+    @shift = Shift.includes([:table, :discount, { user_shifts: :user }]).find(params[:shift_id])
+    authorize! :index, @shift
   end
 
   def show
-    authorize! :show, Bill
-    @bill = Bill.includes([:table, :discount, :user, { bill_items: :good }]).find(params[:id])
+    @bill = Bill.includes([:table, :discount, :shift, { bill_items: :good }]).find(params[:id])
+    authorize! :show, @bill
   end
 
   def new
     authorize! :create, Bill
-    @bill = Bill.new
+    @shift = Shift.find(params[:shift_id])
+    @bill = Bill.new({shift_id: @shift.id})
 
     @tables = Table.select('name, id')
     @discounts = Discount.select('value, id')
   end
 
   def create
+    @shift = Shift.find(params[:shift_id])
     authorize! :create, Bill
 
     unless Table.exists?(params_create[:table_id])
       flash[:error] = 'Such table does not exist.'
-      return redirect_to bill_url(@bill)
+      return redirect_to shift_bills_url(@shift, @bill)
     end
 
     unless Discount.exists?(params_create[:discount_id])
       flash[:error] = 'Such discount does not exist.'
-      return redirect_to bill_url(@bill)
+      return redirect_to shift_bills_url(@shift, @bill)
     end
 
     bill = Bill.new(params_create)
-    bill.user = current_user
-    bill.save!
+    @shift.bills << bill
     flash[:success] = 'Bill created successfully.'
 
-    redirect_to bills_url
+    redirect_to shift_bill_url(@shift, bill)
   end
 
   def edit
-    authorize! :update, Bill
-    @bill = Bill.find(params[:id])
+    @bill = Bill.includes(:shift).find(params[:id])
+    authorize! :update, @bill
 
     @tables = Table.select('name, id')
     @discounts = Discount.select('value, id')
   end
 
   def update
-    authorize! :update, Bill
-    @bill = Bill.find(params[:id])
+    @bill = Bill.includes(:shift).find(params[:id])
+    authorize! :update, @bill
 
     unless Table.exists?(params_create[:table_id])
       flash[:error] = 'Such table does not exist.'
@@ -67,7 +68,7 @@ class BillsController < ApplicationController
       flash[:error] = 'This bill is closed or cancelled.'
     end
 
-    redirect_to bill_url(@bill)
+    redirect_to shift_bill_url(@bill.shift, @bill)
   end
 
   def cancel
@@ -82,7 +83,7 @@ class BillsController < ApplicationController
       flash[:error] = 'This bill is closed or cancelled.'
     end
 
-    redirect_to bills_url
+    redirect_to shift_url(@bill.shift)
   end
 
   def destroy
@@ -97,13 +98,13 @@ class BillsController < ApplicationController
       flash[:error] = 'This bill is closed.'
     end
 
-    redirect_to bills_url
+    redirect_to shift_url(@bill.shift)
   end
 
   protected
 
   def params_create
-    params.require(:bill).permit(:table_id, :people_number, :discount_id)
+    params.require(:bill).permit(:shift_id, :table_id, :discount_id, :people_number,)
   end
 
   def params_update

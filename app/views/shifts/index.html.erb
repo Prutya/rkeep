@@ -1,0 +1,42 @@
+<% provide :page_title, 'Shifts' %>
+<% provide :page_heading, 'Shifts' %>
+
+<menu class="col-xs-12 action-bar">
+  <div class="text-left col-xs-12 col-md-4 action-bar-section">
+  </div>
+
+  <div class="text-right col-xs-12 col-md-8 action-bar-section">
+    <%= link_to shifts_url, class: 'btn btn-primary', method: :create, data: { confirm: 'Are you sure?' } do %>
+      <%= icon('plus') %> <%= 'New shift' %>
+    <% end %>
+  </div>
+</menu>
+
+<section class="col-xs-12 table-responsive">
+  <table class="table" id="shifts-table">
+    <thead>
+      <tr>
+        <td class="text-left" ><%= 'Opened at'  %></td>
+        <td class="text-left" ><%= 'Created by' %></td>
+        <td class="text-left" ><%= 'Closed at'  %></td>
+        <td class="text-right"><%= 'Bills'      %></td>
+        <td class="text-right"><%= 'Cash'       %></td>
+        <td class="text-right"><%= 'Spendings'  %></td>
+        <td class="text-right"><%= 'Total'      %></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @shifts.each do |shift| %>
+        <tr class="row-link" data-href="<%= shift_url(shift) %>" >
+          <td class="text-left" ><%= shift.opened_at   %></td>
+          <td class="text-left" ><%= 'TODO' %></td>
+          <td class="text-left" ><%= shift.closed_at   %></td>
+          <td class="text-right"><%= 'TODO'  %></td>
+          <td class="text-right"><%= 'TODO'  %></td>
+          <td class="text-right"><%= 'TODO'  %></td>
+          <td class="text-right"><%= 'TODO'  %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

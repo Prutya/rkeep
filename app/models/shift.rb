@@ -6,4 +6,8 @@ class Shift < ApplicationRecord
 
   validates :total,         numericality: { greater_than_or_equal_to: 0.00 }
   validates :subtotal,      numericality: { greater_than_or_equal_to: 0.00 }
+
+  def closed?
+    self.closed_at.present?
+  end
 end

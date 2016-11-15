@@ -7,7 +7,8 @@ class Ability
     can [:index], :home
 
     if user.employee?
-      can [:index, :create, :show, :update, :destroy], Bill
+      can [:index, :create, :show, :destroy], Shift
+      can [:index, :update, :create, :show, :destroy], Bill
       can [:index, :create, :destroy], Spending
     end
   end
