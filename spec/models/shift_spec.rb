@@ -10,17 +10,17 @@ RSpec.describe Shift, type: :model do
 
   describe 'validations' do
     it { should validate_numericality_of(:total) }
-    it { should_not allow_value(-1).for(:total) }
+    it { should allow_value(-1).for(:total) }
     it { should allow_value(0.00).for(:total) }
     it { should allow_value(1.00).for(:total) }
 
     it { should validate_numericality_of(:total_revenue) }
-    it { should_not allow_value(-1).for(:total_revenue) }
+    it { should allow_value(-1).for(:total_revenue) }
     it { should allow_value(0.00).for(:total_revenue) }
     it { should allow_value(1.00).for(:total_revenue) }
 
     it { should validate_numericality_of(:total_spendings) }
-    it { should_not allow_value(-1).for(:total_spendings) }
+    it { should allow_value(-1).for(:total_spendings) }
     it { should allow_value(0.00).for(:total_spendings) }
     it { should allow_value(1.00).for(:total_spendings) }
   end

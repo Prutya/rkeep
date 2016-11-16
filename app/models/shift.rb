@@ -4,9 +4,9 @@ class Shift < ApplicationRecord
   has_many :user_shifts
   has_many :users, through: :user_shifts
 
-  validates :total,           numericality: { greater_than_or_equal_to: 0.00 }
-  validates :total_revenue,   numericality: { greater_than_or_equal_to: 0.00 }
-  validates :total_spendings, numericality: { greater_than_or_equal_to: 0.00 }
+  validates :total,           numericality: true
+  validates :total_revenue,   numericality: true
+  validates :total_spendings, numericality: true
 
   default_scope { order(opened_at: :desc) }
 

@@ -42,7 +42,7 @@ RSpec.describe Spending, type: :model do
 
       context 'any other state' do
         it 'returns status ok' do
-          expect(subject.status).to eq :ok
+          expect(subject.status).to eq :added
         end
       end
     end
