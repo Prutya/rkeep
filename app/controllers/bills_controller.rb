@@ -19,24 +19,25 @@ class BillsController < ApplicationController
   end
 
   def create
-    @shift = Shift.find(params[:shift_id])
+    shift = Shift.find(params[:shift_id])
     authorize! :create, Bill
+
+    bill = Bill.new(params_create)
 
     unless Table.exists?(params_create[:table_id])
       flash[:error] = 'Such table does not exist.'
-      return redirect_to shift_bills_url(@shift, @bill)
+      return redirect_to shift_bills_url(shift, bill)
     end
 
     unless Discount.exists?(params_create[:discount_id])
       flash[:error] = 'Such discount does not exist.'
-      return redirect_to shift_bills_url(@shift, @bill)
+      return redirect_to shift_bills_url(shift, bill)
     end
 
-    bill = Bill.new(params_create)
-    @shift.bills << bill
+    shift.bills << bill
     flash[:success] = 'Bill created successfully.'
 
-    redirect_to shift_bill_url(@shift, bill)
+    redirect_to shift_bill_url(shift, bill)
   end
 
   def edit
@@ -48,57 +49,57 @@ class BillsController < ApplicationController
   end
 
   def update
-    @bill = Bill.includes(:shift).find(params[:id])
-    authorize! :update, @bill
+    bill = Bill.includes(:shift).find(params[:id])
+    authorize! :update, bill
 
     unless Table.exists?(params_create[:table_id])
       flash[:error] = 'Such table does not exist.'
-      return redirect_to bill_url(@bill)
+      return redirect_to shift_bill_url(bill.shift, bill)
     end
 
     unless Discount.exists?(params_create[:discount_id])
       flash[:error] = 'Such discount does not exist.'
-      return redirect_to bill_url(@bill)
+      return redirect_to shift_bill_url(bill.shift, bill)
     end
 
-    unless @bill.cancelled? || @bill.closed?
-      @bill.update_attributes(params_update)
+    unless bill.cancelled? || bill.closed?
+      bill.update_attributes(params_update)
       flash[:success] = 'Bill updated successfully.'
     else
       flash[:error] = 'This bill is closed or cancelled.'
     end
 
-    redirect_to shift_bill_url(@bill.shift, @bill)
+    redirect_to shift_bill_url(bill.shift, bill)
   end
 
   def cancel
     authorize! :update, Bill
-    @bill = Bill.find(params[:id])
+    bill = Bill.includes(:shift).find(params[:id])
 
-    unless @bill.cancelled? || @bill.closed?
-      @bill.cancel
-      @bill.save!
+    unless bill.cancelled? || bill.closed?
+      bill.cancel
+      bill.save!
       flash[:success] = 'Bill cancelled successfully.'
     else
       flash[:error] = 'This bill is closed or cancelled.'
     end
 
-    redirect_to shift_url(@bill.shift)
+    redirect_to shift_bill_url(bill.shift, bill)
   end
 
   def destroy
     authorize! :destroy, Bill
-    @bill = Bill.find(params[:id])
+    bill = Bill.includes(:shift).find(params[:id])
 
-    unless @bill.closed?
-      @bill.close
-      @bill.save!
+    unless bill.closed?
+      bill.close
+      bill.save!
       flash[:success] = 'Bill closed successfully.'
     else
       flash[:error] = 'This bill is closed.'
     end
 
-    redirect_to shift_url(@bill.shift)
+    redirect_to shift_bill_url(bill.shift, bill)
   end
 
   protected
