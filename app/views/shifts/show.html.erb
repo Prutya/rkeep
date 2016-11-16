@@ -32,14 +32,8 @@
   <legend class="text-center"><%= 'Bills' %></legend>
 
   <span>
-    <%= 'Shift total' %>:
-    <strong>
-      <% if @shift.closed? %>
-        <%= '%.2f' % @shift.total_revenue %>
-      <% else %>
-        <%= '%.2f' % @shift.calculate_total_revenue %>
-      <% end %>
-    </strong>
+    <%= 'Total revenue' %>:
+    <strong><%= '%.2f' % (@shift.total_revenue || @shift.calculate_total_revenue) %></strong>
   </span>
 
   <div class="table-responsive">
@@ -61,21 +55,9 @@
           <td class="text-left"><%= bill.created_at.strftime("%Y-%m-%d %H:%M") %></td>
           <td class="text-right"><%= bill.table.name    %></td>
           <td class="text-right"><%= bill.people_number %></td>
-          <td class="text-right">
-            <% if bill.closed? %>
-              <%= '%.2f' % bill.subtotal %>
-            <% else %>
-              <%= '%.2f' % bill.calculate_subtotal %>
-            <% end %>
-          </td>
+          <td class="text-right"><%= '%.2f' % (bill.subtotal || bill.calculate_subtotal)%></td>
           <td class="text-right"><%= "#{'%.2f' % bill.discount.value}" %></td>
-          <td class="text-right">
-            <% if bill.closed? %>
-              <%= '%.2f' % bill.total %>
-            <% else %>
-              <%= '%.2f' % bill.calculate_total %>
-            <% end %>
-          </td>
+          <td class="text-right"><%= '%.2f' % (bill.total || bill.calculate_total) %></td>
           <td class="text-right">
             <span class="label label-<%= bill_bootstrap_status(bill.status) %>">
               <%= bill.status %>
@@ -92,8 +74,8 @@
   <legend class="text-center"><%= 'Spendings' %></legend>
 
   <span>
-    <%= 'Shift total' %>:
-    <strong><%= '%.2f' % @shift.calculate_total_spendings %></strong>
+    <%= 'Total spendings' %>:
+    <strong><%= '%.2f' % (@shift.total_spendings || @shift.calculate_total_spendings) %></strong>
   </span>
 
   <div class="table-responsive">

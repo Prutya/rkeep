@@ -4,10 +4,6 @@ class Shift < ApplicationRecord
   has_many :user_shifts
   has_many :users, through: :user_shifts
 
-  validates :total,           numericality: true
-  validates :total_revenue,   numericality: true
-  validates :total_spendings, numericality: true
-
   default_scope { order(opened_at: :desc) }
 
   def closed?
@@ -20,7 +16,7 @@ class Shift < ApplicationRecord
   end
 
   def calculate_total_revenue
-    bills.sum(&:total).round(2)
+    (self.bills.inject(0) { |total, bill| bill.closed? ? total + bill.total : total }).round(2)
   end
 
   def calculate_total_spendings

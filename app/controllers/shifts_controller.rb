@@ -2,9 +2,9 @@ class ShiftsController < ApplicationController
   def index
     authorize! :index, Shift
     if current_user.admin?
-      @shifts = Shift.preload([ :bills, :spendings ])
+      @shifts = Shift.paginate(page: params[:page], per_page: 20).includes([ :bills, :spendings ])
     else
-      @shifts = Shift.preload([ :bills, :spendings ]).where({ opened_at: Shift.current_day_range })
+      @shifts = Shift.paginate(page: params[:page], per_page: 20).includes([ :bills, :spendings ]).where({ opened_at: Shift.current_day_range })
     end
   end
 
@@ -14,6 +14,7 @@ class ShiftsController < ApplicationController
     shift.users << current_user
 
     flash[:success] = 'Shift created successfully.'
+
     redirect_to shift_url(shift)
   end
 
@@ -31,10 +32,10 @@ class ShiftsController < ApplicationController
       shift.save!
 
       flash[:success] = 'Shift closed successfully.'
-      return redirect_to shifts_url
+    else
+      flash[:error] = 'Shift is already closed.'
     end
 
-    flash[:error] = 'Shift is already closed.'
     redirect_to shifts_url
   end
 end

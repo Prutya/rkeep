@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116054345) do
+ActiveRecord::Schema.define(version: 20161116191831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,13 +38,13 @@ ActiveRecord::Schema.define(version: 20161116054345) do
 
   create_table "bills", force: :cascade do |t|
     t.integer  "table_id"
-    t.decimal  "total",         precision: 10, scale: 2, default: "0.0", null: false
-    t.decimal  "subtotal",      precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal  "total",         precision: 10, scale: 2
+    t.decimal  "subtotal",      precision: 10, scale: 2
     t.datetime "time_cancel"
     t.datetime "time_close"
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
-    t.integer  "people_number",                          default: 1,     null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.integer  "people_number",                          default: 1, null: false
     t.integer  "user_id"
     t.integer  "discount_id"
     t.integer  "shift_id"
@@ -87,11 +87,11 @@ ActiveRecord::Schema.define(version: 20161116054345) do
   create_table "shifts", force: :cascade do |t|
     t.datetime "opened_at"
     t.datetime "closed_at"
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
-    t.decimal  "total",           precision: 10, scale: 2, default: "0.0", null: false
-    t.decimal  "total_revenue",   precision: 10, scale: 2, default: "0.0", null: false
-    t.decimal  "total_spendings", precision: 10, scale: 2, default: "0.0", null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.decimal  "total",           precision: 10, scale: 2
+    t.decimal  "total_revenue",   precision: 10, scale: 2
+    t.decimal  "total_spendings", precision: 10, scale: 2
   end
 
   create_table "spendings", force: :cascade do |t|

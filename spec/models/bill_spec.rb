@@ -14,16 +14,6 @@ RSpec.describe Bill, type: :model do
     it { should_not allow_value(-1).for(:people_number) }
     it { should_not allow_value(0).for(:people_number) }
     it { should allow_value(1).for(:people_number) }
-
-    it { should validate_numericality_of(:total) }
-    it { should_not allow_value(-1).for(:total) }
-    it { should allow_value(0.00).for(:total) }
-    it { should allow_value(1.00).for(:total) }
-
-    it { should validate_numericality_of(:subtotal) }
-    it { should_not allow_value(-1).for(:subtotal) }
-    it { should allow_value(0.00).for(:subtotal) }
-    it { should allow_value(1.00).for(:subtotal) }
   end
 
   describe 'methods' do

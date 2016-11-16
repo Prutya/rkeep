@@ -1,16 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'rails',                  '5.0.0.1'
-gem 'puma',                   '3.6.0'
-gem 'pg',                     '0.19'
-gem 'devise',                 '4.2.0'
-gem 'sass-rails',             '5.0.6'
-gem 'rails_admin',            '1.0.0'
-gem 'cancancan',              '1.15.0'
-gem 'bootstrap-sass',         '3.3.7'
-gem 'font-awesome-sass',      '4.7.0'
-gem 'uglifier',               '3.0.2'
-gem 'jbuilder',               '2.6.0'
+gem 'rails',                   '5.0.0.1'
+gem 'puma',                    '3.6.0'
+gem 'pg',                      '0.19'
+gem 'devise',                  '4.2.0'
+gem 'sass-rails',              '5.0.6'
+gem 'rails_admin',             '1.0.0'
+gem 'cancancan',               '1.15.0'
+gem 'bootstrap-sass',          '3.3.7'
+gem 'font-awesome-sass',       '4.7.0'
+gem 'bootstrap-will_paginate', '0.0.10'
+gem 'uglifier',                '3.0.2'
+gem 'jbuilder',                '2.6.0'
 
 group :development, :test do
   gem 'byebug',             platform: :mri

@@ -5,8 +5,6 @@ class Bill < ApplicationRecord
   has_many   :bill_items, dependent: :delete_all
 
   validates :people_number, presence: true, numericality: { greater_than: 0 }
-  validates :total,         numericality: { greater_than_or_equal_to: 0.00 }
-  validates :subtotal,      numericality: { greater_than_or_equal_to: 0.00 }
 
   default_scope { order(created_at: :desc) }
 
