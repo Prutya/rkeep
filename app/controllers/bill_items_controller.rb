@@ -7,41 +7,47 @@ class BillItemsController < ApplicationController
   end
 
   def create
-    @bill = Bill.includes([ :shift, { bill_items: :good }]).find(params[:bill_id])
-    authorize! :update, @bill
+    bill = Bill.includes([ :shift, { bill_items: :good }]).find(params[:bill_id])
+    authorize! :update, bill
 
-    if @bill.shift.closed?
+    if bill.shift.closed?
       flash[:error] = 'This shift is closed.'
 
-      return redirect_to shift_bill_url(@bill.shift, @bill)
+      return redirect_to shift_bill_url(bill.shift, bill)
     end
 
-    if @bill.closed? || @bill.cancelled?
+    if bill.closed? || bill.cancelled?
       flash[:error] = 'This bill is closed or cancelled.'
 
-      return redirect_to shift_bill_url(@bill.shift, @bill)
+      return redirect_to shift_bill_url(bill.shift, bill)
     end
 
-    create_or_add(params_create)
+    create_or_add(params_create, bill)
     flash[:success] = 'Item added successfully.'
 
-    redirect_to shift_bill_url(@bill.shift, @bill)
+    redirect_to shift_bill_url(bill.shift, bill)
   end
 
   def destroy
-    @bill_item = BillItem.includes([{ bill: :shift }, :good]).find(params[:id])
-    authorize! :update, @bill_item.bill
+    bill_item = BillItem.includes([{ bill: :shift }, :good]).find(params[:id])
+    authorize! :update, bill_item.bill
 
-    if @bill_item.bill.closed? || @bill_item.bill.cancelled?
-      flash[:error] = 'This bill is closed or cancelled.'
+    if bill_item.bill.shift.closed?
+      flash[:error] = 'This shift is closed.'
 
-      return redirect_to shift_bill_url(@bill_item.bill.shift, @bill_item.bill)
+      return redirect_to shift_bill_url(bill.shift, bill_item.bill)
     end
 
-    @bill_item.destroy!
+    if bill_item.bill.closed? || bill_item.bill.cancelled?
+      flash[:error] = 'This bill is closed or cancelled.'
+
+      return redirect_to shift_bill_url(bill_item.bill.shift, bill_item.bill)
+    end
+
+    bill_item.destroy!
     flash[:success] = 'Item removed successfully.'
 
-    redirect_to shift_bill_url(@bill_item.bill.shift, @bill_item.bill)
+    redirect_to shift_bill_url(bill_item.bill.shift, bill_item.bill)
   end
 
   protected
@@ -50,7 +56,7 @@ class BillItemsController < ApplicationController
     params.require(:bill_item).permit(:quantity, :good_id)
   end
 
-  def create_or_add(bill_item, bill = @bill)
+  def create_or_add(bill_item, bill)
     existing_item = bill.bill_items.find_by(good_id: params_create[:good_id])
 
     if (existing_item.present?)
@@ -59,7 +65,5 @@ class BillItemsController < ApplicationController
     else
       bill.bill_items << BillItem.new(params_create)
     end
-
-    bill.save!
   end
 end

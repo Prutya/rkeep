@@ -8,6 +8,8 @@ class Bill < ApplicationRecord
   validates :total,         numericality: { greater_than_or_equal_to: 0.00 }
   validates :subtotal,      numericality: { greater_than_or_equal_to: 0.00 }
 
+  default_scope { order(created_at: :desc) }
+
   def status
     return :cancelled if self.time_cancel
     return :closed    if self.time_close

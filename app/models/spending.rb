@@ -4,9 +4,11 @@ class Spending < ApplicationRecord
   validates :name, presence: true, allow_blank: false
   validates :total, presence: true, numericality: { greater_than: 0.00 }
 
+  default_scope { order(created_at: :desc) }
+
   def status
     return :cancelled if self.time_cancel
-    :ok
+    :added
   end
 
   def cancelled?

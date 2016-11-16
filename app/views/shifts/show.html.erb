@@ -1,17 +1,29 @@
 <% provide :page_title, "Shift #{@shift.id}" %>
-<% provide :page_heading, "Shift #{@shift.id}" %>
+<% provide :page_heading do %>
+  <%= "Shift #{@shift.id}" %>
+  <strong class="label label-<%= shift_bootstrap_status(@shift.status) %>"><%= @shift.status %></strong>
+<% end %>
 
 <menu class="col-xs-12 action-bar">
-  <div class="text-left col-xs-12 col-md-4 action-bar-section"></div>
+  <div class="text-left col-xs-12 col-md-4 action-bar-section">
+    <% unless @shift.closed? %>
+      <%= link_to shift_url(@shift), class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <%= icon('check') %>
+        <%= 'Close shift' %>
+      <% end %>
+    <% end %>
+  </div>
 
   <div class="text-right col-xs-12 col-md-8 action-bar-section">
-    <%= link_to new_shift_bill_url(@shift), class: 'btn btn-primary' do %>
-      <%= icon('plus') %>
-      <%= 'New bill' %>
-    <% end %>
-    <%= link_to new_shift_spending_url(@shift), class: 'btn btn-primary' do %>
-      <%= icon('plus') %>
-      <%= 'New spending' %>
+    <% unless @shift.closed? %>
+      <%= link_to new_shift_bill_url(@shift), class: 'btn btn-primary' do %>
+        <%= icon('plus') %>
+        <%= 'New bill' %>
+      <% end %>
+      <%= link_to new_shift_spending_url(@shift), class: 'btn btn-primary' do %>
+        <%= icon('plus') %>
+        <%= 'New spending' %>
+      <% end %>
     <% end %>
   </div>
 </menu>
@@ -22,7 +34,11 @@
   <span>
     <%= 'Shift total' %>:
     <strong>
-      <%= '%.2f' % @shift.total_revenue %>
+      <% if @shift.closed? %>
+        <%= '%.2f' % @shift.total_revenue %>
+      <% else %>
+        <%= '%.2f' % @shift.calculate_total_revenue %>
+      <% end %>
     </strong>
   </span>
 
@@ -43,8 +59,8 @@
         <% @shift.bills.each do |bill| %>
         <tr class="row-link" data-href="<%= shift_bill_url(@shift, bill) %>">
           <td class="text-left"><%= bill.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-          <td class="text-right"><%= bill.table.name     %></td>
-          <td class="text-right"><%= bill.people_number  %></td>
+          <td class="text-right"><%= bill.table.name    %></td>
+          <td class="text-right"><%= bill.people_number %></td>
           <td class="text-right">
             <% if bill.closed? %>
               <%= '%.2f' % bill.subtotal %>
@@ -88,7 +104,9 @@
           <td class="text-left"><%= 'Name' %></td>
           <td class="text-right"><%= 'Total' %></td>
           <td class="text-right"><%= 'Status' %></td>
-          <td class="text-right"><%= 'Actions' %></td>
+          <% unless @shift.closed? %>
+            <td class="text-right"><%= 'Actions' %></td>
+          <% end %>
         </tr>
       </thead>
       <tbody>
@@ -102,13 +120,15 @@
               <%= spending.status %>
             </span>
           </td>
-          <td class="text-right">
-            <% unless spending.cancelled? %>
-              <%= link_to shift_spending_url(@shift, spending), class: 'btn btn-xs btn-danger', method: :delete, data: { confirm: "Are you sure?" } do %>
-                <%= icon('trash') %>
+          <% unless @shift.closed? %>
+            <td class="text-right">
+              <% unless spending.cancelled? %>
+                <%= link_to shift_spending_url(@shift, spending), class: 'btn btn-xs btn-danger', method: :delete, data: { confirm: "Are you sure?" } do %>
+                  <%= icon('trash') %>
+                <% end %>
               <% end %>
-            <% end %>
-          </td>
+            </td>
+          <% end %>
         </tr>
         <% end %>
       </tbody>
