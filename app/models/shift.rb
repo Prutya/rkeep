@@ -13,10 +13,14 @@ class Shift < ApplicationRecord
   end
 
   def calculate_total_revenue
-    bills.sum(&:total)
+    bills.sum(&:total).round(2)
   end
 
   def calculate_total_spendings
-    self.spendings.inject(0) { |total, spending| spending.cancelled? ? total : total + spending.total }
+    (self.spendings.inject(0) { |total, spending| spending.cancelled? ? total : total + spending.total }).round(2)
+  end
+
+  def users_list
+    self.users.map(&:name).join(", ")
   end
 end

@@ -49,17 +49,17 @@
 
   <div class="form-group">
     <%= label :bill, :subtotal %>
-    <%= text_field :bill, :subtotal, value: @bill.calculate_subtotal, class: 'form-control', readonly: true %>
+    <%= text_field :bill, :subtotal, value: '%.2f' % @bill.calculate_subtotal, class: 'form-control', readonly: true %>
   </div>
 
   <div class="form-group">
     <%= label :bill, :discount %>
-    <input type="text" id="bill_discount_value" name="bill[discount][value]" value="<%= "#{@bill.discount.value} %" %>" class="form-control" readonly="readonly" />
+    <input type="text" id="bill_discount_value" name="bill[discount][value]" value="<%= "#{'%.2f' % @bill.discount.value} %" %>" class="form-control" readonly="readonly" />
   </div>
 
   <div class="form-group">
     <%= label :bill, :total %>
-    <%= text_field :bill, :total, value: @bill.calculate_total, class: 'form-control', readonly: true %>
+    <%= text_field :bill, :total, value: '%.2f' % @bill.calculate_total, class: 'form-control', readonly: true %>
   </div>
 
   <div class="form-group">
@@ -86,10 +86,10 @@
       <% @bill.bill_items.each do |item| %>
       <tr>
         <td class="text-right"><%= item.good.name %></td>
-        <td class="text-right"><%= item.good.price %></td>
+        <td class="text-right"><%= '%.2f' % item.good.price %></td>
         <td class="text-right"><%= item.quantity  %></td>
-        <td class="text-right"><%= item.calculate_subtotal %></td>
-        <td class="text-right"><%= item.calculate_total(@bill.discount.value) %></td>
+        <td class="text-right"><%= '%.2f' % item.calculate_subtotal %></td>
+        <td class="text-right"><%= '%.2f' % item.calculate_total(@bill.discount.value) %></td>
         <td class="text-right">
           <% unless @bill.closed? || @bill.cancelled? %>
             <%= link_to shift_bill_item_url(@bill.shift, @bill, item), class: 'btn btn-xs btn-danger', method: :delete, data: { confirm: 'Are you sure?' } do %>

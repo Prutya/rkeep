@@ -20,7 +20,7 @@
   <%= form_for @bill_item, url: shift_bill_items_url(@bill.shift, @bill, @bill_item) do |f| %>
     <div class="form-group">
       <%= f.label :good %>
-      <%= f.select :good_id, @goods.map{ |good| [ "#{good.name} #{good.price}", good.id ] }, {}, { class: 'form-control' } %>
+      <%= f.select :good_id, @goods.map{ |good| [ "#{good.name} #{'%.2f' % good.price}", good.id ] }, {}, { class: 'form-control' } %>
     </div>
 
     <div class="form-group">

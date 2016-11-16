@@ -1,7 +1,7 @@
 class ShiftsController < ApplicationController
   def index
     authorize! :index, Shift
-    @shifts = Shift.all
+    @shifts = Shift.preload([ :bills, :spendings ])
   end
 
   def create
@@ -14,7 +14,7 @@ class ShiftsController < ApplicationController
   end
 
   def show
-    @shift = Shift.includes([ :spendings, { bills: [ :table, :discount, :bill_items ] } ]).find(params[:id])
+    @shift = Shift.includes([ :spendings, { bills: [ :table, :discount, { bill_items: :good } ] } ]).find(params[:id])
     authorize! :show, Shift
   end
 end
