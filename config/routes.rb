@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   resources :shifts, only: [:index, :show, :create, :destroy] do
+    resources :users, only: [:index, :new, :create, :destroy], controller: :user_shifts
     resources :bills, only: [:show, :new, :create, :edit, :update, :destroy] do
       member do
         delete 'cancel'
       end
 
       resources :items, only: [:new, :create, :destroy], controller: :bill_items
-      resources :users, only: [], controller: :user_shifts
     end
     resources :spendings, only: [:index, :new, :create, :destroy]
   end

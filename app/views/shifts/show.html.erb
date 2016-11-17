@@ -16,6 +16,10 @@
 
   <div class="text-right col-xs-12 col-md-8 action-bar-section">
     <% unless @shift.closed? %>
+      <%= link_to new_shift_user_url(@shift), class: 'btn btn-primary' do %>
+        <%= icon('plus') %>
+        <%= 'Add user' %>
+      <% end %>
       <%= link_to new_shift_bill_url(@shift), class: 'btn btn-primary' do %>
         <%= icon('plus') %>
         <%= 'New bill' %>

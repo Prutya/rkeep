@@ -24,6 +24,16 @@ class User < ApplicationRecord
     role?(:employee)
   end
 
+  def at_shift?
+    user_last_shift = self.last_shift
+
+    user_last_shift && !user_last_shift.closed?
+  end
+
+  def last_shift
+    self.shifts.order(:opened_at).last
+  end
+
   protected
 
   def role?(role)
