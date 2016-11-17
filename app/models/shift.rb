@@ -16,11 +16,11 @@ class Shift < ApplicationRecord
   end
 
   def calculate_total_revenue
-    (self.bills.inject(0) { |total, bill| bill.closed? ? total + bill.total : total }).round(2)
+    (self.bills.inject(0) { |total, bill| bill.status == :closed ? total + bill.total : total }).round(2)
   end
 
   def calculate_total_spendings
-    (self.spendings.inject(0) { |total, spending| spending.cancelled? ? total : total + spending.total }).round(2)
+    (self.spendings.inject(0) { |total, spending| spending.status == :added ? total + spending.total : total }).round(2)
   end
 
   def calculate_total

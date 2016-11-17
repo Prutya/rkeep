@@ -15,11 +15,11 @@ class Bill < ApplicationRecord
   end
 
   def closed?
-    self.time_close.present?
+    self.status == :closed
   end
 
   def cancelled?
-    self.time_cancel.present?
+    self.status == :cancelled
   end
 
   def calculate_subtotal
