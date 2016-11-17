@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :good do
-    name "MyString"
-    price "9.99"
+    sequence(:name) { |n| "Good #{n}" }
+    price 100.01
   end
 end

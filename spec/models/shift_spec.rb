@@ -13,10 +13,18 @@ RSpec.describe Shift, type: :model do
 
   describe 'calculations' do
     before(:each) do
-      @discounts = [ Discount.new({ value: 50.00 }) ]
-      [ Good.new({ name: 'Good1', price: 100.00 }), Good.new({ name: 'Good2', price: 200.00 }) ].each do |good|
-        subject.bill_items.push(BillItem.new({ good: good, quantity: 2 }))
-      end
+    end
+
+    describe 'calculate total revenue' do
+
+    end
+
+    describe 'calculate total spendings' do
+
+    end
+
+    describe 'calculate total' do
+
     end
   end
 end

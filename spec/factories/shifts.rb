@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :shift do
-    opened_at "2016-11-15 19:57:34"
-    closed_at "2016-11-15 19:57:34"
+    opened_at "2016-11-14 11:58:00"
   end
 end
