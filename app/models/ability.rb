@@ -9,8 +9,8 @@ class Ability
     if user.employee?
       can [:index], Shift
 
-      can [:create], Shift do |shift|
-        Shift.any? { |s| s.closed_at.empty? }
+      unless Shift.any? { |s| s.closed_at.nil? }
+        can [:create], Shift
       end
 
       can [:show, :update, :destroy], Shift do |shift|
@@ -19,6 +19,10 @@ class Ability
 
       can [:update], Bill do |bill|
         can?(:update, bill.shift) && !bill.closed? && !bill.cancelled?
+      end
+
+      can [:create], UserShift do |user_shift|
+        can?(:update, user_shift.shifts) && user_shift.user.employee? && !user_shift.user.busy?
       end
     end
 
