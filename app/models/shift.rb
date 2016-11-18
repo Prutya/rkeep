@@ -1,7 +1,8 @@
 class Shift < ApplicationRecord
-  has_many :bills
-  has_many :spendings
-  has_many :user_shifts
+  has_many :bills, dependent: :nullify
+  has_many :spendings, dependent: :nullify
+  has_many :user_shifts, dependent: :destroy
+  
   has_many :users, through: :user_shifts
 
   default_scope { order(opened_at: :desc) }

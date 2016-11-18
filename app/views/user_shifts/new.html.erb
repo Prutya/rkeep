@@ -13,14 +13,18 @@
 </menu>
 
 <section class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-  <%= form_for @user_shift, url: shift_users_url(@shift) do |f| %>
-    <div class="form-group">
-      <%= f.label :user %>
-      <%= f.select :user_id, @users.map{ |u| [u.name, u.id] }, {}, { class: 'form-control' } %>
-    </div>
+  <% if @users.empty?%>
+    <p class="text-center">No users available.</p>
+  <% else %>
+    <%= form_for @user_shift, url: shift_users_url(@shift) do |f| %>
+      <div class="form-group">
+        <%= f.label :user %>
+        <%= f.select :user_id, @users.map{ |u| [u.name, u.id] }, {}, { class: 'form-control' } %>
+      </div>
 
-    <div class="form-group text-right">
-      <%= f.submit 'Add', class: 'btn btn-primary' %>
-    </div>
+      <div class="form-group text-right">
+        <%= f.submit 'Add', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
   <% end %>
 </section>

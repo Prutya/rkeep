@@ -2,20 +2,21 @@ class ShiftsController < ApplicationController
   def index
     authorize! :index, Shift
     if current_user.admin?
-      @shifts = Shift.paginate(page: params[:page], per_page: 20).includes([ :bills, :spendings ])
+      @shifts = Shift.paginate(page: params[:page], per_page: 10).includes([ :bills, :spendings ])
     else
       @shifts = current_user.shifts.paginate(page: params[:page], per_page: 20).includes([ :bills, :spendings ])
     end
   end
 
   def create
+    @shift = Shift.new({ opened_at: Time.zone.now })
     authorize! :create, Shift
-    shift = Shift.create({ opened_at: Time.zone.now })
-    shift.users << current_user
+
+    @shift.save
+    @shift.users << current_user
 
     flash[:success] = 'Shift created successfully.'
-
-    redirect_to shift_url(shift)
+    redirect_to shift_url(@shift)
   end
 
   def show
@@ -24,18 +25,13 @@ class ShiftsController < ApplicationController
   end
 
   def destroy
-    shift = Shift.find(params[:id])
-    authorize! :destroy, shift
+    @shift = Shift.find(params[:id])
+    authorize! :destroy, @shift
 
-    unless shift.closed?
-      shift.close
-      shift.save!
+    @shift.close
+    @shift.save!
 
-      flash[:success] = 'Shift closed successfully.'
-    else
-      flash[:error] = 'Shift is already closed.'
-    end
-
+    flash[:success] = 'Shift closed successfully.'
     redirect_to shifts_url
   end
 end

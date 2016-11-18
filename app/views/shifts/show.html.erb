@@ -57,7 +57,7 @@
         <% @shift.bills.each do |bill| %>
         <tr class="row-link" data-href="<%= shift_bill_url(@shift, bill) %>">
           <td class="text-left"><%= bill.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-          <td class="text-right"><%= bill.table.name    %></td>
+          <td class="text-right"><%= bill.table.name if bill.table.present? %></td>
           <td class="text-right"><%= bill.people_number %></td>
           <td class="text-right"><%= '%.2f' % (bill.subtotal || bill.calculate_subtotal)%></td>
           <td class="text-right"><%= "#{'%.2f' % bill.discount.value}" %></td>

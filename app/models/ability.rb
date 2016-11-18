@@ -13,20 +13,12 @@ class Ability
         Shift.any? { |s| s.closed_at.empty? }
       end
 
-      can [:show, :destroy], Shift do |shift|
-        user.at_shift?(shift)
+      can [:show, :update, :destroy], Shift do |shift|
+        user.at_shift?(shift) && !shift.closed?
       end
 
-      can [:update, :create, :show, :destroy], Bill do |bill|
-        user.at_shift?(bill.shift) && !bill.shift.closed?
-      end
-
-      can [:create, :destroy], Spending do |spending|
-        user.at_shift?(spending.shift) && !spending.shift.closed?
-      end
-
-      can [:create], UserShift do |user_shift|
-        user.at_shift?(user_shift.shift)
+      can [:update], Bill do |bill|
+        can?(:update, bill.shift) && !bill.closed? && !bill.cancelled?
       end
     end
 
