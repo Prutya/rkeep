@@ -24,10 +24,12 @@ class User < ApplicationRecord
     role?(:employee)
   end
 
-  def at_shift?
-    user_last_shift = self.last_shift
+  def at_shift?(shift)
+    shift.users.any? { |u| u.id == self.id }
+  end
 
-    user_last_shift && !user_last_shift.closed?
+  def busy?(shift = self.last_shift)
+    shift && !shift.closed?
   end
 
   def last_shift

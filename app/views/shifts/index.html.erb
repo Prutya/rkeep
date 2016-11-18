@@ -29,9 +29,9 @@
     <tbody>
       <% @shifts.each do |shift| %>
         <tr class="row-link" data-href="<%= shift_url(shift) %>" >
-          <td class="text-left" ><%= shift.opened_at    %></td>
-          <td class="text-left" ><%= shift.closed_at    %></td>
-          <td class="text-left" ><%= shift.users_list   %></td>
+          <td class="text-left" ><%= shift.opened_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td class="text-left" ><%= shift.closed_at.strftime("%Y-%m-%d %H:%M") if shift.closed_at.present? %></td>
+          <td class="text-left" ><%= shift.users_list %></td>
           <td class="text-right"><%= shift.bills.length %></td>
           <td class="text-right"><%= '%.2f' % (shift.total_revenue || shift.calculate_total_revenue) %></td>
           <td class="text-right"><%= '%.2f' % (shift.total_spendings || shift.calculate_total_spendings) %></td>

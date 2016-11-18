@@ -10,14 +10,14 @@ class UserShiftsController < ApplicationController
   def create
     shift = Shift.preload({ user_shifts: :user }).find_by_id(params[:shift_id])
 
-    unless shift
+    unless shift.present?
       flash[:error] = 'Such shift does not exist.'
       return redirect_to shifts_url
     end
 
     user = User.find_by_id(params_create[:user_id])
 
-    unless user
+    unless user.present?
       flash[:error] = 'Such user does not exist.'
       return redirect_to new_shift_user_url(shift)
     end
@@ -25,7 +25,7 @@ class UserShiftsController < ApplicationController
     user_shift = UserShift.new({ shift: shift, user: user })
     authorize! :create, user_shift
 
-    if user.at_shift? || shift.users.any? { |u| u.id == user.id }
+    if user.busy? || user.at_shift?(shift)
       flash[:error] = 'User is already at shift.'
       return redirect_to new_user_shift_url(shift)
     end
