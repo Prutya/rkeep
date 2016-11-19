@@ -20,4 +20,20 @@ module ApplicationHelper
 
     script.html_safe
   end
+
+  def breadcrumbs(items, options = nil)
+    content_tag(:nav, nil, class: "breadcrumbs #{options[:class] if options}") do
+      items.map { |item|
+        unless item[:link]
+          content_tag(:span, item[:text], class: "breadcrumbs-item active #{item[:class]}")
+        else
+          link_to item[:text], item[:link], class: "breadcrumbs-item"
+        end
+      }.join.html_safe
+    end
+  end
+
+  def crumb(text, link = nil, active = false, options = nil)
+    { text: text, link: link, class: "#{options[:class] if options}" }
+  end
 end

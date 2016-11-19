@@ -1,35 +1,36 @@
 <% provide :page_title, "Bill #{@bill.id}" %>
-<% provide :page_heading do %>
-  <%= "Bill #{@bill.id}" %>
-  <strong class="label label-<%= bill_bootstrap_status(@bill.status) %>"><%= @bill.status %></strong>
-<% end %>
 
-<menu class="col-xs-12 action-bar">
-  <div class="text-left col-xs-12 col-md-4 action-bar-section">
-    <%= link_to shift_url(@bill.shift), class: 'btn btn-default' do %>
-      <%= icon('list') %> <%= 'Back to shift' %>
+<%
+  crumbs = [
+    crumb('Shifts', shifts_url),
+    crumb("Shift #{@bill.shift.id}", shift_url(@bill.shift)),
+    crumb("Bill #{@bill.id}")
+  ]
+%>
+<%= breadcrumbs crumbs, class: 'col-xs-12' %>
+
+<menu class="col-xs-12 action-bar text-right">
+  <% unless @bill.closed? || @bill.cancelled? %>
+    <%= link_to shift_bill_url(@bill.shift, @bill), class: 'btn btn-success', method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <%= icon('check') %>
+      <%= 'Checkout' %>
     <% end %>
-  </div>
 
-  <div class="text-right col-xs-12 col-md-8 action-bar-section">
-    <% unless @bill.closed? || @bill.cancelled? %>
-      <%= link_to edit_shift_bill_url(@bill.shift, @bill), class: 'btn btn-default' do %>
-        <%= icon('pencil') %> <%= 'Edit bill' %>
-      <% end %>
-
-      <%= link_to new_shift_bill_item_url(@bill.shift, @bill), class: 'btn btn-primary' do %>
-        <%= icon('plus') %> <%= 'Add item' %>
-      <% end %>
-
-      <%= link_to shift_bill_url(@bill.shift, @bill), class: 'btn btn-success', method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <%= icon('check') %> <%= 'Checkout' %>
-      <% end %>
-
-      <%= link_to cancel_shift_bill_url(@bill.shift, @bill), class: 'btn btn-warning', method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <%= icon('trash') %> <%= 'Cancel' %>
-      <% end %>
+    <%= link_to cancel_shift_bill_url(@bill.shift, @bill), class: 'btn btn-warning', method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <%= icon('trash') %>
+      <%= 'Cancel' %>
     <% end %>
-  </div>
+
+    <%= link_to edit_shift_bill_url(@bill.shift, @bill), class: 'btn btn-primary' do %>
+      <%= icon('pencil') %>
+      <%= 'Edit bill' %>
+    <% end %>
+
+    <%= link_to new_shift_bill_item_url(@bill.shift, @bill), class: 'btn btn-primary' do %>
+      <%= icon('plus') %>
+      <%= 'Add item' %>
+    <% end %>
+  <% end %>
 </menu>
 
 <section class="col-xs-12 col-sm-3">
@@ -38,7 +39,7 @@
   <div class="row">
     <div class="form-group col-xs-6">
       <%= label :bill, :table %>
-      <input type="text" id="bill_table_name" name="bill[table][name]" value="<%= @bill.table.name if @bill.table.present? %>" class="form-control" readonly="readonly" />
+      <input type="text" id="bill_table_name" name="bill[table][name]" value="<%= @bill.table.name if @bill.table.present? %>" class="form-control" readonly="readonly"/>
     </div>
 
     <div class="form-group col-xs-6">
@@ -54,7 +55,7 @@
 
   <div class="form-group">
     <%= label :bill, :discount %>
-    <input type="text" id="bill_discount_value" name="bill[discount][value]" value="<%= "#{'%.2f' % @bill.discount.value} %" %>" class="form-control" readonly="readonly" />
+    <input type="text" id="bill_discount_value" name="bill[discount][value]" value="<%= " #{'%.2f' % @bill.discount.value} %" %>" class="form-control" readonly="readonly"/>
   </div>
 
   <div class="form-group">
@@ -84,20 +85,20 @@
     </thead>
     <tbody>
       <% @bill.bill_items.each do |item| %>
-      <tr>
-        <td class="text-right"><%= item.good.name %></td>
-        <td class="text-right"><%= '%.2f' % item.good.price %></td>
-        <td class="text-right"><%= item.quantity  %></td>
-        <td class="text-right"><%= '%.2f' % item.calculate_subtotal %></td>
-        <td class="text-right"><%= '%.2f' % item.calculate_total(@bill.discount.value) %></td>
-        <td class="text-right">
-          <% unless @bill.closed? || @bill.cancelled? %>
+        <tr>
+          <td class="text-right"><%= item.good.name %></td>
+          <td class="text-right"><%= '%.2f' % item.good.price %></td>
+          <td class="text-right"><%= item.quantity  %></td>
+          <td class="text-right"><%= '%.2f' % item.calculate_subtotal %></td>
+          <td class="text-right"><%= '%.2f' % item.calculate_total(@bill.discount.value) %></td>
+          <td class="text-right">
+            <% unless @bill.closed? || @bill.cancelled? %>
             <%= link_to shift_bill_item_url(@bill.shift, @bill, item), class: 'btn btn-xs btn-danger', method: :delete, data: { confirm: 'Are you sure?' } do %>
-              <%= icon('trash') %>
+            <%= icon('trash') %>
             <% end %>
-          <% end %>
-        </td>
-      </tr>
+            <% end %>
+          </td>
+        </tr>
       <% end %>
     </tbody>
   </table>

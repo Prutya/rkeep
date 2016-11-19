@@ -1,8 +1,13 @@
 <% provide :page_title, "Edit bill #{@bill.id}" %>
-<% provide :page_heading do %>
-  <%= "Edit bill #{@bill.id}" %>
-  <strong class="label label-<%= bill_bootstrap_status(@bill.status) %>"><%= @bill.status %></strong>
-<% end %>
+
+<%
+  crumbs = [
+    crumb('Shifts', shifts_url),
+    crumb("Shift #{@bill.shift.id}", shift_url(@bill.shift))
+    crumb("Edit bill")
+  ]
+%>
+<%= breadcrumbs crumbs, class: 'col-xs-12' %>
 
 <menu class="col-xs-12 action-bar">
   <div class="text-left col-xs-12 col-md-4 action-bar-section">

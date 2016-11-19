@@ -1,0 +1,19 @@
+.breadcrumbs {
+  background-color: $background-color;
+  font-size: 120%;
+
+  .breadcrumbs-item {
+    text-transform: lowercase;
+
+    &:hover {
+      text-decoration: none;
+    }
+    &:after {
+      content: " /";
+      color: $text-color;
+    }
+    &:before{
+      content: " ";
+    }
+  }
+}
