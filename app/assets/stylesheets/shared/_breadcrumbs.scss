@@ -1,19 +1,25 @@
 .breadcrumbs {
   background-color: $background-color;
-  font-size: 120%;
+  margin-bottom: 15px;
+  display: inline-block;
 
   .breadcrumbs-item {
-    text-transform: lowercase;
+    display: inline-block;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    background-color: $primary-color;
+    color: $text-color-alt;
+
+    &.active {
+      background-color: darken($primary-color, 10%);
+    }
 
     &:hover {
       text-decoration: none;
-    }
-    &:after {
-      content: " /";
-      color: $text-color;
-    }
-    &:before{
-      content: " ";
+      background-color: lighten($primary-color, 15%);
+      cursor: pointer;
     }
   }
 }

@@ -1,0 +1,21 @@
+html, body {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.content-wrapper {
+  height: 100%;
+  overflow: hidden;
+  overflow-y: hidden;
+  transition: margin-left 0.3s;
+}
+
+.content {
+  padding: 20px;
+  overflow-y: scroll;
+  height: 100%;
+  box-shadow: 10px 10px 5px #888888;
+}

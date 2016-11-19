@@ -1,20 +1,22 @@
 /* Libraries */
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import "lib/normalize.min";
 @import "lib/toastr.min";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
 /* Base */
 @import "base/variables";
+@import "base/common";
+@import "base/helpers";
 
 /* Shared */
-@import "shared/brand";
+@import "shared/header";
+@import "shared/logo";
+@import "shared/tables";
 @import "shared/footer";
 @import "shared/actions_bar";
-@import "shared/buttons";
-@import "shared/row_link";
 @import "shared/heading";
+@import "shared/sidebar";
 @import "shared/breadcrumbs";
 
 /* Home */
