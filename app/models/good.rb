@@ -3,4 +3,6 @@ class Good < ApplicationRecord
 
   validates :name, presence: true, allow_blank: false
   validates :price, presence: true, numericality: { greater_than: 0.00 }
+
+  default_scope { order(:name) }
 end

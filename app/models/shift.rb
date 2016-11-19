@@ -2,10 +2,10 @@ class Shift < ApplicationRecord
   has_many :bills, dependent: :nullify
   has_many :spendings, dependent: :nullify
   has_many :user_shifts, dependent: :destroy
-  
+
   has_many :users, through: :user_shifts
 
-  default_scope { order(opened_at: :desc) }
+  default_scope { order(opened_at: :desc).preload(:users) }
 
   def closed?
     self.closed_at.present?
@@ -37,17 +37,5 @@ class Shift < ApplicationRecord
     self.total_revenue = calculate_total_revenue
     self.total_spendings = calculate_total_spendings
     self.total = self.total_revenue - self.total_spendings
-  end
-
-  protected
-
-  def self.current_day_range(datetime = Time.zone.now)
-    config = Configuration.last_set
-    time_opens_today = Time.new(datetime.year, datetime.month, datetime.day,
-                                config.time_opens.hour, config.time_opens.min, 0, 0)
-    time_from = datetime >= time_opens_today ? time_opens_today : time_opens_today - 1.day
-    time_to   = datetime >= time_opens_today ? time_opens_today + 1.day : time_opens_today
-
-    time_from..time_to
   end
 end

@@ -4,7 +4,7 @@ class ShiftsController < ApplicationController
     if current_user.admin?
       @shifts = Shift.paginate(page: params[:page], per_page: 10).includes([ :bills, :spendings ])
     else
-      @shifts = current_user.shifts.paginate(page: params[:page], per_page: 20).includes([ :bills, :spendings ])
+      @shifts = current_user.shifts.paginate(page: params[:page], per_page: 10).includes([ :bills, :spendings ])
     end
   end
 
