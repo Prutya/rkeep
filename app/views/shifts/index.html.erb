@@ -1,24 +1,24 @@
 <% provide :page_title, 'Shifts' %>
-<%= breadcrumbs [crumb('Shifts')], class: 'col-xs-12 col-md-6' %>
 
-<section class="grid">
-<% if can? :create, Shift %>
-  <menu class="grid-cell">
-    <%= link_to shifts_url, class: 'btn btn-primary', method: :create, data: { confirm: 'Are you sure?' } do %>
-      <%= icon('plus') %>
-      <%= 'New shift' %>
-    <% end %>
-  </menu>
-<% end %>
+<section class="row">
+  <%= breadcrumbs [crumb('Shifts')], class: 'col-xs-12 col-md-6' %>
+  <% if can? :create, Shift %>
+    <section class="col-xs-12 col-md-6 text-right">
+      <%= link_to shifts_url, class: 'btn', method: :create, data: { confirm: 'Are you sure?' } do %>
+        <%= icon('plus') %>
+        <%= 'Shift' %>
+      <% end %>
+    </section>
+  <% end %>
 </section>
 
-<section class="grid-cell">
+<section class="table-container">
   <table class="table" id="shifts-table">
     <thead class="table-head">
       <tr class="table-row">
-        <td class="table-cell"><%= 'Opened at' %></td>
-        <td class="table-cell"><%= 'Closed at' %></td>
-        <td class="table-cell"><%= 'Employees' %></td>
+        <td class="table-cell text-left"><%= 'Opened at' %></td>
+        <td class="table-cell text-left"><%= 'Closed at' %></td>
+        <td class="table-cell text-left"><%= 'Employees' %></td>
         <td class="table-cell text-right"><%= 'Bills'     %></td>
         <td class="table-cell text-right"><%= 'Revenue'   %></td>
         <td class="table-cell text-right"><%= 'Spendings' %></td>
@@ -29,15 +29,15 @@
     <tbody class="table-body">
       <% @shifts.each do |shift| %>
         <tr class="table-row row-link" data-href="<%= shift_url(shift) %>">
-          <td class="table-cell"><%= shift.opened_at.strftime("%H:%M %Y/%m/%d") %></td>
-          <td class="table-cell"><%= shift.closed_at.strftime("%H:%M %Y/%m/%d") if shift.closed_at.present? %></td>
-          <td class="table-cell"><%= shift.users_list %></td>
+          <td class="table-cell text-left"><%= shift.opened_at.strftime("%H:%M %Y/%m/%d") %></td>
+          <td class="table-cell text-left"><%= shift.closed_at.strftime("%H:%M %Y/%m/%d") if shift.closed_at %></td>
+          <td class="table-cell text-left"><%= shift.users_list %></td>
           <td class="table-cell text-right"><%= shift.bills.length %></td>
           <td class="table-cell text-right"><%= '%.2f' % (shift.total_revenue || shift.calculate_total_revenue) %></td>
           <td class="table-cell text-right"><%= '%.2f' % (shift.total_spendings || shift.calculate_total_spendings) %></td>
           <td class="table-cell text-right"><%= '%.2f' % (shift.total || shift.calculate_total)%></td>
           <td class="table-cell text-right">
-            <span class="label label-<%= shift_bootstrap_status(shift.status) %>">
+            <span class="badge <%= shift_status(shift.status) %>">
               <%= shift.status %>
             </span>
           </td>
@@ -45,5 +45,6 @@
       <% end %>
     </tbody>
   </table>
-  <%= will_paginate @shifts %>
 </section>
+
+<%= will_paginate @shifts %>

@@ -9,6 +9,7 @@
   console.log(sidebarDisplayWidth);
 
   var sidebar = document.getElementById('sidebar');
+  var content = document.getElementById('content');
   var contentWrapper = document.getElementById('content-wrapper');
   var sidebarIsOpened = false;
 
@@ -32,5 +33,6 @@
     }
   }
 
+  content.addEventListener('click', closeSidebar);
   document.getElementById('sidebar-toggle').addEventListener('click', toggleSidebar);
 })();

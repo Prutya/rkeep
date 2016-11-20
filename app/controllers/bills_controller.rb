@@ -53,7 +53,7 @@ class BillsController < ApplicationController
     @bill.save!
 
     flash[:success] = 'Bill cancelled successfully.'
-    redirect_to shift_bill_url(@bill.shift, @bill)
+    redirect_to shift_url(@bill.shift)
   end
 
   def destroy
@@ -64,7 +64,7 @@ class BillsController < ApplicationController
     @bill.save!
 
     flash[:success] = 'Bill closed successfully.'
-    redirect_to shift_bill_url(@bill.shift, @bill)
+    redirect_to shift_url(@bill.shift)
   end
 
   protected

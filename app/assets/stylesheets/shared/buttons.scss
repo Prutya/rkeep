@@ -1,0 +1,41 @@
+.btn {
+  display: inline-block;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  padding: $button-padding;
+  background-color: $button-color;
+  color: $text-color-alt;
+  margin-bottom: 1.0em;
+  border: 0;
+
+  &:hover {
+    text-decoration: none;
+    background-color: lighten($button-color, 10%);
+    cursor: pointer;
+  }
+
+  &.success {
+    background-color: $success-color;
+
+    &:hover {
+      background-color: lighten($success-color, 10%);
+    }
+  }
+
+  &.warning {
+    background-color: $warning-color;
+
+    &:hover {
+      background-color: lighten($warning-color, 10%);
+    }
+  }
+
+  &.danger {
+    background-color: $danger-color;
+
+    &:hover {
+      background-color: lighten($danger-color, 10%);
+    }
+  }
+}
