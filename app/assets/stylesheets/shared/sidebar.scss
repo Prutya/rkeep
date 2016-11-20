@@ -7,7 +7,7 @@
   color: $text-color-alt;
   position: fixed;
   overflow-x: hidden;
-  /* z-index: 1; */
+  z-index: 1;
   top: 0;
   left: 0;
   transition: 0.3s;
@@ -34,4 +34,17 @@
       }
     }
   }
+}
+
+.content-wrapper {
+  height: 100%;
+  overflow: hidden;
+  overflow-y: hidden;
+  transition: margin-left 0.3s;
+}
+
+.content {
+  height: 100%;
+  padding: 1.0em;
+  overflow-y: scroll;
 }

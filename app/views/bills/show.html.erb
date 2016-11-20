@@ -97,7 +97,7 @@
             <td class="table-cell text-right"><%= '%.2f' % item.calculate_total(@bill.discount.value) %></td>
             <td class="table-cell text-right">
               <% unless @bill.closed? || @bill.cancelled? %>
-                <%= link_to shift_bill_item_url(@bill.shift, @bill, item), class: 'btn btn-xs btn-danger', method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <%= link_to shift_bill_item_url(@bill.shift, @bill, item), class: 'btn btn-small danger', method: :delete, data: { confirm: 'Are you sure?' } do %>
                   <%= icon('trash') %>
                 <% end %>
               <% end %>

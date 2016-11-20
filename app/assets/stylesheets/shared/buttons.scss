@@ -2,17 +2,29 @@
   display: inline-block;
   text-transform: uppercase;
   text-decoration: none;
+  text-align: center;
   font-weight: bold;
   padding: $button-padding;
   background-color: $button-color;
   color: $text-color-alt;
   margin-bottom: 1.0em;
+  min-width: 2.4em;
   border: 0;
+  font-size: 90%;
+  box-shadow: -3px 3px 5px #888888;
 
   &:hover {
     text-decoration: none;
     background-color: lighten($button-color, 10%);
     cursor: pointer;
+  }
+
+  &.primary {
+    background-color: $primary-color;
+
+    &:hover {
+      background-color: lighten($primary-color, 20%);
+    }
   }
 
   &.success {
@@ -38,4 +50,8 @@
       background-color: lighten($danger-color, 10%);
     }
   }
+}
+
+.btn-small {
+  padding: $button-padding-small;
 }

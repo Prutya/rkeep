@@ -2,7 +2,7 @@
   var sidebarDisplayWidth = "20%";
   var sidebarHideWidth = "0";
 
-  if (window.innerWidth < 400) {
+  if (window.innerWidth < 600) {
     sidebarDisplayWidth = "80%";
   }
 

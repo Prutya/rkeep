@@ -8,6 +8,9 @@
     text-transform: uppercase;
     text-decoration: none;
     font-weight: bold;
+    font-size: 90%;
+    box-shadow: -3px 3px 5px #888888;
+    margin-right: 0.3em;
     padding: $button-padding;
     background-color: $primary-color;
     color: $text-color-alt;

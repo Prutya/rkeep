@@ -14,11 +14,10 @@
 
 <section class="row">
   <section class="col-xs-12 col-md-8">
-    <legend class="text-center"><%= 'Bills' %></legend>
-    <label>
-      <%= 'Total' %>:
-      <strong><%= '%.2f' % (@shift.total_revenue || @shift.calculate_total_revenue) %></strong>
-    </label>
+    <legend>
+      <span class="text-left"><%= 'Bills' %></span>
+      <span class="text-right"><%= "Total" %>: <%= '%.2f' % (@shift.total_revenue || @shift.calculate_total_revenue) %></span>
+    </legend>
     <div class="table-container">
       <table class="table" id="bills-table">
         <thead class="table-head">
@@ -56,11 +55,10 @@
   </section>
 
   <section class="col-xs-12 col-md-4">
-    <legend class="text-center"><%= 'Spendings' %></legend>
-    <label>
-      <%= 'Total' %>:
-      <strong><%= '%.2f' % (@shift.total_spendings || @shift.calculate_total_spendings) %></strong>
-    </label>
+    <legend class="text-center">
+      <span class="text-left"><%= 'Spendings' %></span>
+      <span class="text-right"><%= "Total" %>: <%= '%.2f' % (@shift.total_spendings || @shift.calculate_total_spendings) %></span>
+    </legend>
     <div class="table-container">
       <table class="table" id="spendings-table">
         <thead class="table-head">
@@ -88,7 +86,7 @@
               <% unless @shift.closed? %>
                 <td class="table-cell text-right">
                   <% unless spending.cancelled? %>
-                    <%= link_to shift_spending_url(@shift, spending), class: 'btn danger', method: :delete, data: { confirm: "Are you sure?" } do %>
+                    <%= link_to shift_spending_url(@shift, spending), class: 'btn btn-small danger', method: :delete, data: { confirm: "Are you sure?" } do %>
                       <%= icon('trash') %>
                     <% end %>
                   <% end %>
