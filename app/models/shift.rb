@@ -11,6 +11,10 @@ class Shift < ApplicationRecord
     self.closed_at.present?
   end
 
+  def has_open_bills?
+    self.bills.any? { |bill| bill.time_close.nil? && bill.time_cancel.nil? }
+  end
+
   def status
     return :closed if closed?
     :open

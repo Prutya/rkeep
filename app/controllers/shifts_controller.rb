@@ -28,6 +28,11 @@ class ShiftsController < ApplicationController
     @shift = Shift.find(params[:id])
     authorize! :destroy, @shift
 
+    if @shift.has_open_bills?
+      flash[:error] = 'Shift has open bills.'
+      return redirect_to shift_url(@shift)
+    end
+
     @shift.close
     @shift.save!
 
