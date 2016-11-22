@@ -11,11 +11,11 @@ html, body {
   height: 100%;
   overflow: hidden;
   overflow-y: hidden;
-  transition: margin-left 0.3s;
 }
 
 .content {
   padding: 1.0em;
-  height: 87%;
+  height: 88%;
   overflow-y: scroll;
+  background-color: $background-color;
 }

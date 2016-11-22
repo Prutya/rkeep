@@ -1,6 +1,5 @@
 input,
 select {
-  margin-bottom: 1.0em;
   display: block;
   margin: 0;
   width: 100%;
@@ -9,7 +8,7 @@ select {
   padding: 10px;
   border: solid 5px lighten($text-color, 75%);
   transition: border 0.3s;
-  margin-bottom: 1.0em;
+  margin-bottom: $input-margin;
   border-radius: 0;
 }
 

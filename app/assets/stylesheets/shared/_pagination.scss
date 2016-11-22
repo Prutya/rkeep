@@ -25,11 +25,7 @@
     }
 
     &.disabled {
-      color: darken($primary-color, 20%);
-
-      &:hover {
-        cursor: not-allowed;
-      }
+      display: none;
     }
 
     &.current {

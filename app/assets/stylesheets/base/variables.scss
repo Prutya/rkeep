@@ -1,16 +1,30 @@
-$background-color: #FFFFFF;
-$primary-color:    #3B107C;
-$default-color:    #B0B0B0;
+$background-color:        #F5F5F5;
+$primary-color:           #110a39;
+$success-color:           #0D978C;
+$danger-color:            #C70039;
+$warning-color:           #FF5733;
+$neutral-color:           #B0B0B0;
 
-$button-color:     #096CA4;
-$success-color:    #0D978C;
-$danger-color :    #C70039;
-$warning-color:    #FF5733;
+$primary-highlight-color: lighten($primary-color, 20%);
+$success-highlight-color: lighten($success-color, 8%);
+$danger-highlight-color:  lighten($danger-color,  20%);
+$warning-highlight-color: lighten($warning-color,  20%);
 
-$text-color:       #000000;
-$text-color-alt:   #FFFFFF;
-$link-color:       #3B107C;
+$button-color:            #096CA4;
+$text-color:              #000000;
+$text-color-alt:          #FFFFFF;
+$link-color:              #3B107C;
+$table-highlight-color:   lighten($primary-color, 70%);
 
-$default-padding:      15px;
-$button-padding:       0.7em;
-$button-padding-small: 0.35em;
+$default-padding:         1.0em;
+$button-padding:          0.7em;
+$button-padding-small:    0.35em;
+$table-cell-padding:      0.8em;
+
+$default-margin:          1.0em;
+$legend-margin:           $default-margin;
+$button-margin:           $default-margin;
+$input-margin:            $default-margin;
+
+$default-transition:      0.3s;
+$sidebar-transition:      $default-transition;

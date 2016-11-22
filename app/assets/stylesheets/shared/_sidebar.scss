@@ -1,37 +1,41 @@
 .sidebar {
-  display: block;
-  width: 0;
-  float: left;
   height: 100%;
-  background-color: $primary-color;
-  color: $text-color-alt;
+  width: 0;
   position: fixed;
-  overflow-x: hidden;
-  z-index: 1;
   top: 0;
   left: 0;
-  transition: 0.3s;
+  overflow-x: hidden;
+  z-index: 1;
+  transition: $sidebar-transition;
+  background-color: $primary-color;
+  color: $text-color-alt;
 
   ul {
-    display: block;
     height: 100%;
     list-style-type: none;
     padding: 0;
     margin: 0;
+    transition: $sidebar-transition;
 
     li a {
-      display: inline-block;
       width: 100%;
+      display: inline-block;
       text-decoration: none;
-      text-align: center;
+      text-align: left;
       text-transform: uppercase;
       font-weight: bold;
-      padding: 1.0em;
+      padding: $default-padding;
       color: $text-color-alt;
+      transition: $sidebar-transition;
+      white-space: nowrap;
 
       &:hover {
         background-color: lighten($primary-color, 20%);
       }
     }
   }
+}
+
+.content-wrapper {
+  transition: margin-left $sidebar-transition;
 }
