@@ -1,14 +1,15 @@
-/* Libraries */
-@import "lib/normalize.min";
-@import "lib/toastr.min";
-@import "lib/flex-grid.min";
-@import "font-awesome-sprockets";
-@import "font-awesome";
-
 /* Base */
 @import "base/variables";
 @import "base/common";
 @import "base/helpers";
+
+/* Libraries */
+@import "lib/normalize.min";
+@import "lib/toastr.min";
+@import "lib/toastr-custom-style";
+@import "lib/flex-grid.min";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 /* Shared */
 @import "shared/links";
