@@ -84,7 +84,6 @@
           <td class="table-cell text-right"><%= 'Quantity' %></td>
           <td class="table-cell text-right"><%= 'Subtotal' %></td>
           <td class="table-cell text-right"><%= 'Total' %></td>
-          <td class="table-cell text-right"><%= 'Actions' %></td>
         </tr>
       </thead>
       <tbody class="table-body">
@@ -95,13 +94,6 @@
             <td class="table-cell text-right"><%= item.quantity  %></td>
             <td class="table-cell text-right"><%= '%.2f' % item.calculate_subtotal %></td>
             <td class="table-cell text-right"><%= '%.2f' % item.calculate_total(@bill.discount.value) %></td>
-            <td class="table-cell text-right">
-              <% unless @bill.closed? || @bill.cancelled? %>
-                <%= link_to shift_bill_item_url(@bill.shift, @bill, item), class: 'btn btn-small danger', method: :delete, data: { confirm: 'Are you sure?' } do %>
-                  <%= icon('trash') %>
-                <% end %>
-              <% end %>
-            </td>
           </tr>
         <% end %>
       </tbody>

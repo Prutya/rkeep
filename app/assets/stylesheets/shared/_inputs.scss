@@ -4,7 +4,6 @@ select {
   display: block;
   margin: 0;
   width: 100%;
-  font-family: sans-serif;
   font-size: 18px;
   box-shadow: none;
   padding: 10px;
@@ -19,6 +18,10 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   outline: none;
+
+  &:hover {
+    border: solid 5px lighten($text-color, 50%);
+  }
 }
 
 input[type="email"],
@@ -39,4 +42,6 @@ label {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 90%;
+  display: inline-block;
+  margin-bottom: 0.2em;
 }

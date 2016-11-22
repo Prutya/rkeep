@@ -4,7 +4,7 @@
   crumbs = [
     crumb('Shifts', shifts_url),
     crumb("Shift #{@user_shift.shift.id}", shift_url(@user_shift.shift)),
-    crumb('Add user')
+    crumb('Add employee')
   ]
 %>
 
@@ -14,11 +14,11 @@
 
 <section class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
   <% if @users.empty?%>
-    <p class="text-center">No users available.</p>
+    <p class="text-center">No employees available.</p>
   <% else %>
     <%= form_for @user_shift, url: shift_users_url(@shift) do |f| %>
       <div>
-        <%= f.label :user %>
+        <%= f.label :employee %>
         <%= f.select :user_id, @users.map{ |u| [u.name, u.id] } %>
       </div>
 

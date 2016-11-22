@@ -12,6 +12,8 @@ class User < ApplicationRecord
   validates :last_name,  presence: true, allow_blank: false
   validates :phone,      presence: true, allow_blank: false
 
+  default_scope { order(:last_name) }
+
   def name
     "#{first_name} #{last_name}"
   end
