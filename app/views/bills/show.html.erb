@@ -79,7 +79,7 @@
     <table class="table">
       <thead class="table-head">
         <tr class="table-row">
-          <td class="table-cell text-right"><%= 'Title' %></td>
+          <td class="table-cell text-left"><%= 'Title' %></td>
           <td class="table-cell text-right"><%= 'Price' %></td>
           <td class="table-cell text-right"><%= 'Quantity' %></td>
           <td class="table-cell text-right"><%= 'Subtotal' %></td>
@@ -89,7 +89,7 @@
       <tbody class="table-body">
         <% @bill.bill_items.each do |item| %>
           <tr class="table-row">
-            <td class="table-cell text-right"><%= item.good.name %></td>
+            <td class="table-cell text-left"><%= item.good.name %></td>
             <td class="table-cell text-right"><%= '%.2f' % item.good.price %></td>
             <td class="table-cell text-right"><%= item.quantity  %></td>
             <td class="table-cell text-right"><%= '%.2f' % item.calculate_subtotal %></td>

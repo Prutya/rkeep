@@ -14,7 +14,7 @@ class UserShiftsController < ApplicationController
 
     UserShift.create({ shift: @shift, user: @user })
 
-    flash[:success] = 'User successfully added.'
+    flash[:success] = 'Employee added successfully'
     redirect_to shift_url(@shift)
   end
 

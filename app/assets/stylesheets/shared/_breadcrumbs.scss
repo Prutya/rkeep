@@ -16,12 +16,12 @@
     color: $text-color-alt;
 
     &.active {
-      background-color: lighten($primary-color, 20%);
+      background-color: $primary-highlight-color;
     }
 
     &:hover {
       text-decoration: none;
-      background-color: lighten($primary-color, 25%);
+      background-color: $primary-highlight-color;
       cursor: pointer;
     }
   }

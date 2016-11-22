@@ -1,19 +1,14 @@
 <nav id="sidebar" class="sidebar">
-  <ul class="nav navbar-nav navbar-right">
+  <ul>
     <% if user_signed_in? %>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" role="button" href="#">
-          <%= current_user.name %>
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <% if current_user.admin? %>
-            <li><%= link_to 'Admin dashboard', rails_admin_url %></li>
-          <% end %>
-          <li><%= link_to 'Shifts', shifts_url %></li>
-          <li><%= link_to 'Sign out', destroy_user_session_url, method: :delete %></li>
-        </ul>
+      <li>
+        <a href='#'><%= current_user.name %></a>
       </li>
+      <% if current_user.admin? %>
+      <li><%= link_to 'Admin dashboard', rails_admin_url %></li>
+      <% end %>
+      <li><%= link_to 'Shifts', shifts_url %></li>
+      <li><%= link_to 'Sign out', destroy_user_session_url, method: :delete %></li>
     <% else %>
       <li><%= link_to 'Sign in', new_user_session_url %></li>
     <% end %>

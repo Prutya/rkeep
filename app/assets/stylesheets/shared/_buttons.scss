@@ -7,7 +7,7 @@
   padding: $button-padding;
   background-color: $button-color;
   color: $text-color-alt;
-  margin-bottom: 1.0em;
+  margin-bottom: $button-margin;
   min-width: 2.4em;
   border: 0;
   font-size: 90%;
@@ -23,7 +23,7 @@
     background-color: $primary-color;
 
     &:hover {
-      background-color: lighten($primary-color, 20%);
+      background-color: $primary-highlight-color;
     }
   }
 
@@ -31,7 +31,7 @@
     background-color: $success-color;
 
     &:hover {
-      background-color: lighten($success-color, 10%);
+      background-color: $success-highlight-color;
     }
   }
 
@@ -39,7 +39,7 @@
     background-color: $warning-color;
 
     &:hover {
-      background-color: lighten($warning-color, 10%);
+      background-color: $warning-highlight-color;
     }
   }
 

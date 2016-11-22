@@ -36,6 +36,10 @@
   background-color: $danger-color;
 }
 
-.default {
-  background-color: $default-color;
+.neutral {
+  background-color: $neutral-color;
+}
+
+.text-wrap {
+  word-wrap: normal;
 }
