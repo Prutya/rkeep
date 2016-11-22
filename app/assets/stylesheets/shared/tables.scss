@@ -1,0 +1,43 @@
+.table {
+  border-spacing: 0;
+  width: 100%;
+  margin-bottom: $default-padding;
+
+  .table-cell {
+    padding: 0.8em;
+  }
+
+  .table-row {
+    &.row-link {
+      &:hover {
+        cursor: pointer;
+        background-color: lighten($primary-color, 60%);
+      }
+    }
+  }
+
+  .table-head {
+    .table-row {
+      background-color: $primary-color;
+
+      .table-cell {
+        color: $text-color-alt;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 90%;
+      }
+    }
+  }
+
+  .table-body {
+    .table-row {
+      .table-cell {
+        border: 2px $primary-color;
+      }
+    }
+  }
+}
+
+.table-container {
+  overflow: scroll;
+}

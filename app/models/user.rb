@@ -1,7 +1,9 @@
 class User < ApplicationRecord
-  has_many :assignments
-  has_many :spendings
-  has_many :bills
+  has_many :assignments, dependent: :destroy
+  has_many :bills, dependent: :nullify
+  has_many :user_shifts, dependent: :destroy
+
+  has_many :shifts, through: :user_shifts
   has_many :roles, through: :assignments
 
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
@@ -20,6 +22,18 @@ class User < ApplicationRecord
 
   def employee?
     role?(:employee)
+  end
+
+  def at_shift?(shift)
+    shift.users.any? { |u| u.id == self.id }
+  end
+
+  def busy?(shift = self.last_shift)
+    shift && !shift.closed?
+  end
+
+  def last_shift
+    self.shifts.order(:opened_at).last
   end
 
   protected

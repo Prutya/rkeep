@@ -1,43 +1,37 @@
 <% provide :page_title, "Edit bill #{@bill.id}" %>
-<% provide :page_heading do %>
-  <%= "Edit bill #{@bill.id}" %>
-  <strong class="label label-<%= bill_bootstrap_status(@bill.status) %>"><%= @bill.status %></strong>
-<% end %>
 
-<menu class="col-xs-12 action-bar">
-  <div class="text-left col-xs-12 col-md-4 action-bar-section">
-    <%= link_to bills_url, class: 'btn btn-default' do %>
-      <%= icon('list') %> <%= 'Back to shift' %>
-    <% end %>
+<%
+  crumbs = [
+    crumb('Shifts', shifts_url),
+    crumb("Shift #{@bill.shift.id}", shift_url(@bill.shift)),
+    crumb("Bill #{@bill.id}", shift_bill_url(@bill.shift, @bill)),
+    crumb("Edit")
+  ]
+%>
 
-    <%= link_to bill_url(@bill), class: 'btn btn-default' do %>
-      <%= icon('arrow-left') %> <%= 'Back to bill' %>
-    <% end %>
-  </div>
-
-  <div class="text-right col-xs-12 col-md-8 action-bar-section">
-  </div>
-</menu>
+<section class="row">
+  <%= breadcrumbs crumbs, class: 'col-xs-12 col-md-6' %>
+</section>
 
 <section class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-  <%= form_for @bill do |f| %>
-    <div class="form-group">
+  <%= form_for [@bill.shift, @bill] do |f| %>
+    <div>
       <%= f.label :table %>
-      <%= f.select :table_id, @tables.map{ |t| [t.name, t.id] }, {}, { class: 'form-control' } %>
+      <%= f.select :table_id, @tables.map{ |t| [t.name, t.id] } %>
     </div>
 
-    <div class="form-group">
+    <div>
       <%= f.label :people %>
-      <%= f.select :people_number, (1..100).map{ |n| [n, n] }, {}, { class: 'form-control' } %>
+      <%= f.select :people_number, (1..100).map{ |n| [n, n] } %>
     </div>
 
-    <div class="form-group">
+    <div>
       <%= f.label :discount %>
-      <%= f.select :discount_id, @discounts.map{ |t| [t.value, t.id] }, {}, { class: 'form-control' } %>
+      <%= f.select :discount_id, @discounts.map{ |t| [t.value, t.id] } %>
     </div>
 
-    <div class="form-group">
-      <%= f.submit 'Update', class: 'btn btn-primary' %>
+    <div>
+      <%= f.submit 'Update', class: 'btn' %>
     </div>
   <% end %>
 </section>

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Spending, type: :model do
   describe 'relationships' do
-    it { should belong_to :user }
+    it { should belong_to :shift }
   end
 
   describe 'validations' do
@@ -42,7 +42,7 @@ RSpec.describe Spending, type: :model do
 
       context 'any other state' do
         it 'returns status ok' do
-          expect(subject.status).to eq :ok
+          expect(subject.status).to eq :added
         end
       end
     end
@@ -56,21 +56,6 @@ RSpec.describe Spending, type: :model do
 
       it 'returns false if is not cancelled' do
         expect(subject.cancelled?).to be_falsy
-      end
-    end
-  end
-
-
-  describe 'calculations' do
-    before(:each) do
-      Configuration.create({ time_opens: Time.zone.now })
-      Spending.create({ name: 'Spending1', total: 100.00 })
-      Spending.create({ name: 'Spending2', total: 200.00 })
-    end
-
-    describe 'self.calculate_total_for_shift' do
-      it 'should return correct value' do
-        expect(Spending.calculate_total_for_shift).to eq 300.00
       end
     end
   end

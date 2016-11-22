@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :discount do
-    value "9.99"
+    value 10.01
   end
 end

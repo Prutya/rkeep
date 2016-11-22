@@ -1,16 +1,18 @@
 Rails.application.routes.draw do
-  resources :bills, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    member do
-      delete 'cancel'
-    end
+  resources :shifts, only: [:index, :show, :create, :destroy] do
+    resources :users, only: [:index, :new, :create, :destroy], controller: :user_shifts
+    resources :bills, only: [:show, :new, :create, :edit, :update, :destroy] do
+      member do
+        delete 'cancel'
+      end
 
-    resources :items, only: [:new, :create, :destroy], controller: :bill_items
+      resources :items, only: [:new, :create, :destroy], controller: :bill_items
+    end
+    resources :spendings, only: [:index, :new, :create, :destroy]
   end
 
-  resources :spendings
-
   authenticated :user do
-    root 'bills#index'
+    root 'shifts#index'
   end
   root 'home#index'
 

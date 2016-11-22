@@ -1,0 +1,28 @@
+.breadcrumbs {
+  background-color: $background-color;
+  display: inline-block;
+  margin-bottom: 1.0em;
+
+  .breadcrumbs-item {
+    display: inline-block;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 90%;
+    box-shadow: -3px 3px 5px #888888;
+    margin-right: 0.35em;
+    padding: $button-padding;
+    background-color: $primary-color;
+    color: $text-color-alt;
+
+    &.active {
+      background-color: lighten($primary-color, 20%);
+    }
+
+    &:hover {
+      text-decoration: none;
+      background-color: lighten($primary-color, 25%);
+      cursor: pointer;
+    }
+  }
+}

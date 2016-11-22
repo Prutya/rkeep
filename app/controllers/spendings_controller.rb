@@ -1,38 +1,39 @@
 class SpendingsController < ApplicationController
-  def index
-    authorize! :index, Spending
-    @spendings = Spending.for_shift(Time.zone.now).includes(:user)
-  end
-
   def new
-    authorize! :create, Spending
-    @spending = Spending.new
+    @shift = Shift.find(params[:shift_id])
+    authorize! :update, @shift
+
+    @spending = Spending.new({ shift: @shift })
   end
 
   def create
-    authorize! :create, Spending
-    @spending = Spending.new(params_create)
-    @spending.user = current_user
+    @shift = Shift.find(params[:shift_id])
+    authorize! :update, @shift
 
-    if @spending.save
-      flash[:success] = 'Spending created successfully.'
-      return redirect_to spendings_url
+    @spending = Spending.new(params_create)
+    @spending.shift = @shift
+
+    unless @spending.valid?
+      flash[:error] = @spending.errors.empty? ? "Error" : @spending.errors.full_messages.to_sentence
+      return redirect_to new_shift_spending_url
     end
 
-    flash[:error] = @spending.errors.empty? ? "Error" : @spending.errors.full_messages.to_sentence
-    redirect_to new_spending_url
+    @spending.save!
+
+    flash[:success] = 'Spending created successfully.'
+    redirect_to shift_url(@shift)
   end
 
   def destroy
-    authorize! :destroy, Spending
-    @spending = Spending.find(params[:id])
+    @spending = Spending.includes(:shift).find(params[:id])
+    authorize! :update, @spending.shift
 
     @spending.cancel
     @spending.save!
 
     flash[:success] = 'Spending cancelled successfully.'
 
-    redirect_to spendings_url
+    redirect_to shift_url(@spending.shift)
   end
 
   protected
