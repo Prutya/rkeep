@@ -6,13 +6,19 @@ select {
   width: 100%;
   font-family: sans-serif;
   font-size: 18px;
-  appearance: none;
   box-shadow: none;
-  border-radius: none;
   padding: 10px;
-  border: solid 5px #c9c9c9;
+  border: solid 5px lighten($text-color, 75%);
   transition: border 0.3s;
   margin-bottom: 1.0em;
+  border-radius: 0;
+}
+
+select {
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
 }
 
 input[type="email"],
@@ -20,7 +26,7 @@ input[type="password"],
 input[type="text"] {
   &:focus {
     outline: none;
-    border: solid 5px #969696;
+    border: solid 5px lighten($text-color, 50%);
   }
 }
 

@@ -35,16 +35,3 @@
     }
   }
 }
-
-.content-wrapper {
-  height: 100%;
-  overflow: hidden;
-  overflow-y: hidden;
-  transition: margin-left 0.3s;
-}
-
-.content {
-  height: 100%;
-  padding: 1.0em;
-  overflow-y: scroll;
-}

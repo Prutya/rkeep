@@ -10,12 +10,14 @@
 <body>
   <% if params[:controller] == 'home' && params[:action] == 'index' %>
     <%= yield %>
+    <%= render "layouts/footer" %>
   <% else %>
     <%= render "layouts/sidebar" %>
     <div id="content-wrapper" class="content-wrapper">
       <%= render "layouts/header" %>
       <main id="content" class="content">
         <%= yield %>
+        <%= render "layouts/footer" %>
       </main>
     </div>
   <% end %>
