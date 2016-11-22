@@ -13,23 +13,19 @@
   <section class="col-xs-12 col-md-6 text-right">
     <% unless @bill.closed? || @bill.cancelled? %>
       <%= link_to shift_bill_url(@bill.shift, @bill), class: 'btn success', method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <%= icon('check') %>
-        <%= 'Checkout' %>
+        <%= icon('check') %> <%= 'Checkout' %>
       <% end %>
 
       <%= link_to cancel_shift_bill_url(@bill.shift, @bill), class: 'btn warning', method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <%= icon('trash') %>
-        <%= 'Cancel' %>
+        <%= icon('trash') %> <%= 'Cancel' %>
       <% end %>
 
       <%= link_to edit_shift_bill_url(@bill.shift, @bill), class: 'btn' do %>
-        <%= icon('pencil') %>
-        <%= 'Edit bill' %>
+        <%= icon('pencil') %> <%= 'Edit bill' %>
       <% end %>
 
       <%= link_to new_shift_bill_item_url(@bill.shift, @bill), class: 'btn' do %>
-        <%= icon('plus') %>
-        <%= 'Add item' %>
+        <%= icon('plus') %> <%= 'Add item' %>
       <% end %>
     <% end %>
   </section>
