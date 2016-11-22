@@ -1,8 +1,8 @@
-$background-color:        #F5F5F5;
-$primary-color:           #110a39;
-$success-color:           #0D978C;
-$danger-color:            #C70039;
-$warning-color:           #FF5733;
+$background-color:        #F8F1ED;
+$primary-color:           #110a06;
+$success-color:           #089378;
+$danger-color:            #f14814;
+$warning-color:           #f14814;
 $neutral-color:           #B0B0B0;
 
 $primary-highlight-color: lighten($primary-color, 20%);
@@ -10,7 +10,7 @@ $success-highlight-color: lighten($success-color, 8%);
 $danger-highlight-color:  lighten($danger-color,  20%);
 $warning-highlight-color: lighten($warning-color,  20%);
 
-$button-color:            #096CA4;
+$button-color:            lighten($primary-color, 20%);
 $text-color:              #000000;
 $text-color-alt:          #FFFFFF;
 $link-color:              #3B107C;
