@@ -29,16 +29,6 @@ class BillItemsController < ApplicationController
     redirect_to shift_bill_url(@bill.shift, @bill)
   end
 
-  def destroy
-    @bill_item = BillItem.includes([{ bill: :shift }, :good]).find(params[:id])
-    authorize! :update, @bill_item.bill
-
-    bill_item.destroy!
-
-    flash[:success] = 'Item removed successfully.'
-    redirect_to shift_bill_url(@bill_item.bill.shift, @bill_item.bill)
-  end
-
   protected
 
   def params_create

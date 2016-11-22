@@ -12,4 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require lib/toastr.min.js
+//= require lib/toastr-settings.js
+//= require tables/bills.js
+//= require tables/shifts.js
+//= require sidebar/sidebar.js

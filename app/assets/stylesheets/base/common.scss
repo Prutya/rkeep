@@ -5,3 +5,17 @@ html, body {
 * {
   box-sizing: border-box;
 }
+
+.content-wrapper {
+  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: hidden;
+  transition: margin-left 0.3s;
+}
+
+.content {
+  padding: 1.0em;
+  height: 87%;
+  overflow-y: scroll;
+}
