@@ -4,10 +4,10 @@
   <%= breadcrumbs [ crumb('Shifts', shifts_url), crumb("Shift #{@shift.id}") ], class: 'col-xs-12 col-md-6 text-left' %>
   <section class="col-xs-12 col-md-6 text-right">
     <% unless @shift.closed? %>
-      <%= link_to shift_url(@shift), class: 'btn success', method: :delete, data: { confirm: 'Are you sure?' } do %><%= icon('check') %><%= 'Close' %><% end %>
-      <%= link_to new_shift_user_url(@shift), class: 'btn' do %><%= icon('plus') %><%= 'Employee' %><% end %>
-      <%= link_to new_shift_bill_url(@shift), class: 'btn' do %><%= icon('plus') %><%= 'Bill' %><% end %>
-      <%= link_to new_shift_spending_url(@shift), class: 'btn' do %><%= icon('plus') %><%= 'Spending' %><% end %>
+      <%= link_to shift_url(@shift), class: 'btn success', method: :delete, data: { confirm: 'Are you sure?' } do %><%= icon('check') %> <%= 'Close' %><% end %>
+      <%= link_to new_shift_user_url(@shift), class: 'btn' do %><%= icon('plus') %> <%= 'Employee' %><% end %>
+      <%= link_to new_shift_bill_url(@shift), class: 'btn' do %><%= icon('plus') %> <%= 'Bill' %><% end %>
+      <%= link_to new_shift_spending_url(@shift), class: 'btn' do %><%= icon('plus') %> <%= 'Spending' %><% end %>
     <% end %>
   </section>
 </section>
