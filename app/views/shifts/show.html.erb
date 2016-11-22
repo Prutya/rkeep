@@ -15,8 +15,8 @@
 <section class="row">
   <section class="col-xs-12 col-md-8">
     <legend>
-      <span class="text-left"><%= 'Bills' %></span>
-      <span class="text-right"><%= "Total" %>: <%= '%.2f' % (@shift.total_revenue || @shift.calculate_total_revenue) %></span>
+      <span><%= 'Bills' %></span></br>
+      <span><%= "Total" %>: <%= '%.2f' % (@shift.total_revenue || @shift.calculate_total_revenue) %></span>
     </legend>
     <div class="table-container">
       <table class="table" id="bills-table">
@@ -55,9 +55,9 @@
   </section>
 
   <section class="col-xs-12 col-md-4">
-    <legend class="text-center">
-      <span class="text-left"><%= 'Spendings' %></span>
-      <span class="text-right"><%= "Total" %>: <%= '%.2f' % (@shift.total_spendings || @shift.calculate_total_spendings) %></span>
+    <legend>
+      <span><%= 'Spendings' %></span></br>
+      <span><%= "Total" %>: <%= '%.2f' % (@shift.total_spendings || @shift.calculate_total_spendings) %></span>
     </legend>
     <div class="table-container">
       <table class="table" id="spendings-table">
