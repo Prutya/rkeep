@@ -6,8 +6,6 @@
     sidebarDisplayWidth = "80%";
   }
 
-  console.log(sidebarDisplayWidth);
-
   var sidebar = document.getElementById('sidebar');
   var content = document.getElementById('content');
   var contentWrapper = document.getElementById('content-wrapper');
