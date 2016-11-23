@@ -15,6 +15,26 @@ class Shift < ApplicationRecord
     self.bills.any? { |bill| bill.time_close.nil? && bill.time_cancel.nil? }
   end
 
+  def next_bill_number
+    bills.count + 1
+  end
+
+  def next_spending_number
+    spendings.count + 1
+  end
+
+  def closed_bills_number
+    bills.inject(0) { |total, bill| bill.status == :closed ? total += 1 : total }
+  end
+
+  def open_bills_number
+    bills.inject(0) { |total, bill| bill.status == :open ? total += 1 : total }
+  end
+
+  def cancelled_bills_number
+    bills.inject(0) { |total, bill| bill.status == :cancelled ? total += 1 : total }
+  end
+
   def status
     return :closed if closed?
     :open

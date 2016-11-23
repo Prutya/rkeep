@@ -12,6 +12,7 @@ class SpendingsController < ApplicationController
 
     @spending = Spending.new(params_create)
     @spending.shift = @shift
+    @spending.relative_id = @shift.next_spending_number
 
     unless @spending.valid?
       flash[:error] = @spending.errors.empty? ? "Error" : @spending.errors.full_messages.to_sentence

@@ -22,6 +22,7 @@
       <table class="table" id="bills-table">
         <thead class="table-head">
           <tr class="table-row">
+            <td class="table-cell text-center"><%= '#' %></td>
             <td class="table-cell text-left"><%= 'Created at' %></td>
             <td class="table-cell text-left"><%= 'Closed at' %></td>
             <td class="table-cell text-right"><%= 'Table'     %></td>
@@ -35,6 +36,7 @@
         <tbody class="table-body">
           <% @shift.bills.each do |bill| %>
             <tr class="table-row row-link" data-href="<%= shift_bill_url(@shift, bill) %>">
+              <td class="table-cell text-center"><%= bill.relative_id || '' %></td>
               <td class="table-cell text-left"><%= bill.created_at.strftime("%Y-%m-%d %H:%M") %></td>
               <td class="table-cell text-left"><%= bill.time_close.strftime("%H:%M %Y/%m/%d") if bill.time_close %></td>
               <td class="table-cell text-right"><%= bill.table.name if bill.table.present? %></td>
@@ -63,6 +65,7 @@
       <table class="table" id="spendings-table">
         <thead class="table-head">
           <tr class="table-row">
+            <td class="table-cell text-center"><%= '#' %></td>
             <td class="table-cell text-left"><%= 'Created at' %></td>
             <td class="table-cell text-left"><%= 'Name' %></td>
             <td class="table-cell text-right"><%= 'Total' %></td>
@@ -75,6 +78,7 @@
         <tbody class="table-body">
           <% @shift.spendings.each do |spending| %>
             <tr class="table-row">
+              <td class="table-cell text-center"><%= spending.relative_id || '' %></td>
               <td class="table-cell text-left"><%= spending.created_at.strftime("%Y-%m-%d %H:%M") %></td>
               <td class="table-cell text-left"><%= spending.name %></td>
               <td class="table-cell text-right"><%= '%.2f' % spending.total %></td>
