@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116191831) do
+ActiveRecord::Schema.define(version: 20161123160205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20161116191831) do
     t.integer  "user_id"
     t.integer  "discount_id"
     t.integer  "shift_id"
+    t.integer  "relative_id"
     t.index ["discount_id"], name: "index_bills_on_discount_id", using: :btree
     t.index ["shift_id"], name: "index_bills_on_shift_id", using: :btree
     t.index ["table_id"], name: "index_bills_on_table_id", using: :btree
@@ -101,6 +102,7 @@ ActiveRecord::Schema.define(version: 20161116191831) do
     t.datetime "updated_at",                                           null: false
     t.datetime "time_cancel"
     t.integer  "shift_id"
+    t.integer  "relative_id"
     t.index ["shift_id"], name: "index_spendings_on_shift_id", using: :btree
   end
 
