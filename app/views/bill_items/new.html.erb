@@ -4,7 +4,7 @@
   crumbs = [
     crumb('Shifts', shifts_url),
     crumb("Shift #{@bill.shift.id}", shift_url(@bill.shift)),
-    crumb("Bill #{@bill.id}", shift_bill_url(@bill.shift, @bill)),
+    crumb("Bill #{@bill.relative_id}", shift_bill_url(@bill.shift, @bill)),
     crumb('Add item')
   ]
 %>
