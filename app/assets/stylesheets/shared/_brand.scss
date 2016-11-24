@@ -1,0 +1,13 @@
+.brand {
+  display: inline-block;
+  width: $full-width;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: inherit;
+  font-weight: bold;
+  letter-spacing: -0.05em;
+  padding: $button-padding;
+  background-color: inherit;
+  color: inherit;
+}

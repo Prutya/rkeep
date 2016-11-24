@@ -7,15 +7,13 @@
   padding: $button-padding;
   background-color: $button-color;
   color: $text-color-alt;
-  margin-bottom: $button-margin;
-  min-width: 2.4em;
   border: 0;
-  font-size: 90%;
-  box-shadow: -3px 3px 5px #888888;
+  font-size: $font-sm-size;
+  @include box-shadow(5px, 5px, 5px, rgba(0, 0, 0, 0.3));
 
   &:hover {
     text-decoration: none;
-    background-color: lighten($button-color, 10%);
+    background-color: $button-highlight-color;
     cursor: pointer;
   }
 
@@ -47,7 +45,7 @@
     background-color: $danger-color;
 
     &:hover {
-      background-color: lighten($danger-color, 10%);
+      background-color: $danger-highlight-color;
     }
   }
 }

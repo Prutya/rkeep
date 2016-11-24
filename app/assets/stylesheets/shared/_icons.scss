@@ -1,0 +1,8 @@
+.icon {
+  font-size: inherit;
+  line-height: $full-height;
+
+  &.hamburger::before {
+    content: "\2630";
+  }
+}

@@ -8,23 +8,19 @@
   ]
 %>
 
-<section class="grid">
-  <%= breadcrumbs crumbs, class: 'grid-cell text-left' %>
-</section>
+<%= breadcrumbs crumbs %>
 
-<section class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-  <% if @users.empty?%>
-    <p class="text-center">No employees available.</p>
-  <% else %>
-    <%= form_for @user_shift, url: shift_users_url(@shift) do |f| %>
-      <div>
-        <%= f.label :employee %>
-        <%= f.select :user_id, @users.map{ |u| [u.name, u.id] } %>
-      </div>
+<% if @users.empty? %>
+  <p class="text-center">No employees available.</p>
+<% else %>
+  <%= form_for @user_shift, url: shift_users_url(@shift) do |f| %>
+    <div>
+      <%= f.label :employee %>
+      <%= f.select :user_id, @users.map{ |u| [u.name, u.id] } %>
+    </div>
 
-      <div>
-        <%= f.submit 'Add', class: 'btn' %>
-      </div>
-    <% end %>
+    <div>
+      <%= f.submit 'Add', class: 'btn' %>
+    </div>
   <% end %>
-</section>
+<% end %>

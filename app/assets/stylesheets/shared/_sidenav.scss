@@ -1,0 +1,73 @@
+.sidenav {
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: $sidenav-width;
+  height: $full-height;
+  overflow-x: hidden;
+  transition: $sidenav-transition;
+  font-size: $font-lg-size;
+  background-color: $alt-color;
+  color: $text-color-alt;
+  @include box-shadow(5px, 5px, 5px, rgba(0, 0, 0, 0.3));
+
+  ul {
+    width: $full-width;
+
+    li {
+      text-align: left;
+
+      a {
+        display: inline-block;
+        padding: $button-padding;
+        width: $full-width;
+        text-transform: uppercase;
+        text-decoration: none;        
+        font-weight: bold;
+        letter-spacing: -0.05em;
+        background-color: inherit;
+        color: $text-color-alt;
+
+        &:hover {
+          background-color: $alt-hightlight-color;
+        }
+      }
+    }
+  }
+}
+
+.sidenav-hidden {
+  top: 0;
+  left: (-$sidenav-width);
+  @include no-shadow;
+}
+
+.sidenav-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sidenav-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.sidenav-open-button {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: $button-padding;
+  font-size: inherit;
+  background-color: $alt-color;
+  color: inherit;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $alt-hightlight-color;
+  }
+}

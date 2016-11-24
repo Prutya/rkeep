@@ -1,25 +1,30 @@
-$background-color:        #F8F1ED;
-$primary-color:           #110a06;
-$success-color:           #089378;
-$danger-color:            #f14814;
-$warning-color:           #f14814;
-$neutral-color:           #B0B0B0;
-
+$background-color:        #f5f2f1;
+$primary-color:           #060c11;
 $primary-highlight-color: lighten($primary-color, 20%);
-$success-highlight-color: lighten($success-color, 8%);
-$danger-highlight-color:  lighten($danger-color,  20%);
-$warning-highlight-color: lighten($warning-color,  20%);
-
-$button-color:            lighten($primary-color, 20%);
+$alt-color:               $primary-color;
+$alt-hightlight-color:    $primary-highlight-color;
 $text-color:              #000000;
 $text-color-alt:          #FFFFFF;
 $link-color:              $primary-highlight-color;
-$table-highlight-color:   lighten($primary-color, 70%);
+$success-color:           #089378;
+$success-highlight-color: lighten($success-color, 8%);
+$danger-color:            #F14814;
+$danger-highlight-color:  lighten($danger-color,  20%);
+$warning-color:           $danger-color;
+$warning-highlight-color: lighten($warning-color,  20%);
+$neutral-color:           #B0B0B0;
+
+$button-color:            lighten($primary-color, 20%);
+$button-highlight-color:  lighten($button-color,  10%);
+$table-caption-color:     $primary-highlight-color;
+$table-heading-color:     lighten($table-caption-color, 10%);
+$table-backgroud-color:   #FFFFFF;
+$table-highlight-color:   lighten($primary-color, 80%);
 
 $default-padding:         1.0em;
 $button-padding:          0.7em;
 $button-padding-small:    0.35em;
-$table-cell-padding:      0.8em;
+$table-cell-padding:      0.7em;
 
 $default-margin:          1.0em;
 $legend-margin:           $default-margin;
@@ -27,4 +32,15 @@ $button-margin:           $default-margin;
 $input-margin:            $default-margin;
 
 $default-transition:      0.3s;
-$sidebar-transition:      $default-transition;
+$sidenav-transition:      $default-transition;
+
+$default-font-size:       18px;
+$font-xs-size:            75%;
+$font-sm-size:            90%;
+$font-md-size:            120%;
+$font-lg-size:            140%;
+$font-xl-size:            160%;
+
+$full-width:              100%;
+$full-height:             100%;
+$sidenav-width:           250px;

@@ -8,92 +8,74 @@
   ]
 %>
 
-<section class="row">
-  <%= breadcrumbs crumbs, class: 'col-xs-12 col-md-6 text-left' %>
-  <section class="col-xs-12 col-md-6 text-right">
-    <% unless @bill.closed? || @bill.cancelled? %>
-      <%= link_to shift_bill_url(@bill.shift, @bill), class: 'btn success', method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <%= icon('check') %> <%= 'Checkout' %>
-      <% end %>
+<%= breadcrumbs crumbs %>
 
-      <%= link_to cancel_shift_bill_url(@bill.shift, @bill), class: 'btn warning', method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <%= icon('trash') %> <%= 'Cancel' %>
-      <% end %>
-
-      <%= link_to edit_shift_bill_url(@bill.shift, @bill), class: 'btn' do %>
-        <%= icon('pencil') %> <%= 'Edit bill' %>
-      <% end %>
-
-      <%= link_to new_shift_bill_item_url(@bill.shift, @bill), class: 'btn' do %>
-        <%= icon('plus') %> <%= 'Add item' %>
-      <% end %>
+<div class="actions">
+  <% unless @bill.closed? || @bill.cancelled? %>
+    <%= link_to shift_bill_url(@bill.shift, @bill), class: 'btn success', method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <%= icon('check') %> <%= 'Checkout' %>
     <% end %>
-  </section>
-</section>
 
-<section class="row">
-  <section class="col-xs-12 col-sm-3">
-    <legend class="text-center">Information</legend>
+    <%= link_to cancel_shift_bill_url(@bill.shift, @bill), class: 'btn warning', method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <%= icon('trash') %> <%= 'Cancel' %>
+    <% end %>
 
-    <div class="row">
-      <div class="form-group col-xs-6">
-        <%= label :bill, :table %>
-        <input type="text" id="bill_table_name" name="bill[table][name]" value="<%= @bill.table.name if @bill.table.present? %>" class="form-control" readonly="readonly"/>
-      </div>
+    <%= link_to edit_shift_bill_url(@bill.shift, @bill), class: 'btn' do %>
+      <%= icon('pencil') %> <%= 'Edit bill' %>
+    <% end %>
 
-      <div class="form-group col-xs-6">
-        <%= label :bill, :people %>
-        <%= text_field :bill, :people_number, class: 'form-control', readonly: true %>
-      </div>
-    </div>
+    <%= link_to new_shift_bill_item_url(@bill.shift, @bill), class: 'btn' do %>
+      <%= icon('plus') %> <%= 'Add item' %>
+    <% end %>
+  <% end %>
+</div>
 
-    <div class="form-group">
-      <%= label :bill, :subtotal %>
-      <%= text_field :bill, :subtotal, value: '%.2f' % (@bill.subtotal || @bill.calculate_subtotal), class: 'form-control', readonly: true %>
-    </div>
+<div class="table-container">
+  <table class="table">
+    <caption class="table-caption"><%= 'Information' %></caption>
+    <thead class="table-head">
+      <tr class="table-row">
+        <td class="table-cell text-left"><%= 'Table' %></td>
+        <td class="table-cell text-right"><%= 'People' %></td>
+        <td class="table-cell text-right"><%= 'Subtotal' %></td>
+        <td class="table-cell text-right"><%= 'Discount' %></td>
+        <td class="table-cell text-right"><%= 'Total' %></td>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row">
+        <td class="table-cell text-left"><%= @bill.table.name %></td>
+        <td class="table-cell text-right"><%= @bill.people_number %></td>
+        <td class="table-cell text-right"><%= '%.2f' % (@bill.subtotal || @bill.calculate_subtotal) %></td>
+        <td class="table-cell text-right"><%= '%.2f' % @bill.discount.value  %></td>
+        <td class="table-cell text-right"><%= '%.2f' % (@bill.total || @bill.calculate_total) %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-    <div class="form-group">
-      <%= label :bill, :discount %>
-      <input type="text" id="bill_discount_value" name="bill[discount][value]" value="<%= " #{'%.2f' % @bill.discount.value} %" %>" class="form-control" readonly="readonly"/>
-    </div>
-
-    <div class="form-group">
-      <%= label :bill, :total %>
-      <%= text_field :bill, :total, value: '%.2f' % (@bill.subtotal || @bill.calculate_total), class: 'form-control', readonly: true %>
-    </div>
-
-    <div class="form-group">
-      <%= label :bill, :created_at %>
-      <%= text_field :bill, :created_at, value: @bill.created_at.strftime("%Y-%m-%d %H:%M"), class: 'form-control', readonly: true %>
-    </div>
-  </section>
-
-  <section class="col-xs-12 col-sm-9">
-  <legend class="text-center">Items</legend>
-
-  <div class="table-container">
-    <table class="table">
-      <thead class="table-head">
-        <tr class="table-row">
-          <td class="table-cell text-left"><%= 'Title' %></td>
-          <td class="table-cell text-right"><%= 'Price' %></td>
-          <td class="table-cell text-right"><%= 'Quantity' %></td>
-          <td class="table-cell text-right"><%= 'Subtotal' %></td>
-          <td class="table-cell text-right"><%= 'Total' %></td>
-        </tr>
-      </thead>
-      <tbody class="table-body">
-        <% @bill.bill_items.each do |item| %>
-          <tr class="table-row">
-            <td class="table-cell text-left"><%= item.good.name %></td>
-            <td class="table-cell text-right"><%= '%.2f' % item.good.price %></td>
-            <td class="table-cell text-right"><%= item.quantity  %></td>
-            <td class="table-cell text-right"><%= '%.2f' % item.calculate_subtotal %></td>
-            <td class="table-cell text-right"><%= '%.2f' % item.calculate_total(@bill.discount.value) %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</section>
-</section>
+<div class="table-container">
+  <table class="table">
+    <caption class="table-caption"><%= 'Items' %></caption>
+    <thead class="table-head">
+      <tr class="table-row">
+        <td class="table-cell text-left"><%= 'Title' %></td>
+        <td class="table-cell text-right"><%= 'Price' %></td>
+        <td class="table-cell text-right"><%= 'Quantity' %></td>
+        <td class="table-cell text-right"><%= 'Subtotal' %></td>
+        <td class="table-cell text-right"><%= 'Total' %></td>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <% @bill.bill_items.each do |item| %>
+      <tr class="table-row">
+        <td class="table-cell text-left"><%= item.good.name %></td>
+        <td class="table-cell text-right"><%= '%.2f' % item.good.price %></td>
+        <td class="table-cell text-right"><%= item.quantity  %></td>
+        <td class="table-cell text-right"><%= '%.2f' % item.calculate_subtotal %></td>
+        <td class="table-cell text-right"><%= '%.2f' % item.calculate_total(@bill.discount.value) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

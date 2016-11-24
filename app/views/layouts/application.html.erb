@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= full_title yield(:page_title) %></title>
-  <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-</head>
+  <head>
+    <title><%= full_title yield(:page_title) %></title>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+  </head>
 
-<body>
-  <% if params[:controller] == 'home' && params[:action] == 'index' %>
-    <%= yield %>
-    <%= render "layouts/footer" %>
-  <% else %>
-    <%= render "layouts/sidebar" %>
-    <div id="content-wrapper" class="content-wrapper">
+  <body>
+    <% if params[:controller] == 'home' && params[:action] == 'index' %>
+      <%= yield %>
+      <%= render "layouts/footer" %>
+    <% else %>
+      <%= render "layouts/sidenav" %>
       <%= render "layouts/header" %>
-      <main id="content" class="content">
+      <main class="content" id="content">
         <%= yield %>
       </main>
       <%= render "layouts/footer" %>
-    </div>
-  <% end %>
+    <% end %>
 
-  <%= javascript_include_tag 'application' %>
-  <%= toastr_flash %>
-  <%= devise_error_messages! if devise_controller? %>
-</body>
+    <%= javascript_include_tag 'application' %>
+    <%= toastr_flash %>
+    <%= devise_error_messages! if devise_controller? %>
+  </body>
 </html>

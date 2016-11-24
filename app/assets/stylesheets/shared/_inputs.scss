@@ -2,7 +2,7 @@ input,
 select {
   display: block;
   margin: 0;
-  width: 100%;
+  width: $full-width;
   font-size: 18px;
   box-shadow: none;
   padding: 10px;
@@ -40,7 +40,7 @@ input[type="checkbox"] {
 label {
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 90%;
+  font-size: $font-sm-size;
   display: inline-block;
   margin-bottom: 0.2em;
 }
