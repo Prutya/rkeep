@@ -15,7 +15,6 @@ button {
 
 html {
   font-family: sans-serif;
-  font-family: 'Raleway', sans-serif;
   background-color: $background-color;
   color: $text-color;
 }
@@ -30,6 +29,18 @@ body {
 
 ul, ol, menu {
   list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-bottom: $default-margin;
+}
+
+h1 {
+  font-size: $font-xl-size;
+}
+
+h2 {
+  font-size: $font-lg-size;
 }
 
 .content {

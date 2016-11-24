@@ -8,9 +8,11 @@
   ]
 %>
 
-<%= breadcrumbs crumbs %>
+<div class="clearfix">
+  <%= breadcrumbs crumbs %>
+</div>
 
-<%= form_for [@shift, @spending] do |f| %>
+<%= form_for [@shift, @spending], html: { class: 'form' } do |f| %>
   <div>
     <%= f.label :name %>
     <%= f.text_field :name %>

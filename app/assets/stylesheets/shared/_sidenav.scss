@@ -8,10 +8,9 @@
   height: $full-height;
   overflow-x: hidden;
   transition: $sidenav-transition;
-  font-size: $font-lg-size;
   background-color: $alt-color;
   color: $text-color-alt;
-  @include box-shadow(5px, 5px, 5px, rgba(0, 0, 0, 0.3));
+  @include box-shadow(10px, 0, 5px, rgba(0, 0, 0, 0.3));
 
   ul {
     width: $full-width;
@@ -24,7 +23,7 @@
         padding: $button-padding;
         width: $full-width;
         text-transform: uppercase;
-        text-decoration: none;        
+        text-decoration: none;
         font-weight: bold;
         letter-spacing: -0.05em;
         background-color: inherit;

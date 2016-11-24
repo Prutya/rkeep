@@ -9,9 +9,11 @@
   ]
 %>
 
-<%= breadcrumbs crumbs %>
+<div class="clearfix">
+  <%= breadcrumbs crumbs %>
+</div>
 
-<%= form_for [@bill.shift, @bill] do |f| %>
+<%= form_for [@bill.shift, @bill], html: { class: 'form' } do |f| %>
   <div>
     <%= f.label :table %>
     <%= f.select :table_id, @tables.map{ |t| [t.name, t.id] } %>

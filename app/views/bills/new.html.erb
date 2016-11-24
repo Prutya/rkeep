@@ -8,12 +8,14 @@
   ]
 %>
 
-<%= breadcrumbs crumbs %>
+<div class="clearfix">
+  <%= breadcrumbs crumbs %>
+</div>
 
 <% if @tables.empty? || @discounts.empty? %>
   <p class="text-center">No tables or discounts available.</p>
 <% else %>
-  <%= form_for [@shift, @bill] do |f| %>
+  <%= form_for [@shift, @bill], html: { class: 'form' } do |f| %>
     <div>
       <%= f.label :table %>
       <%= f.select :table_id, @tables.map { |t| [t.name, t.id] } %>

@@ -1,14 +1,16 @@
 <% provide :page_title, 'Shifts' %>
 
-<%= breadcrumbs [ crumb('Shifts') ] %>
+<div class="clearfix">
+  <%= breadcrumbs [ crumb('Shifts') ] %>
 
-<% if can? :create, Shift %>
-  <div class="actions">
-    <%= link_to shifts_url, class: 'btn', method: :create, data: { confirm: 'Are you sure?' } do %>
-      <%= icon('plus') %><%= 'Shift' %>
-    <% end %>
-  </div>
-<% end %>
+  <% if can? :create, Shift %>
+    <div class="actions">
+      <%= link_to shifts_url, class: 'btn', method: :create, data: { confirm: 'Are you sure?' } do %>
+        <%= icon('plus') %> <%= 'Shift' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <div class="table-container">
   <table class="table" id="shifts-table">

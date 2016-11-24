@@ -1,15 +1,17 @@
+/* Libraries */
+@import "lib/normalize.min";
+@import "lib/toastr.min";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 /* Base */
 @import "base/variables";
 @import "base/mixins";
 @import "base/common";
 @import "base/helpers";
 
-/* Libraries */
-@import "lib/normalize.min";
-@import "lib/toastr.min";
+/* Custom styles */
 @import "lib/toastr-custom-style";
-@import "font-awesome-sprockets";
-@import "font-awesome";
 
 /* Shared */
 @import "shared/icons";
@@ -25,6 +27,7 @@
 @import "shared/buttons";
 @import "shared/badge";
 @import "shared/pagination";
+@import "shared/forms";
 
 /* Home */
 @import "home/welcome";

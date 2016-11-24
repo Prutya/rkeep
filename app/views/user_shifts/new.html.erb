@@ -8,12 +8,14 @@
   ]
 %>
 
-<%= breadcrumbs crumbs %>
+<div class="clearfix">
+  <%= breadcrumbs crumbs %>
+</div>
 
 <% if @users.empty? %>
   <p class="text-center">No employees available.</p>
 <% else %>
-  <%= form_for @user_shift, url: shift_users_url(@shift) do |f| %>
+  <%= form_for @user_shift, url: shift_users_url(@shift), html: { class: 'form' } do |f| %>
     <div>
       <%= f.label :employee %>
       <%= f.select :user_id, @users.map{ |u| [u.name, u.id] } %>
