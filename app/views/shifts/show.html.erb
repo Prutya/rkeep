@@ -5,14 +5,18 @@
 
   <div class="actions">
     <% unless @shift.closed? %>
-      <%= link_to shift_url(@shift), class: 'btn success', method: :delete, data: { confirm: 'Are you sure?' } do %><%= icon('check') %>
-        <%= 'Close' %><% end %>
+      <%= link_to shift_url(@shift), class: 'btn success', method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <span class="icon check"></span> <%= 'Close' %>
+      <% end %>
       <%= link_to new_shift_user_url(@shift), class: 'btn' do %>
-        <%= icon('plus') %> <%= 'Employee' %><% end %>
+        <span class="icon plus"></span> <%= 'Employee' %>
+      <% end %>
       <%= link_to new_shift_bill_url(@shift), class: 'btn' do %>
-        <%= icon('plus') %> <%= 'Bill' %><% end %>
+        <span class="icon plus"></span> <%= 'Bill' %>
+      <% end %>
       <%= link_to new_shift_spending_url(@shift), class: 'btn' do %>
-        <%= icon('plus') %> <%= 'Spending' %><% end %>
+        <span class="icon plus"></span> <%= 'Spending' %>
+      <% end %>
     <% end %>
   </div>
 </div>
@@ -102,7 +106,7 @@
           <td class="table-cell text-right">
             <% unless spending.cancelled? %>
               <%= link_to shift_spending_url(@shift, spending), class: 'btn btn-small danger', method: :delete, data: { confirm: "Are you sure?" } do %>
-                <%= icon('trash') %>
+                <span class="icon cross"></span>
               <% end %>
             <% end %>
           </td>

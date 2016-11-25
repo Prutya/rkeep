@@ -6,7 +6,7 @@
   <% if can? :create, Shift %>
     <div class="actions">
       <%= link_to shifts_url, class: 'btn', method: :create, data: { confirm: 'Are you sure?' } do %>
-        <%= icon('plus') %> <%= 'Shift' %>
+        <span class="icon plus"></span> <%= 'Shift' %>
       <% end %>
     </div>
   <% end %>
