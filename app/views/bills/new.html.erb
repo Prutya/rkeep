@@ -8,33 +8,31 @@
   ]
 %>
 
-<section class="row">
-  <%= breadcrumbs crumbs, class: 'col-xs-12' %>
-</section>
+<div class="clearfix">
+  <%= breadcrumbs crumbs %>
+</div>
 
-<section class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-  <% if @tables.empty? || @discounts.empty? %>
-    <p class="text-center">No tables or discounts available.</p>
-  <% else %>
-    <%= form_for [@shift, @bill] do |f| %>
-      <div class="form-group">
-        <%= f.label :table %>
-        <%= f.select :table_id, @tables.map{ |t| [t.name, t.id] }, {}, { class: 'form-control' } %>
-      </div>
+<% if @tables.empty? || @discounts.empty? %>
+  <p class="text-center">No tables or discounts available.</p>
+<% else %>
+  <%= form_for [@shift, @bill], html: { class: 'form' } do |f| %>
+    <div>
+      <%= f.label :table %>
+      <%= f.select :table_id, @tables.map { |t| [t.name, t.id] } %>
+    </div>
 
-      <div class="form-group">
-        <%= f.label :people %>
-        <%= f.select :people_number, (1..100).map{ |n| [n, n] }, {}, { class: 'form-control' } %>
-      </div>
+    <div>
+      <%= f.label :people %>
+      <%= f.select :people_number, (1..100).map { |n| [n, n] } %>
+    </div>
 
-      <div class="form-group">
-        <%= f.label :discount %>
-        <%= f.select :discount_id, @discounts.map{ |t| [t.value, t.id] }, {}, { class: 'form-control' } %>
-      </div>
+    <div>
+      <%= f.label :discount %>
+      <%= f.select :discount_id, @discounts.map { |t| [t.value, t.id] } %>
+    </div>
 
-      <div class="form-group">
-        <%= f.submit 'Create', class: 'btn btn-primary' %>
-      </div>
-    <% end %>
+    <div>
+      <%= f.submit 'Create', class: 'btn' %>
+    </div>
   <% end %>
-</section>
+<% end %>

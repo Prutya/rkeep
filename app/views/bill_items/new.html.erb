@@ -9,28 +9,26 @@
   ]
 %>
 
-<section class="row">
-  <%= breadcrumbs crumbs, class: 'col-xs-12' %>
-</section>
+<div class="clearfix">
+  <%= breadcrumbs crumbs %>
+</div>
 
-<section class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-  <% if @goods.empty? %>
-    <p class="text-center">No goods available.</p>
-  <% else %>
-    <%= form_for @bill_item, url: shift_bill_items_url(@bill.shift, @bill, @bill_item) do |f| %>
-      <div class="form-group">
-        <%= f.label :good %>
-        <%= f.select :good_id, @goods.map{ |good| [ "#{good.name} #{'%.2f' % good.price}", good.id ] }, {}, { class: 'form-control' } %>
-      </div>
+<% if @goods.empty? %>
+  <p class="text-center">No goods available.</p>
+<% else %>
+  <%= form_for @bill_item, url: shift_bill_items_url(@bill.shift, @bill, @bill_item), html: { class: 'form' } do |f| %>
+    <div>
+      <%= f.label :good %>
+      <%= f.select :good_id, @goods.map { |good| [ "#{good.name} #{'%.2f' % good.price}", good.id ] } %>
+    </div>
 
-      <div class="form-group">
-        <%= f.label :quantity %>
-        <%= f.select :quantity, (1..100).map{ |n| [n,n] }, {}, { class: 'form-control' } %>
-      </div>
+    <div>
+      <%= f.label :quantity %>
+      <%= f.select :quantity, (1..100).map { |n| [n,n] } %>
+    </div>
 
-      <div class="form-group text-right">
-        <%= f.submit 'Add', class: 'btn btn-primary' %>
-      </div>
-    <% end %>
+    <div>
+      <%= f.submit 'Add', class: 'btn' %>
+    </div>
   <% end %>
-</section>
+<% end %>

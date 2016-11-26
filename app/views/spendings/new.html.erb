@@ -8,24 +8,22 @@
   ]
 %>
 
-<section class="row">
-  <%= breadcrumbs crumbs, class: 'col-xs-12 col-md-6' %>
-</section>
+<div class="clearfix">
+  <%= breadcrumbs crumbs %>
+</div>
 
-<section class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-  <%= form_for [@shift, @spending] do |f| %>
-    <div>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </div>
+<%= form_for [@shift, @spending], html: { class: 'form' } do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
 
-    <div>
-      <%= f.label :total %>
-      <%= f.text_field :total, value: '' %>
-    </div>
+  <div>
+    <%= f.label :total %>
+    <%= f.text_field :total, value: '' %>
+  </div>
 
-    <div>
-      <%= f.submit 'Create', class: 'btn' %>
-    </div>
-  <% end %>
-</section>
+  <div>
+    <%= f.submit 'Create', class: 'btn' %>
+  </div>
+<% end %>

@@ -1,19 +1,19 @@
 .breadcrumbs {
   background-color: $background-color;
   display: inline-block;
-  margin-bottom: 1.0em;
+  margin-bottom: $default-margin;
 
   .breadcrumbs-item {
     display: inline-block;
+    margin-right: 0.35em;
+    padding: $button-padding;
     text-transform: uppercase;
     text-decoration: none;
     font-weight: bold;
-    font-size: 90%;
-    box-shadow: -3px 3px 5px #888888;
-    margin-right: 0.35em;
-    padding: $button-padding;
+    font-size: $font-sm-size;
     background-color: $primary-color;
     color: $text-color-alt;
+    @include box-shadow(5px, 5px, 5px, rgba(0, 0, 0, 0.3));
 
     &.active {
       background-color: $primary-highlight-color;

@@ -1,0 +1,27 @@
+.icon {
+  font-size: inherit;
+
+  &::before {
+    line-height: $full-height;
+  }
+
+  &.hamburger::before {
+    content: "☰";
+  }
+
+  &.plus::before {
+    content: "✚";
+  }
+
+  &.check::before {
+    content: "✔";
+  }
+
+  &.cross::before {
+    content: "✖";
+  }
+
+  &.pencil::before {
+    content: "✎";
+  }
+}

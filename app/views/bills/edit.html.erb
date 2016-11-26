@@ -9,29 +9,27 @@
   ]
 %>
 
-<section class="row">
-  <%= breadcrumbs crumbs, class: 'col-xs-12 col-md-6' %>
-</section>
+<div class="clearfix">
+  <%= breadcrumbs crumbs %>
+</div>
 
-<section class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-  <%= form_for [@bill.shift, @bill] do |f| %>
-    <div>
-      <%= f.label :table %>
-      <%= f.select :table_id, @tables.map{ |t| [t.name, t.id] } %>
-    </div>
+<%= form_for [@bill.shift, @bill], html: { class: 'form' } do |f| %>
+  <div>
+    <%= f.label :table %>
+    <%= f.select :table_id, @tables.map{ |t| [t.name, t.id] } %>
+  </div>
 
-    <div>
-      <%= f.label :people %>
-      <%= f.select :people_number, (1..100).map{ |n| [n, n] } %>
-    </div>
+  <div>
+    <%= f.label :people %>
+    <%= f.select :people_number, (1..100).map{ |n| [n, n] } %>
+  </div>
 
-    <div>
-      <%= f.label :discount %>
-      <%= f.select :discount_id, @discounts.map{ |t| [t.value, t.id] } %>
-    </div>
+  <div>
+    <%= f.label :discount %>
+    <%= f.select :discount_id, @discounts.map{ |t| [t.value, t.id] } %>
+  </div>
 
-    <div>
-      <%= f.submit 'Update', class: 'btn' %>
-    </div>
-  <% end %>
-</section>
+  <div>
+    <%= f.submit 'Update', class: 'btn' %>
+  </div>
+<% end %>

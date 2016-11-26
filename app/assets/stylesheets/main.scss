@@ -1,29 +1,31 @@
-/* Base */
-@import "base/variables";
-@import "base/common";
-@import "base/helpers";
-
 /* Libraries */
 @import "lib/normalize.min";
 @import "lib/toastr.min";
+
+/* Base */
+@import "base/variables";
+@import "base/mixins";
+@import "base/common";
+@import "base/helpers";
+
+/* Custom styles */
 @import "lib/toastr-custom-style";
-@import "lib/flex-grid.min";
-@import "font-awesome-sprockets";
-@import "font-awesome";
 
 /* Shared */
+@import "shared/icons";
 @import "shared/links";
 @import "shared/header";
-@import "shared/logo";
+@import "shared/brand";
 @import "shared/tables";
 @import "shared/footer";
 @import "shared/inputs";
-@import "shared/legend";
-@import "shared/sidebar";
+@import "shared/sidenav";
 @import "shared/breadcrumbs";
+@import "shared/actions";
 @import "shared/buttons";
 @import "shared/badge";
 @import "shared/pagination";
+@import "shared/forms";
 
 /* Home */
 @import "home/welcome";

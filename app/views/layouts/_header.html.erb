@@ -1,10 +1,6 @@
-<header class="header clearfix">
-  <menu>
-    <li>
-      <button id="sidebar-toggle">
-        <span class="fa fa-bars fa-lg"></span>
-      </button>
-    </li>
-  </menu>
-  <%= link_to full_title, root_url, class: 'logo' %>
+<header class="header">
+  <button class="sidenav-open-button" id="sidenav-open-button">
+    <span class="icon hamburger"></span>
+  </button>
+  <%= link_to full_title, root_url, class: 'brand' %>
 </header>

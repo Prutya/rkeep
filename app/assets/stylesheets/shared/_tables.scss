@@ -1,10 +1,18 @@
 .table {
   border-spacing: 0;
-  width: 100%;
-  margin-bottom: $default-margin;
+  width: $full-width;
+
+  .table-caption {
+    padding: $table-cell-padding;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: $font-sm-size;
+    background-color: $table-caption-color;
+    color: $text-color-alt;
+  }
 
   .table-cell {
-    padding: 0.8em;
+    padding: $table-cell-padding;
   }
 
   .table-row {
@@ -18,26 +26,21 @@
 
   .table-head {
     .table-row {
-      background-color: $primary-color;
+      background-color: $table-heading-color;
 
       .table-cell {
         color: $text-color-alt;
         text-transform: uppercase;
         font-weight: bold;
-        font-size: 90%;
-      }
-    }
-  }
-
-  .table-body {
-    .table-row {
-      .table-cell {
-        border: 2px $primary-color;
+        font-size: $font-sm-size;
       }
     }
   }
 }
 
 .table-container {
+  margin-bottom: $default-margin;
   overflow: scroll;
+  background-color: $table-backgroud-color;
+  @include box-shadow(5px, 5px, 5px, rgba(0, 0, 0, 0.3));
 }

@@ -1,27 +1,25 @@
 .pagination {
-  background-color: $background-color;
-  margin: 1.0em 0;
-  display: inline-block;
+  display: block;
+  text-align: right;
+  padding: $default-padding;
 
   * {
     display: inline-block;
     min-width: 2.5em;
     max-height: 2.5em;
+    padding: $button-padding;
     text-transform: uppercase;
     text-decoration: none;
     text-align: center;
+    font-size: $font-xs-size;
     font-style: normal;
     font-weight: bold;
-    padding: $button-padding;
+    cursor: pointer;
     background-color: $primary-color;
     color: $text-color-alt;
-    margin: 0;
-    font-size: 90%;
-    box-shadow: -3px 3px 5px #888888;
 
     &:hover {
-      background-color: lighten($primary-color, 25%);
-      cursor: pointer;
+      background-color: $primary-highlight-color;
     }
 
     &.disabled {
@@ -29,7 +27,7 @@
     }
 
     &.current {
-      background-color: lighten($primary-color, 20%);
+      background-color: $primary-highlight-color;
     }
   }
 }

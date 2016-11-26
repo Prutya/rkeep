@@ -16,4 +16,4 @@
 //= require lib/toastr-settings.js
 //= require tables/bills.js
 //= require tables/shifts.js
-//= require sidebar/sidebar.js
+//= require sidenav/sidenav.js
