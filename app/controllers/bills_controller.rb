@@ -19,8 +19,6 @@ class BillsController < ApplicationController
     @discount = Discount.find(params_create[:discount_id])
     authorize! :update, @shift
 
-    debugger
-
     @bill = Bill.create({
       shift: @shift,
       table: @table,
