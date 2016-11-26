@@ -2,7 +2,7 @@ module ApplicationHelper
   DEFAULT_TITLE = "rkeep"
 
   def full_title(page_title = '')
-    title = Configuration.last_set.company_name || DEFAULT_TITLE
+    title = ENV.fetch('RKEEP_COMPANY_NAME') { DEFAULT_TITLE }
     return "#{page_title} | #{title}" unless page_title.empty?
     title
   end

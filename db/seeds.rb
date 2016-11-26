@@ -1,8 +1,6 @@
 Role.create({ name: :admin })    unless Role.exists?(name: :admin)
 Role.create({ name: :employee }) unless Role.exists?(name: :employee)
 
-Configuration.create unless Configuration.exists?
-
 unless Discount.exists?
   Discount.create({ value:  0.00 })
   Discount.create({ value:  5.00 })

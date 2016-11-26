@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123160205) do
+ActiveRecord::Schema.define(version: 20161126131842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,15 +53,6 @@ ActiveRecord::Schema.define(version: 20161123160205) do
     t.index ["shift_id"], name: "index_bills_on_shift_id", using: :btree
     t.index ["table_id"], name: "index_bills_on_table_id", using: :btree
     t.index ["user_id"], name: "index_bills_on_user_id", using: :btree
-  end
-
-  create_table "configurations", force: :cascade do |t|
-    t.string   "company_name"
-    t.datetime "time_opens",   default: '2016-01-01 10:00:00', null: false
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
-    t.datetime "time_setup",   default: '2016-01-01 10:00:00', null: false
-    t.index ["time_setup"], name: "index_configurations_on_time_setup", unique: true, using: :btree
   end
 
   create_table "discounts", force: :cascade do |t|
