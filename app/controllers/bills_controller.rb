@@ -19,7 +19,14 @@ class BillsController < ApplicationController
     @discount = Discount.find(params_create[:discount_id])
     authorize! :update, @shift
 
-    @bill = Bill.create({ shift: @shift, table: @table, discount: @discount, relative_id: @shift.next_bill_number })
+    debugger
+
+    @bill = Bill.create({
+      shift: @shift,
+      table: @table,
+      discount: @discount,
+      relative_id: @shift.next_bill_number,
+      people_number: params_create[:people_number] })
 
     flash[:success] = 'Bill created successfully.'
     redirect_to shift_bill_url(@shift, @bill)
