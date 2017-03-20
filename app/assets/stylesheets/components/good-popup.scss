@@ -1,0 +1,58 @@
+.good-popup {
+  position: relative;
+  top: 25%;
+  width: 50%;
+  margin: auto;
+
+  padding: $default-padding;
+
+  background-color: rgb(255, 255, 255);
+  @include box-shadow(5px, 5px, 5px, rgba(0, 0, 0, 0.3));
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+
+  &__button {
+    @extend .good__button;
+
+    &--close {
+      @extend .good__button--close;
+
+      &:hover {
+        @extend .good__button--close:hover;
+      }
+
+      &::before {
+        @extend .good__button--close::before;
+      }
+    }
+  }
+
+  &__header {
+    @include clearfix;
+
+    padding-bottom: $default-padding;
+    margin-bottom: $default-margin;
+
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  &__body {
+    @include clearfix;
+  }
+
+  &__footer {
+    @include clearfix;
+
+    padding-top: $default-padding;
+
+    &__add-button {
+      @extend .btn, .success, .btn-flat;
+
+      float: right;
+    }
+  }
+}

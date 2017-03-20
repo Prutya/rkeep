@@ -2,6 +2,7 @@
   padding: $button-padding;
   border: 0;
   display: inline-block;
+  min-width: 40px;
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
@@ -53,4 +54,8 @@
 
 .btn-small {
   padding: $button-padding-small;
+}
+
+.btn-flat {
+  @include no-shadow;
 }

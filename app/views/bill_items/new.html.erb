@@ -5,7 +5,7 @@
     crumb('Shifts', shifts_url),
     crumb("Shift #{@bill.shift.id}", shift_url(@bill.shift)),
     crumb("Bill #{@bill.relative_id}", shift_bill_url(@bill.shift, @bill)),
-    crumb('Add item')
+    crumb('Manage items')
   ]
 %>
 
@@ -16,19 +16,17 @@
 <% if @goods.empty? %>
   <p class="text-center">No goods available.</p>
 <% else %>
-  <%= form_for @bill_item, url: shift_bill_items_url(@bill.shift, @bill, @bill_item), html: { class: 'form' } do |f| %>
-    <div>
-      <%= f.label :good %>
-      <%= f.select :good_id, @goods.map { |good| [ "#{good.name} #{'%.2f' % good.price}", good.id ] } %>
+  <section class="goods-container">
+    <div class="goods-container__toolbar text-right">
+      <button class="btn success" id="trigger"><span class="icon plus"></span></button>
+    </div>
+    <div class="goods-container__list">
     </div>
 
-    <div>
-      <%= f.label :quantity %>
-      <%= f.select :quantity, (1..100).map { |n| [n,n] } %>
-    </div>
+    <%= render partial: 'good_popup' %>
+  </section>
 
-    <div>
-      <%= f.submit 'Add', class: 'btn' %>
-    </div>
-  <% end %>
+  <script id="good-template" type="x-tmpl-mustache">
+    <%= render partial: 'good_template' %>
+  </script>
 <% end %>

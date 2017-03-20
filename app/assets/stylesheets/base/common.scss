@@ -46,3 +46,7 @@ h2 {
 .content {
   padding: $default-padding;
 }
+
+body.noscroll {
+  overflow: hidden;
+}
