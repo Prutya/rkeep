@@ -1,25 +1,20 @@
 var GoodsEditor = function(container) {
   var container = container;
-
-  var list = null;
-  var cards = null;
-  var popup = null;
-  var popupWrapper = null;
+  var list = container.find('.goods-container__list');
+  var cards = list.find('.good');
+  var popupWrapper = container.find('.popup-wrapper');
+  var popup = popupWrapper.find('.good-popup');
 
   init();
 
   return {
+    list: list,
     cards: cards,
     popup: popup,
     popupWrapper: popupWrapper
   };
 
   function init() {
-    list = container.find('.goods-container__list');
-    cards = list.find('.good');
-    popupWrapper = container.find('.popup-wrapper');
-    popup = popupWrapper.find('.good-popup');
-
     initPopup();
     initCards();
   }
@@ -87,14 +82,15 @@ var GoodsEditor = function(container) {
       hideCard(card);
     });
 
-    card.click(function() {
+    card.get(0).addEventListener('click', function(e) {
       var isHidden = card.hasClass('good--hidden');
 
       if (isHidden) {
+        e.preventDefault();
+        e.stopPropagation();
         showCard(card);
       }
-    });
-
+    }, true);
   }
 
   function openPopup() {
@@ -155,5 +151,5 @@ var GoodsEditor = function(container) {
 }
 
 $(function() {
-  var goodsEditors = new GoodsEditor($('.goods-container'));
+  var goodsEditor = new GoodsEditor($('.goods-container'));
 });

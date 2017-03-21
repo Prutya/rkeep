@@ -1,23 +1,15 @@
-$goods-in-row-large: 4;
+$goods-in-row: 4;
 
 .good {
   position: relative;
-
   float: left;
-
-  @include calc(width, '((100% / #{$goods-in-row-large}) - #{$default-margin})');
-
+  @include calc(width, '((100% / #{$goods-in-row}) - #{$default-margin})');
   margin-right: $default-margin;
   margin-bottom: $default-margin;
-  padding: $default-padding;
-
   background-color: rgb(255, 255, 255);
   @include box-shadow(5px, 5px, 5px, rgba(0, 0, 0, 0.3));
   opacity: 1;
-
-  @include transition(opacity 1000ms);
-  @include transition(background-color 200ms);
-
+  @include transition(background-color $popup-transition);
   @media screen and (max-width: 1024px) {
     width: 100%;
   }
@@ -27,26 +19,23 @@ $goods-in-row-large: 4;
   }
 
   &--highlight {
-    background-color: rgb(240, 216, 133);
+    background-color: $good-highlight-color;
   }
 
   &__button {
     position: absolute;
     top: 0;
     right: 0;
-
-    padding: 10px;
+    padding: $button-padding-medium;
     min-width: 40px;
-
+    min-height: 40px;
     cursor: pointer;
-
     color: rgb(255, 255, 255);
-    background-color: rgb(130, 130, 130);
-
-    @include transition(background-color 200ms);
+    background-color: $button-color;
+    @include transition(background-color $popup-transition);
 
     &:hover {
-      background-color: rgb(156, 156, 156);
+      background-color: $button-highlight-color;
     }
 
     &--close {
@@ -63,9 +52,18 @@ $goods-in-row-large: 4;
   }
 
   &__header {
+    padding: $form-padding;
+    min-height: 40px;
+
     &__title {
+      margin-bottom: 0;
       text-transform: uppercase;
       text-align: left;
+      font-size: $font-sm-size;
     }
+  }
+
+  &__body {
+    padding: $form-padding;
   }
 }
