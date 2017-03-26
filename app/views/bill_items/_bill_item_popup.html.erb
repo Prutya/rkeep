@@ -9,11 +9,11 @@
     <div class="good-popup__body">
       <div>
         <label for="good[id]">Item</label>
-        <%= select_tag 'good[id]', options_for_select(@goods.map{ |good| ["#{good.name} #{'%.2f' % good.price}", good.id] }) %>
+        <%=  select_tag 'good[id]' %>
       </div>
       <div>
         <label for="good[quantity]">Quantity</label>
-        <%= select_tag 'good[quantity]', options_for_select((1..100).map{ |n| [n,n] }) %>
+        <%= number_field_tag 'good[quantity]', 1, min: 1 %>
       </div>
     </div>
 

@@ -17,5 +17,5 @@
 //= require lib/mustache.min.js
 //= require tables/bills.js
 //= require tables/shifts.js
-//= require goods.js
 //= require sidenav/sidenav.js
+//= require components/goods.js

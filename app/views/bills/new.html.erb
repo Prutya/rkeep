@@ -28,7 +28,7 @@
 
     <div>
       <%= f.label :discount %>
-      <%= f.select :discount_id, @discounts.map { |t| [t.value, t.id] } %>
+      <%= f.select :discount_id, @discounts.map { |t| ["#{format('%.2f', t.value)}%", t.id] } %>
     </div>
 
     <div>

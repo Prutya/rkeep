@@ -11,4 +11,8 @@ class BillItem < ApplicationRecord
   def calculate_total(discount)
     (calculate_subtotal * (100 - discount) / 100).round(2)
   end
+
+  def cancel(cancel_time = Time.zone.now)
+    self.time_cancel = cancel_time
+  end
 end

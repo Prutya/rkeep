@@ -9,13 +9,22 @@ $goods-in-row: 4;
   background-color: rgb(255, 255, 255);
   @include box-shadow(5px, 5px, 5px, rgba(0, 0, 0, 0.3));
   opacity: 1;
-  @include transition(background-color $popup-transition);
+  @include transition(
+    background-color $popup-transition ease-out,
+    opacity $popup-transition
+  );
   @media screen and (max-width: 1024px) {
     width: 100%;
   }
 
-  &--hidden {
+  &--disabled {
     opacity: 0.3;
+    pointer-events: none;
+  }
+
+  &--hidden {
+    opacity: 0;
+    pointer-events: none;
   }
 
   &--highlight {
@@ -39,14 +48,14 @@ $goods-in-row: 4;
     }
 
     &--close {
-      background-color: $warning-highlight-color;
+      background-color: $warning-color;
 
       &::before {
         content: "✖";
       }
 
       &:hover {
-        background-color: $warning-color;
+        background-color: $warning-highlight-color;
       }
     }
   }
@@ -64,6 +73,10 @@ $goods-in-row: 4;
   }
 
   &__body {
+    padding: $form-padding;
+  }
+
+  &__footer {
     padding: $form-padding;
   }
 }

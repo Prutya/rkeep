@@ -21,13 +21,34 @@ select {
   &:hover {
     border: solid 5px lighten($text-color, 50%);
   }
+
+  &:focus {
+    border: solid 5px lighten($text-color, 50%);
+  }
 }
 
 input[type="email"],
 input[type="password"],
 input[type="text"] {
+  outline: none;
+
+  &:hover {
+    border: solid 5px lighten($text-color, 50%);
+  }
+
   &:focus {
-    outline: none;
+    border: solid 5px lighten($text-color, 50%);
+  }
+}
+
+input[type="number"] {
+  outline: none;
+
+  &:hover {
+    border: solid 5px lighten($text-color, 50%);
+  }
+
+  &:focus {
     border: solid 5px lighten($text-color, 50%);
   }
 }

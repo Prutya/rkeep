@@ -17,6 +17,10 @@ class Ability
         user.at_shift?(shift) && !shift.closed?
       end
 
+      can [:show], Bill do |bill|
+        user.at_shift(bill.shift) && !bill.shift.closed?
+      end
+
       can [:update], Bill do |bill|
         can?(:update, bill.shift) && !bill.closed? && !bill.cancelled?
       end
@@ -24,6 +28,8 @@ class Ability
       can [:create], UserShift do |user_shift|
         can?(:update, user_shift.shifts) && user_shift.user.employee? && !user_shift.user.busy?
       end
+
+      can [:index], Good
     end
 
     if user.admin?

@@ -1,19 +1,30 @@
 .goods-container {
   @include clearfix;
 
-  max-height: 100%;
-
-  &__toolbar {
-    @include clearfix;
-
-    width: 100%;
-
-    padding-top: $default-padding;
-    padding-bottom: $default-padding;
-    margin-bottom: $default-margin;
-  }
+  position: relative;
+  min-height: 40vh;
 
   &__list {
     @include clearfix;
+  }
+
+  &__loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 1;
+
+    @include transition(
+      opacity $popup-transition
+    );
+  }
+
+  &__loader--hidden {
+    opacity: 0;
+    pointer-events: none;
   }
 }

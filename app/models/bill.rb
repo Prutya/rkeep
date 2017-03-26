@@ -23,7 +23,15 @@ class Bill < ApplicationRecord
   end
 
   def calculate_subtotal
-    (bill_items.inject(0) { |total, item| total += item.good.price * item.quantity }).round(2)
+    amount = bill_items.inject(0) do |total, item|
+      if item.time_cancel
+        total
+      else
+        total += item.good.price * item.quantity
+      end
+    end
+
+    amount.round(2)
   end
 
   def calculate_total
