@@ -8,7 +8,7 @@ class Api::V1::BillsController < Api::V1::ApiController
   def show
     @bill = Bill
       .includes(:discount, bill_items: [ :good ])
-      .order('bill_items.created_at ASC')
+      .order('bill_items.time_cancel DESC')
       .find(params[:id])
   end
 end
