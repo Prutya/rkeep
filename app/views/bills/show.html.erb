@@ -25,14 +25,14 @@
         <span class="icon pencil"></span> <%= 'Edit bill' %>
       <% end %>
 
-      <%= link_to new_shift_bill_item_url(@bill.shift, @bill), class: 'btn' do %>
+      <%= link_to new_shift_bill_item_url(@bill.shift, @bill), class: 'btn', id: 'good-popup-trigger' do %>
         <span class="icon plus"></span> <%= 'Add item' %>
       <% end %>
     <% end %>
   </div>
 </div>
 
-<div class="table-container">
+<section class="table-container">
   <table class="table">
     <caption class="table-caption"><%= 'Information' %></caption>
     <thead class="table-head">
@@ -48,36 +48,27 @@
       <tr class="table-row">
         <td class="table-cell text-left"><%= @bill.table.name %></td>
         <td class="table-cell text-right"><%= @bill.people_number %></td>
-        <td class="table-cell text-right"><%= '%.2f' % (@bill.subtotal || @bill.calculate_subtotal) %></td>
-        <td class="table-cell text-right"><%= '%.2f' % @bill.discount.value  %></td>
-        <td class="table-cell text-right"><%= '%.2f' % (@bill.total || @bill.calculate_total) %></td>
+        <td class="table-cell text-right" id="bill-subtotal"><%= '%.2f' % (@bill.subtotal || @bill.calculate_subtotal) %></td>
+        <td class="table-cell text-right"><%= '%.2f' % @bill.discount.value  %>%</td>
+        <td class="table-cell text-right" id="bill-total"><%= '%.2f' % (@bill.total || @bill.calculate_total) %></td>
       </tr>
     </tbody>
   </table>
-</div>
+</section>
 
-<div class="table-container">
-  <table class="table">
-    <caption class="table-caption"><%= 'Items' %></caption>
-    <thead class="table-head">
-      <tr class="table-row">
-        <td class="table-cell text-left"><%= 'Title' %></td>
-        <td class="table-cell text-right"><%= 'Price' %></td>
-        <td class="table-cell text-right"><%= 'Quantity' %></td>
-        <td class="table-cell text-right"><%= 'Subtotal' %></td>
-        <td class="table-cell text-right"><%= 'Total' %></td>
-      </tr>
-    </thead>
-    <tbody class="table-body">
-      <% @bill.bill_items.each do |item| %>
-      <tr class="table-row">
-        <td class="table-cell text-left"><%= item.good.name %></td>
-        <td class="table-cell text-right"><%= '%.2f' % item.good.price %></td>
-        <td class="table-cell text-right"><%= item.quantity  %></td>
-        <td class="table-cell text-right"><%= '%.2f' % item.calculate_subtotal %></td>
-        <td class="table-cell text-right"><%= '%.2f' % item.calculate_total(@bill.discount.value) %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<section class="goods-container" data-bill-id="<%= @bill.id %>">
+  <div class="goods-container__list">
+  </div>
+
+  <div class="goods-container__loader">
+    <%= render partial: 'layouts/spinner' %>
+  </div>
+</section>
+
+<script id="bill-item-template" type="x-tmpl-mustache">
+  <%= render partial: 'templates/bill_item.mustache' %>
+</script>
+
+<script id="bill-item-popup-template" type="x-tmpl-mustache">
+  <%= render partial: 'templates/bill_item_popup.mustache' %>
+</script>

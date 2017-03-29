@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require lib/toastr.min.js
 //= require lib/toastr-settings.js
+//= require lib/mustache.min.js
 //= require tables/bills.js
 //= require tables/shifts.js
 //= require sidenav/sidenav.js
+//= require components/goods.js

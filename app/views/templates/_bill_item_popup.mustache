@@ -1,0 +1,28 @@
+<div class="popup-wrapper popup-wrapper--hidden">
+  <div class="good-popup">
+    <button class="good-popup__button good-popup__button--close"></button>
+
+    <div class="good-popup__header">
+      Add item
+    </div>
+
+    <div class="good-popup__body">
+      <div>
+        <label for="good[id]">Item</label>
+        <select name="good[id]">
+          {{#goods}}
+          <option value="{{id}}">{{name}} {{price}}</option>
+          {{/goods}}
+        </select>
+      </div>
+      <div>
+        <label for="good[quantity]">Quantity</label>
+        <input type="number" name="good[quantity]" value="1" min="1" />
+      </div>
+    </div>
+
+    <div class="good-popup__footer">
+      <button class="good-popup__footer__add-button">Add</button>
+    </div>
+  </div>
+</div>

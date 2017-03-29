@@ -45,4 +45,9 @@ h2 {
 
 .content {
   padding: $default-padding;
+  min-height: 85vh;
+}
+
+body.noscroll {
+  overflow: hidden;
 }

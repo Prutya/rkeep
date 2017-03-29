@@ -1,0 +1,13 @@
+<div class="good {{#item.cancelled_at}}good--disabled{{/item.cancelled_at}} good--hidden" data-good-id="{{ item.good_id }}" data-bill-item-id="{{ item.id }}">
+  {{^button_disabled}}
+  <button class="good__button good__button--close"></button>
+  {{/button_disabled}}
+
+  <div class="good__header">
+    <h3 class="good__header__title">{{ item.good.name }} {{ item.good.price }}</h3>
+  </div>
+
+  <div class="good__body">
+    <input name="good[quantity]" type="text" value="{{ item.quantity }}" disabled />
+  </div>
+</div>

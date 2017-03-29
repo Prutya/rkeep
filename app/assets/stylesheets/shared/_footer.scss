@@ -1,3 +1,18 @@
 .footer {
+  height: 6vh;
   padding: $default-padding;
+
+  &__text {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+
+    text-align: center;
+
+    color: $neutral-color;
+
+    &__url {
+      color: $neutral-color;
+    }
+  }
 }
