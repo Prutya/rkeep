@@ -11,12 +11,7 @@ var GoodsEditor = function(container) {
 
   init();
 
-  return {
-    list: list,
-    popup: popup,
-    popupWrapper: popupWrapper,
-    billId: billId
-  };
+  return {list: list, popup: popup, popupWrapper: popupWrapper, billId: billId};
 
   function init() {
     if (container.length < 1) {
@@ -28,7 +23,7 @@ var GoodsEditor = function(container) {
   }
 
   function initPopup() {
-    var renderedPopup = Mustache.render(billItemPopupTemplate, {goods: goods});
+    var renderedPopup = Mustache.render(billItemPopupTemplate, {goods: goods, numberOptions: range(1,100)});
     popupWrapper = $(renderedPopup);
     popup = popupWrapper.find('.good-popup');
 
@@ -65,7 +60,7 @@ var GoodsEditor = function(container) {
       e.preventDefault();
 
       var selectList = popup.find('select[name="good[id]"]');
-      var numberList = popup.find('input[name="good[quantity]"]');
+      var numberList = popup.find('select[name="good[quantity]"]');
 
       var goodId = selectList.val();
       var goodQuantity = parseInt(numberList.val());
@@ -152,7 +147,7 @@ var GoodsEditor = function(container) {
     popupWrapper.addClass('popup-wrapper--hidden');
     $(document.body).removeClass('noscroll');
 
-    popup.find('input[name="good[quantity]"]').val(1); // Set to default value
+    popup.find('input[name="good[quantity]"]').val("1"); // Set to default value
   }
 
   function highlightCard(card) {
@@ -206,6 +201,12 @@ var GoodsEditor = function(container) {
   function updateBillInfo(options) {
     $('#bill-total').text(options.total);
     $('#bill-subtotal').text(options.subtotal);
+  }
+
+  function range(start, count) {
+    return Array.apply(0, Array(count)).map(function(element, index) {
+      return index + start;
+    });
   }
 
   function loadBill() {
