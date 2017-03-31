@@ -17,7 +17,11 @@
       </div>
       <div>
         <label for="good[quantity]">Quantity</label>
-        <input type="number" name="good[quantity]" value="1" min="1" />
+        <select name="good[quantity]">
+          {{#numberOptions}}
+          <option value="{{.}}">{{.}}</option>
+          {{/numberOptions}}
+        </select>
       </div>
     </div>
 
