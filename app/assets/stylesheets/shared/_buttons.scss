@@ -12,6 +12,7 @@
   background-color: $button-color;
   color: $text-color-alt;
   @include box-shadow(5px, 5px, 5px, rgba(0, 0, 0, 0.3));
+  @include transition(background-color $button-transition);
 
   &:hover {
     text-decoration: none;
