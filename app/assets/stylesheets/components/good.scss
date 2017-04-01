@@ -13,7 +13,8 @@ $goods-in-row: 4;
     background-color $popup-transition ease-out,
     opacity $popup-transition
   );
-  @media screen and (max-width: 1024px) {
+
+  @media screen and (max-width: 1023px) {
     width: 100%;
   }
 

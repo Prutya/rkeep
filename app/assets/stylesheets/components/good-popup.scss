@@ -52,6 +52,8 @@
     &__add-button {
       @extend .btn, .success, .btn-flat;
 
+      width: 100%;
+
       float: right;
     }
   }
