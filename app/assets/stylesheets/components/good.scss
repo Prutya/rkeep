@@ -1,9 +1,11 @@
-$goods-in-row: 4;
+$goods-in-row-lg: 4;
+$goods-in-row-md: 3;
+$goods-in-row-sm: 2;
 
 .good {
   position: relative;
   float: left;
-  @include calc(width, '((100% / #{$goods-in-row}) - #{$default-margin})');
+  @include calc(width, '((100% / #{$goods-in-row-lg}) - #{$default-margin})');
   margin-right: $default-margin;
   margin-bottom: $default-margin;
   background-color: rgb(255, 255, 255);
@@ -14,7 +16,15 @@ $goods-in-row: 4;
     opacity $popup-transition
   );
 
+  @media screen and (max-width: 1439px) {
+    @include calc(width, '((100% / #{$goods-in-row-md}) - #{$default-margin})');
+  }
+
   @media screen and (max-width: 1023px) {
+    @include calc(width, '((100% / #{$goods-in-row-sm}) - #{$default-margin})');
+  }
+
+  @media screen and (max-width: 767px) {
     width: 100%;
   }
 
