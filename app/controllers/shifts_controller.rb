@@ -15,6 +15,8 @@ class ShiftsController < ApplicationController
     @shift.save
     @shift.users << current_user
 
+    AdminMailer.shift_started(@shift).deliver_later
+
     flash[:success] = 'Shift created successfully.'
     redirect_to shift_url(@shift)
   end
@@ -35,6 +37,8 @@ class ShiftsController < ApplicationController
 
     @shift.close
     @shift.save!
+
+    AdminMailer.shift_ended(@shift).deliver_later
 
     flash[:success] = 'Shift closed successfully.'
     redirect_to shifts_url

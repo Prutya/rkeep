@@ -14,5 +14,8 @@ module Rkeep
 
     # Configure Rails time zone
     config.time_zone = ENV.fetch('RKEEP_TIME_ZONE') { 'UTC' }
+
+    # Use Sidekiq for ActiveJob
+    config.active_job.queue_adapter = :sidekiq
   end
 end

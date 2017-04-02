@@ -3,3 +3,4 @@
 :logdile: ./tmp/log/sidekiq.log
 :queues:
   - default
+  - mailers
