@@ -1,6 +1,8 @@
-$(document).ready(function() {
+$(function() {
   $('#shifts-table tbody tr').click(function(){
-    window.location = $(this).data('href');
-    return false;
+    var url = $(this).data('href');
+    if (url) {
+      window.location = url;
+    }
   });
 });
