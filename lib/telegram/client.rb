@@ -7,7 +7,7 @@ class Telegram::Client
     chat_id: Rails.configuration.telegram_channel_id
   )
     text = <<~MD
-      *#{ts}[#{Socket.gethostname}]#{title.nil? ? nil : ": #{title}"}*
+      #{title.nil? ? nil : "*#{title}*"}
       #{message}
     MD
 

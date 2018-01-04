@@ -47,27 +47,31 @@ class ShiftsController < ApplicationController
   private
 
   def notify_shift_started
-    employee = @shift.users.first
+    Telegram::Client.send_message title: 'Shift started', message: <<~MSG
 
-    find_admins.each do |admin|
-      Telegram::Client.send_message title: 'Shift started', message: <<~MSG
-        Hey, #{admin.first_name || 'Admin'}.
-        A shift has just started.
-        Started at: #{@shift.opened_at}
-        Started by: #{employee.name}
-      MSG
-    end
+      The shift *##{@shift.id}* has just started.
+
+      ```
+      Started at: #{@shift.opened_at}
+      Started by: #{current_user.name}#{current_user.phone.blank? ? nil : " [#{current_user.phone}]"}
+      ```
+    MSG
   end
 
   def notify_shift_ended
-    find_admins.each do |admin|
-      Telegram::Client.send_message title: 'Shift ended', message: <<~MSG
-        Hey,
-        A shift has just ended.
-        Closed at: #{@shift.closed_at}
-        Closed by: #{current_user.name}
-      MSG
-    end
+    Telegram::Client.send_message title: 'Shift ended', message: <<~MSG
+
+      The shift *##{@shift.id}* has just ended.
+
+      ```
+      Revenue:   #{'%.2f' % @shift.total_revenue}
+      Spendings: #{'%.2f' % @shift.total_spendings}
+      Total:     #{'%.2f' % @shift.total}
+
+      Closed at: #{@shift.closed_at}
+      Closed by: #{current_user.name}#{current_user.phone.blank? ? nil : " [#{current_user.phone}]"}
+      ```
+    MSG
   end
 
   def find_admins
