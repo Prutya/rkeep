@@ -47,7 +47,7 @@ class ShiftsController < ApplicationController
   private
 
   def notify_shift_started
-    Telegram::Client.send_message title: 'Shift started', message: <<~MSG
+    ::Telegram::Client.send_message title: 'Shift started', message: <<~MSG
 
       The shift *##{@shift.id}* has just started.
 
@@ -59,7 +59,7 @@ class ShiftsController < ApplicationController
   end
 
   def notify_shift_ended
-    Telegram::Client.send_message title: 'Shift ended', message: <<~MSG
+    ::Telegram::Client.send_message title: 'Shift ended', message: <<~MSG
 
       The shift *##{@shift.id}* has just ended.
 
