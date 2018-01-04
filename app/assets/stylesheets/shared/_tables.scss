@@ -23,6 +23,10 @@
     display: table-row;
     text-decoration: none;
 
+    &:nth-child(even) {
+      background-color: $table-backgroud-color-alt;
+    }
+
     &.row-link {
       &:hover {
         background-color: $table-highlight-color;
