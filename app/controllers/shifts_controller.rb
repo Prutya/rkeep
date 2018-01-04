@@ -15,7 +15,7 @@ class ShiftsController < ApplicationController
     @shift.save
     @shift.users << current_user
 
-    AdminMailer.shift_started(@shift).deliver
+    notify_shift_started
 
     flash[:success] = 'Shift created successfully.'
     redirect_to shift_url(@shift)
@@ -38,9 +38,39 @@ class ShiftsController < ApplicationController
     @shift.close
     @shift.save!
 
-    AdminMailer.shift_ended(@shift).deliver
+    notify_shift_ended
 
     flash[:success] = 'Shift closed successfully.'
     redirect_to shifts_url
+  end
+
+  private
+
+  def notify_shift_started
+    employee = @shift.users.first
+
+    find_admins.each do |admin|
+      Telegram::Client.send_message title: 'Shift started', message: <<~MSG
+        Hey, #{admin.first_name || 'Admin'}.
+        A shift has just started.
+        Started at: #{@shift.opened_at}
+        Started by: #{employee.name}
+      MSG
+    end
+  end
+
+  def notify_shift_ended
+    find_admins.each do |admin|
+      Telegram::Client.send_message title: 'Shift ended', message: <<~MSG
+        Hey,
+        A shift has just ended.
+        Closed at: #{@shift.closed_at}
+        Closed by: #{current_user.name}
+      MSG
+    end
+  end
+
+  def find_admins
+    User.joins(assignments: :role).where(roles: { name: :admin })
   end
 end
