@@ -22,57 +22,54 @@
 </div>
 
 <div class="table-container">
-  <table class="table" id="bills-table">
-    <caption class="table-caption"><%= 'Bills' %></caption>
-    <thead class="table-head">
-      <tr class="table-row">
-        <td class="table-cell text-center"><%= '#' %></td>
-        <td class="table-cell text-left"><%= 'Created at' %></td>
-        <td class="table-cell text-left"><%= 'Cancelled at' %></td>
-        <td class="table-cell text-left"><%= 'Closed at' %></td>
-        <td class="table-cell text-right"><%= 'Table'     %></td>
-        <td class="table-cell text-right"><%= 'People'    %></td>
-        <td class="table-cell text-right"><%= 'Subtotal'  %></td>
-        <td class="table-cell text-right"><%= 'Discount'  %>, %</td>
-        <td class="table-cell text-right"><%= 'Total'     %></td>
-        <td class="table-cell text-right"><%= 'Status'    %></td>
-      </tr>
-    </thead>
-    <tbody class="table-body">
+  <div class="table" id="bills-table">
+    <div class="table-caption">
+      <%= 'Bills' %>
+    </div>
+    <div class="table-head">
+      <div class="table-row">
+        <div class="table-cell text-center"><%= '#'            %></div>
+        <div class="table-cell text-left"  ><%= 'Created at'   %></div>
+        <div class="table-cell text-left"  ><%= 'Cancelled at' %></div>
+        <div class="table-cell text-left"  ><%= 'Closed at'    %></div>
+        <div class="table-cell text-right" ><%= 'Table'        %></div>
+        <div class="table-cell text-right" ><%= 'People'       %></div>
+        <div class="table-cell text-right" ><%= 'Subtotal'     %></div>
+        <div class="table-cell text-right" ><%= 'Discount'  %>, %</div>
+        <div class="table-cell text-right" ><%= 'Total'        %></div>
+        <div class="table-cell text-right" ><%= 'Status'       %></div>
+      </div>
+    </div>
+    <div class="table-body">
       <% @shift.bills.each do |bill| %>
-        <tr class="table-row row-link" data-href="<%= shift_bill_url(@shift, bill) %>">
-          <td class="table-cell text-center"><%= bill.relative_id || '' %></td>
-          <td class="table-cell text-left"><%= bill.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-          <td class="table-cell text-left"><%= bill.time_cancel.strftime("%Y-%m-%d %H:%M") if bill.time_cancel %></td>
-          <td class="table-cell text-left"><%= bill.time_close.strftime("%H:%M %Y/%m/%d") if bill.time_close %></td>
-          <td class="table-cell text-right"><%= bill.table.name if bill.table.present? %></td>
-          <td class="table-cell text-right"><%= bill.people_number %></td>
-          <td class="table-cell text-right"><%= '%.2f' % (bill.subtotal || bill.calculate_subtotal)%></td>
-          <td class="table-cell text-right"><%= '%.2f' % bill.discount.value %></td>
-          <td class="table-cell text-right"><%= '%.2f' % (bill.total || bill.calculate_total) %></td>
-          <td class="table-cell text-right">
+        <%= link_to shift_bill_url(@shift, bill), class: 'table-row row-link' do %>
+          <div class="table-cell text-center"><%= bill.relative_id || '' %></div>
+          <div class="table-cell text-left"><%= bill.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+          <div class="table-cell text-left"><%= bill.time_cancel.strftime("%Y-%m-%d %H:%M") if bill.time_cancel %></div>
+          <div class="table-cell text-left"><%= bill.time_close.strftime("%H:%M %Y/%m/%d") if bill.time_close %></div>
+          <div class="table-cell text-right"><%= bill.table.name if bill.table.present? %></div>
+          <div class="table-cell text-right"><%= bill.people_number %></div>
+          <div class="table-cell text-right"><%= '%.2f' % (bill.subtotal || bill.calculate_subtotal)%></div>
+          <div class="table-cell text-right"><%= '%.2f' % bill.discount.value %></div>
+          <div class="table-cell text-right"><%= '%.2f' % (bill.total || bill.calculate_total) %></div>
+          <div class="table-cell text-right">
             <span class="badge <%= bill_status(bill.status) %>">
               <%= bill.status %>
             </span>
-          </td>
-        </tr>
+          </div>
+        <% end %>
       <% end %>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td class="table-cell text-right">
+      <div class="table-row">
+        <% 8.times do %>
+          <div class="table-cell"></div>
+        <% end %>
+        <div class="table-cell text-right">
           <strong><%= '%.2f' % (@shift.total_revenue || @shift.calculate_total_revenue) %></strong>
-        </td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+        <div class="table-cell"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="table-container">
