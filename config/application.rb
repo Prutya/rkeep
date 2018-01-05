@@ -16,7 +16,5 @@ module Rkeep
     config.time_zone = ENV.fetch('RKEEP_TIME_ZONE') { 'UTC' }
     config.telegram_key = ENV['TELEGRAM_BOT_KEY']
     config.telegram_channel_id = ENV['TELEGRAM_CHANNEL_ID']
-
-    config.autoload_paths << Rails.root.join('lib')
   end
 end
