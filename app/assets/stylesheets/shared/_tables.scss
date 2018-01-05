@@ -1,8 +1,11 @@
 .table {
+  display: table;
   border-spacing: 0;
   width: $full-width;
 
   .table-caption {
+    display: table-caption;
+    text-align: center;
     padding: $table-cell-padding;
     text-transform: uppercase;
     font-weight: bold;
@@ -12,29 +15,44 @@
   }
 
   .table-cell {
+    display: table-cell;
     padding: $table-cell-padding;
   }
 
   .table-row {
+    display: table-row;
+    text-decoration: none;
+
+    &:nth-child(even) {
+      background-color: $table-backgroud-color-alt;
+    }
+
     &.row-link {
       &:hover {
-        cursor: pointer;
         background-color: $table-highlight-color;
       }
     }
   }
 
   .table-head {
+    display: table-header-group;
+
     .table-row {
+      display: table-row;
       background-color: $table-heading-color;
 
       .table-cell {
+        display: table-cell;
         color: $text-color-alt;
         text-transform: uppercase;
         font-weight: bold;
         font-size: $font-sm-size;
       }
     }
+  }
+
+  .table-body {
+    display: table-row-group;
   }
 }
 

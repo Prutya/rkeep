@@ -13,41 +13,43 @@
 </div>
 
 <div class="table-container">
-  <table class="table" id="shifts-table">
-    <caption class="table-caption"><%= 'Shifts' %></caption>
-    <thead class="table-head">
-      <tr class="table-row">
-        <td class="table-cell text-center"><%= '#' %></td>
-        <td class="table-cell text-left"><%= 'Opened at' %></td>
-        <td class="table-cell text-left"><%= 'Closed at' %></td>
-        <td class="table-cell text-left"><%= 'Employees' %></td>
-        <td class="table-cell text-right"><%= 'Bills OP/CA/CL/TO' %></td>
-        <td class="table-cell text-right"><%= 'Revenue'   %></td>
-        <td class="table-cell text-right"><%= 'Spendings' %></td>
-        <td class="table-cell text-right"><%= 'Total'     %></td>
-        <td class="table-cell text-right"><%= 'Status'    %></td>
-      </tr>
-    </thead>
-    <tbody class="table-body">
+  <div class="table">
+    <div class="table-caption">
+      <%= 'Shifts' %>
+    </div>
+    <div class="table-head">
+      <div class="table-row">
+        <div class="table-cell text-center"><%= '#'                 %></div>
+        <div class="table-cell text-left"  ><%= 'Opened at'         %></div>
+        <div class="table-cell text-left"  ><%= 'Closed at'         %></div>
+        <div class="table-cell text-left"  ><%= 'Employees'         %></div>
+        <div class="table-cell text-right" ><%= 'Bills OP/CA/CL/TO' %></div>
+        <div class="table-cell text-right" ><%= 'Revenue'           %></div>
+        <div class="table-cell text-right" ><%= 'Spendings'         %></div>
+        <div class="table-cell text-right" ><%= 'Total'             %></div>
+        <div class="table-cell text-right" ><%= 'Status'            %></div>
+      </div>
+    </div>
+    <div class="table-body">
       <% @shifts.each do |shift| %>
-      <tr class="table-row row-link" data-href="<%= shift_url(shift) %>">
-        <td class="table-cell text-center"><%= shift.id %></td>
-        <td class="table-cell text-left"><%= shift.opened_at.strftime("%H:%M %Y/%m/%d") %></td>
-        <td class="table-cell text-left"><%= shift.closed_at.strftime("%H:%M %Y/%m/%d") if shift.closed_at %></td>
-        <td class="table-cell text-left"><%= shift.users_list %></td>
-        <td class="table-cell text-right"><%= "#{shift.open_bills_number}/#{shift.cancelled_bills_number}/#{shift.closed_bills_number}/#{shift.bills.length}" %></td>
-        <td class="table-cell text-right"><%= '%.2f' % (shift.total_revenue || shift.calculate_total_revenue) %></td>
-        <td class="table-cell text-right"><%= '%.2f' % (shift.total_spendings || shift.calculate_total_spendings) %></td>
-        <td class="table-cell text-right"><%= '%.2f' % (shift.total || shift.calculate_total)%></td>
-        <td class="table-cell text-right">
-          <span class="badge <%= shift_status(shift.status) %>">
-            <%= shift.status %>
-          </span>
-        </td>
-      </tr>
+        <%= link_to shift_url(shift), class: 'table-row row-link' do %>
+          <div class="table-cell text-center"><%= shift.id %></div>
+          <div class="table-cell text-left"><%= shift.opened_at.strftime("%H:%M %Y/%m/%d") %></div>
+          <div class="table-cell text-left"><%= shift.closed_at.strftime("%H:%M %Y/%m/%d") if shift.closed_at %></div>
+          <div class="table-cell text-left"><%= shift.users_list %></div>
+          <div class="table-cell text-right"><%= "#{shift.open_bills_number}/#{shift.cancelled_bills_number}/#{shift.closed_bills_number}/#{shift.bills.length}" %></div>
+          <div class="table-cell text-right"><%= '%.2f' % (shift.total_revenue || shift.calculate_total_revenue) %></div>
+          <div class="table-cell text-right"><%= '%.2f' % (shift.total_spendings || shift.calculate_total_spendings) %></div>
+          <div class="table-cell text-right"><%= '%.2f' % (shift.total || shift.calculate_total)%></div>
+          <div class="table-cell text-right">
+            <span class="badge <%= shift_status(shift.status) %>">
+              <%= shift.status %>
+            </span>
+          </div>
+        <% end %>
       <% end %>
-    </tbody>
-  </table>
-
+    </div>
+  </div>
+  
   <%= will_paginate @shifts %>
 </div>
